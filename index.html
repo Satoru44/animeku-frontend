@@ -13,10 +13,9 @@
 <link rel="canonical" href="https://nimesora.netlify.app/">
 
 <!-- ===================== GOOGLE SEARCH CONSOLE ===================== -->
-<!-- LANGKAH: Ganti content di bawah dengan kode verifikasi dari search.google.com/search-console -->
 <meta name="google-site-verification" content="googleb86885ce2cee2304">
 
-<!-- ===================== OPEN GRAPH (WhatsApp / Facebook / Twitter) ===================== -->
+<!-- ===================== OPEN GRAPH ===================== -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NimeSora">
 <meta property="og:title" content="NimeSora — Info & Jadwal Anime Sub Indo Terlengkap">
@@ -33,7 +32,7 @@
 <meta name="twitter:description" content="Temukan jadwal tayang, rating, sinopsis, dan trailer anime favoritmu.">
 <meta name="twitter:image" content="https://nimesora.netlify.app/og-image.jpg">
 
-<!-- ===================== SCHEMA.ORG (Google Rich Results) ===================== -->
+<!-- ===================== SCHEMA.ORG ===================== -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -64,7 +63,6 @@
 </script>
 
 <!-- ===================== GOOGLE ADSENSE ===================== -->
-<!-- LANGKAH: Daftar di adsense.google.com, lalu ganti ca-pub-XXXX dengan Publisher ID kamu -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-GANTI_DENGAN_PUBLISHER_ID_ADSENSE" crossorigin="anonymous"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -313,7 +311,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 .genre-btn{padding:8px 4px;border-radius:6px;text-align:center;font-size:11px;font-weight:700;border:1px solid var(--border);background:var(--bg3);color:var(--muted2);cursor:pointer;transition:all .2s;text-decoration:none;display:block}
 .genre-btn:hover{border-color:rgba(0,212,255,.4);color:var(--cyan);background:rgba(0,212,255,.06)}
 
-/* HISTORY SIDEBAR (local) */
+/* HISTORY SIDEBAR */
 .history-item{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:background .2s}
 .history-item:hover{background:rgba(255,255,255,.04)}
 .history-thumb{width:44px;height:60px;border-radius:6px;object-fit:cover;flex-shrink:0;background:var(--bg3)}
@@ -399,14 +397,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
 .img-placeholder{background:linear-gradient(135deg,var(--bg3),var(--bg2));display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:24px}
 .api-status{display:none!important}
 
-/* HERO BG loading state */
-#heroBg{background:linear-gradient(135deg,#0c0e1a 0%,#111428 50%,#0d1020 100%)}
-.hero-bg img{transition:opacity .6s ease}
-
-/* API status clickable on error */
-#apiStatus{display:none!important}
-
-/* PARTICLES */
+/* HERO PARTICLES */
 .hero-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:3}
 .particle{position:absolute;border-radius:50%;opacity:0;animation:particleFloat var(--d,8s) var(--delay,0s) infinite ease-in-out}
 @keyframes particleFloat{0%{transform:translate(0,0);opacity:0}20%{opacity:.7}50%{transform:translate(var(--x1,20px),var(--y1,-30px));opacity:.4}80%{opacity:.6}100%{transform:translate(var(--x2,40px),var(--y2,-80px));opacity:0}}
@@ -427,7 +418,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
 .login-close{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--muted2);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .login-close:hover{border-color:var(--pink);color:var(--pink)}
 
-/* USER AVATAR di navbar */
+/* USER AVATAR */
 .user-avatar-wrap{display:flex;align-items:center;gap:8px;cursor:pointer;padding:5px 10px;border-radius:99px;border:1px solid var(--border2);background:var(--bg3);transition:all .2s}
 .user-avatar-wrap:hover{border-color:rgba(0,212,255,.4)}
 .user-avatar{width:28px;height:28px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan);background:var(--bg3)}
@@ -440,7 +431,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
 .user-dropdown-item.danger{color:#ef4444}
 .user-dropdown-item.danger:hover{background:rgba(239,68,68,.1)}
 .user-dropdown-sep{height:1px;background:var(--border);margin:4px 0}
-
 
 /* PROFILE MODAL */
 #profileModal{position:fixed;inset:0;z-index:9996;background:rgba(6,7,16,.92);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
@@ -473,16 +463,16 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
 .scroll-top.visible{opacity:1;pointer-events:auto}
 .scroll-top:hover{background:rgba(0,212,255,.1);border-color:var(--cyan);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,212,255,.2)}
 
-/* SAWERIA DONATION BUTTON */
+/* SAWERIA */
 .btn-saweria{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:99px;background:linear-gradient(135deg,#f97316,#ef4444);color:#fff;font-family:var(--font-b);font-size:12px;font-weight:700;border:none;cursor:pointer;text-decoration:none;text-transform:uppercase;letter-spacing:.5px;transition:all .25s;box-shadow:0 4px 14px rgba(249,115,22,.35);white-space:nowrap}
 .btn-saweria:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(249,115,22,.5);color:#fff}
 .btn-saweria svg{width:15px;height:15px;flex-shrink:0}
 
-/* ADSENSE AD UNIT */
+/* ADSENSE */
 .ad-unit{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;text-align:center;padding:8px;position:relative}
 .ad-unit::before{content:'Iklan';position:absolute;top:4px;left:8px;font-size:9px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
 
-/* SAWERIA SECTION di footer */
+/* FOOTER SAWERIA */
 .footer-saweria{background:linear-gradient(135deg,rgba(249,115,22,.08),rgba(239,68,68,.06));border:1px solid rgba(249,115,22,.2);border-radius:var(--r-lg);padding:24px;text-align:center;margin-bottom:36px}
 .footer-saweria h3{font-family:var(--font-h);font-size:22px;letter-spacing:2px;color:#fff;margin-bottom:6px}
 .footer-saweria p{font-size:13px;color:var(--muted2);margin-bottom:16px;line-height:1.6}
@@ -510,7 +500,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
 #mangaDetailModal{position:fixed;inset:0;background:rgba(6,7,16,.96);z-index:1100;overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:60px 20px 40px}
 .manga-detail-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;width:100%;max-width:820px;overflow:hidden;position:relative;animation:contentIn .4s ease}
 .manga-detail-header{display:flex;gap:24px;padding:28px;background:var(--bg3);border-bottom:1px solid var(--border)}
-.manga-detail-poster{width:120px;height:170px;object-fit:cover;border-radius:10px;flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.manga-detail-poster{width:120px;height:170px;object-fit:cover;border-radius:10px;flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.5);background:var(--bg3)}
 .manga-detail-info{flex:1;min-width:0}
 .manga-detail-title{font-family:var(--font-h);font-size:26px;letter-spacing:1.5px;color:#fff;margin-bottom:8px;line-height:1.2}
 .manga-detail-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
@@ -612,14 +602,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
     <div class="ep-scroll" id="epScroll"><div class="spinner-wrap"><div class="spinner"></div></div></div>
   </section>
 
-  <!-- AD UNIT 1 — Horizontal Banner (aktif setelah AdSense disetujui) -->
   <div class="ad-unit" style="margin-bottom:8px;min-height:90px;">
-    <ins class="adsbygoogle"
-      style="display:block"
-      data-ad-client="ca-pub-GANTI_DENGAN_PUBLISHER_ID_ADSENSE"
-      data-ad-slot="GANTI_DENGAN_AD_SLOT_1"
-      data-ad-format="auto"
-      data-full-width-responsive="true"></ins>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-GANTI_DENGAN_PUBLISHER_ID_ADSENSE" data-ad-slot="GANTI_DENGAN_AD_SLOT_1" data-ad-format="auto" data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
   <div class="layout-grid">
@@ -636,23 +620,15 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
           <button class="filter-pill" data-genre="Supernatural">Supernatural</button>
           <button class="filter-pill" data-genre="Sports">Sports</button>
         </div>
-        <div class="anime-grid" id="seasonGrid"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div></div>
+        <div class="anime-grid" id="seasonGrid"></div>
       </section>
       <section class="section" id="top">
         <div class="section-head"><div class="section-title">TOP <span class="accent">ANIME</span></div><a href="#" class="see-all">Lihat Semua →</a></div>
-
-        <!-- AD UNIT 2 — Di atas Top Anime -->
         <div class="ad-unit" style="margin-bottom:20px;min-height:90px;">
-          <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-GANTI_DENGAN_PUBLISHER_ID_ADSENSE"
-            data-ad-slot="GANTI_DENGAN_AD_SLOT_2"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-GANTI_DENGAN_PUBLISHER_ID_ADSENSE" data-ad-slot="GANTI_DENGAN_AD_SLOT_2" data-ad-format="auto" data-full-width-responsive="true"></ins>
           <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
-
-        <div class="anime-grid" id="topGrid"><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div></div>
+        <div class="anime-grid" id="topGrid"></div>
       </section>
     </div>
     <aside class="sidebar">
@@ -671,7 +647,10 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
       <div class="section-title">📖 BACA <span class="accent">MANGA</span></div>
       <button class="btn btn-outline" onclick="closeMangaSection()" style="font-size:12px;padding:7px 16px;">← Kembali ke Anime</button>
     </div>
-    <p style="color:var(--muted2);font-size:13px;margin-bottom:20px;">Powered by <span style="color:var(--cyan);">MangaDex API</span> — Gratis & Legal · Ribuan manga tersedia</p>
+    <p style="color:var(--muted2);font-size:13px;margin-bottom:20px;">
+      Powered by <span style="color:var(--cyan);">MangaDex API</span> · Gratis & Legal
+      <button onclick="retryWithNextProxy()" style="background:var(--bg3);color:var(--cyan);border:1px solid var(--border);padding:3px 10px;border-radius:6px;font-size:11px;cursor:pointer;margin-left:8px;" title="Kalau cover tidak muncul, coba proxy lain">🔄 Ganti Proxy</button>
+    </p>
     <div class="manga-search-bar">
       <input class="manga-search-input" id="mangaSearchInput" type="text" placeholder="🔍 Cari judul manga...">
       <button class="btn btn-primary" onclick="searchManga()" style="padding:10px 22px;">Cari</button>
@@ -699,7 +678,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
   <div class="manga-detail-box">
     <button class="manga-close-btn" onclick="closeMangaDetail()">✕</button>
     <div class="manga-detail-header">
-      <img class="manga-detail-poster" id="mdPoster" src="" alt="" onerror="this.src=''; this.style.background='linear-gradient(135deg,#1a1f3a,#0d1f2d)'">
+      <img class="manga-detail-poster" id="mdPoster" src="" alt="">
       <div class="manga-detail-info">
         <h2 class="manga-detail-title" id="mdTitle">—</h2>
         <div class="manga-detail-meta" id="mdMeta"></div>
@@ -738,7 +717,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
     <button class="stream-close-btn" onclick="closeStreaming()">✕</button>
   </div>
   <div class="stream-body">
-    <!-- Sidebar: search + results list -->
     <div class="stream-sidebar">
       <div class="stream-search-area">
         <div class="stream-apikey-row" id="streamApiKeyRow" style="display:none;">
@@ -757,7 +735,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
         <div class="stream-status">Masukkan API Key lalu klik Cari</div>
       </div>
     </div>
-    <!-- Main player area -->
     <div class="stream-player-area">
       <div class="stream-player-wrap" id="streamPlayerWrap">
         <div class="stream-player-placeholder">
@@ -774,17 +751,13 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
 </div>
 
 <footer>
-  <!-- SAWERIA DONATION SECTION -->
   <div style="max-width:1400px;margin:0 auto;padding:0 40px;">
     <div class="footer-saweria">
       <h3>☕ DUKUNG <span style="color:#f97316;">NIMESORA</span></h3>
       <p>NimeSora gratis selamanya. Kalau kamu suka websitenya,<br>traktir segelas kopi buat admin yuk! Setiap dukungan sangat berarti 🙏</p>
-      <a class="btn-saweria" href="https://saweria.co/AMVadee" target="_blank" rel="noopener noreferrer" style="font-size:14px;padding:12px 28px;">
-        ☕ Traktir Kopi di Saweria
-      </a>
+      <a class="btn-saweria" href="https://saweria.co/AMVadee" target="_blank" rel="noopener noreferrer" style="font-size:14px;padding:12px 28px;">☕ Traktir Kopi di Saweria</a>
     </div>
   </div>
-
   <div class="footer-grid">
     <div>
       <a class="logo" href="#" style="font-size:32px;"><span class="logo-a">NIME</span><span class="logo-b">SORA</span><span class="logo-dot">.</span></a>
@@ -805,7 +778,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
 <div id="favModal" class="hidden"><div class="fav-modal-inner"><div class="fav-modal-head"><div class="fav-modal-title">❤️ FAVORIT <span>KU</span></div><button class="search-close" onclick="closeFavModal()">✕</button></div><div class="anime-grid" id="favGrid"></div><div id="favEmpty" class="fav-empty hidden"><div class="fav-empty-icon">💔</div><p>Belum ada anime favorit.<br>Klik ❤️ pada anime untuk menambahkan.</p></div></div></div>
 
 <div class="toast" id="toast"><span class="toast-icon" id="toastIcon">✅</span><span id="toastMsg">Berhasil!</span></div>
-<div class="api-status" id="apiStatus"><div class="api-dot" id="apiDot"></div><span id="apiStatusText"></span></div>
 <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Kembali ke atas">↑</button>
 
 <!-- LOGIN MODAL -->
@@ -819,9 +791,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
       <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.36-8.16 2.36-6.26 0-11.57-3.59-13.46-8.83l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
       Lanjutkan dengan Google
     </button>
-    <div id="loginClientIdWarn" class="hidden" style="background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:8px;padding:12px;font-size:12px;color:#ffd700;line-height:1.6;margin-top:8px;">
-      ⚠️ <strong>Setup diperlukan:</strong> Buka file <code>index.html</code>, cari <code>GOOGLE_CLIENT_ID</code> dan ganti dengan Client ID dari <a href="https://console.cloud.google.com" target="_blank" style="color:var(--cyan);">Google Cloud Console</a>.
-    </div>
+    <div id="loginClientIdWarn" class="hidden" style="background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:8px;padding:12px;font-size:12px;color:#ffd700;line-height:1.6;margin-top:8px;">⚠️ <strong>Setup diperlukan:</strong> Ganti <code>GOOGLE_CLIENT_ID</code> dengan Client ID dari <a href="https://console.cloud.google.com" target="_blank" style="color:var(--cyan);">Google Cloud Console</a>.</div>
     <p class="login-terms">Dengan masuk, kamu setuju dengan <a href="#">Syarat & Ketentuan</a> dan <a href="#">Kebijakan Privasi</a> kami.</p>
   </div>
 </div>
@@ -829,10 +799,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
 <!-- PROFILE MODAL -->
 <div id="profileModal" class="hidden">
   <div class="profile-box">
-    <div class="profile-header">
-      <h2 class="profile-title">👤 Edit <span>Profil</span></h2>
-      <button class="login-close" onclick="closeProfileModal()">✕</button>
-    </div>
+    <div class="profile-header"><h2 class="profile-title">👤 Edit <span>Profil</span></h2><button class="login-close" onclick="closeProfileModal()">✕</button></div>
     <div class="profile-avatar-section">
       <div class="profile-avatar-wrap">
         <img id="profileAvatarPreview" src="" alt="" onerror="this.src=''">
@@ -843,64 +810,31 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
     </div>
     <div class="profile-fields">
       <div class="profile-field-row">
-        <div class="profile-field">
-          <label>Nama Tampilan</label>
-          <input type="text" id="pf_name" placeholder="Nama kamu..." maxlength="30">
-        </div>
-        <div class="profile-field">
-          <label>Username</label>
-          <div style="position:relative;">
-            <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;">@</span>
-            <input type="text" id="pf_username" placeholder="username" maxlength="20" style="padding-left:26px;" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_.]/g,'')">
-          </div>
-        </div>
+        <div class="profile-field"><label>Nama Tampilan</label><input type="text" id="pf_name" placeholder="Nama kamu..." maxlength="30"></div>
+        <div class="profile-field"><label>Username</label><div style="position:relative;"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;">@</span><input type="text" id="pf_username" placeholder="username" maxlength="20" style="padding-left:26px;" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_.]/g,'')"></div></div>
       </div>
       <div class="profile-field-row">
-        <div class="profile-field">
-          <label>Gender</label>
-          <select id="pf_gender" onchange="updateWaifuLabel()">
-            <option value="">— Pilih —</option>
-            <option value="male">Laki-laki</option>
-            <option value="female">Perempuan</option>
-            <option value="other">Lainnya</option>
-          </select>
-        </div>
-        <div class="profile-field">
-          <label>Umur</label>
-          <input type="number" id="pf_age" placeholder="Umur" min="10" max="99">
-        </div>
+        <div class="profile-field"><label>Gender</label><select id="pf_gender" onchange="updateWaifuLabel()"><option value="">— Pilih —</option><option value="male">Laki-laki</option><option value="female">Perempuan</option><option value="other">Lainnya</option></select></div>
+        <div class="profile-field"><label>Umur</label><input type="number" id="pf_age" placeholder="Umur" min="10" max="99"></div>
       </div>
-      <div class="profile-field">
-        <label id="waifuLabel">Waifu / Husbando Favorit 💕</label>
-        <input type="text" id="pf_waifu" placeholder="Siapa karakter favorit kamu?" maxlength="50">
-      </div>
-      <div class="profile-field">
-        <label>Genre Favorit</label>
-        <div class="genre-check-grid" id="genreCheckGrid">
-          <label class="genre-check"><input type="checkbox" value="Action"> Action</label>
-          <label class="genre-check"><input type="checkbox" value="Romance"> Romance</label>
-          <label class="genre-check"><input type="checkbox" value="Fantasy"> Fantasy</label>
-          <label class="genre-check"><input type="checkbox" value="Comedy"> Comedy</label>
-          <label class="genre-check"><input type="checkbox" value="Drama"> Drama</label>
-          <label class="genre-check"><input type="checkbox" value="Horror"> Horror</label>
-          <label class="genre-check"><input type="checkbox" value="Isekai"> Isekai</label>
-          <label class="genre-check"><input type="checkbox" value="Mecha"> Mecha</label>
-          <label class="genre-check"><input type="checkbox" value="Sports"> Sports</label>
-          <label class="genre-check"><input type="checkbox" value="Slice of Life"> Slice of Life</label>
-          <label class="genre-check"><input type="checkbox" value="Supernatural"> Supernatural</label>
-          <label class="genre-check"><input type="checkbox" value="Sci-Fi"> Sci-Fi</label>
-        </div>
-      </div>
-      <div class="profile-field">
-        <label>Bio</label>
-        <textarea id="pf_bio" placeholder="Ceritakan sedikit tentang dirimu..." maxlength="150" rows="3"></textarea>
-        <div style="text-align:right;font-size:11px;color:var(--muted);margin-top:4px;"><span id="bioCount">0</span>/150</div>
-      </div>
+      <div class="profile-field"><label id="waifuLabel">Waifu / Husbando Favorit 💕</label><input type="text" id="pf_waifu" placeholder="Siapa karakter favorit kamu?" maxlength="50"></div>
+      <div class="profile-field"><label>Genre Favorit</label><div class="genre-check-grid" id="genreCheckGrid">
+        <label class="genre-check"><input type="checkbox" value="Action"> Action</label>
+        <label class="genre-check"><input type="checkbox" value="Romance"> Romance</label>
+        <label class="genre-check"><input type="checkbox" value="Fantasy"> Fantasy</label>
+        <label class="genre-check"><input type="checkbox" value="Comedy"> Comedy</label>
+        <label class="genre-check"><input type="checkbox" value="Drama"> Drama</label>
+        <label class="genre-check"><input type="checkbox" value="Horror"> Horror</label>
+        <label class="genre-check"><input type="checkbox" value="Isekai"> Isekai</label>
+        <label class="genre-check"><input type="checkbox" value="Mecha"> Mecha</label>
+        <label class="genre-check"><input type="checkbox" value="Sports"> Sports</label>
+        <label class="genre-check"><input type="checkbox" value="Slice of Life"> Slice of Life</label>
+        <label class="genre-check"><input type="checkbox" value="Supernatural"> Supernatural</label>
+        <label class="genre-check"><input type="checkbox" value="Sci-Fi"> Sci-Fi</label>
+      </div></div>
+      <div class="profile-field"><label>Bio</label><textarea id="pf_bio" placeholder="Ceritakan sedikit tentang dirimu..." maxlength="150" rows="3"></textarea><div style="text-align:right;font-size:11px;color:var(--muted);margin-top:4px;"><span id="bioCount">0</span>/150</div></div>
     </div>
-    <div class="profile-actions">
-      <button class="btn-hero btn-hero-watch" onclick="saveProfile()" style="padding:10px 28px;font-size:13px;">💾 Simpan Profil</button>
-      <button class="btn-hero btn-hero-info" onclick="closeProfileModal()" style="padding:10px 20px;font-size:13px;">Batal</button>
-    </div>
+    <div class="profile-actions"><button class="btn-hero btn-hero-watch" onclick="saveProfile()" style="padding:10px 28px;font-size:13px;">💾 Simpan Profil</button><button class="btn-hero btn-hero-info" onclick="closeProfileModal()" style="padding:10px 20px;font-size:13px;">Batal</button></div>
   </div>
 </div>
 
@@ -908,31 +842,13 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
 // ============================================================
 // GOOGLE LOGIN & AUTH
 // ============================================================
-// ⚠️ Ganti dengan Google Client ID dari https://console.cloud.google.com
-// Authorized Origins: tambahkan domain kamu (mis. https://nimesora.netlify.app)
 const GOOGLE_CLIENT_ID = '282308511693-4qoe48o2r1fek4t5r7ar8kpdpcmjhala.apps.googleusercontent.com';
-
 let currentUser = null;
 
-function loadUserSession() {
-  try {
-    const raw = localStorage.getItem('nimesora_user');
-    if (raw) { currentUser = JSON.parse(raw); applyUserToUI(currentUser); }
-  } catch(e) {}
-}
-function saveUserSession(user) {
-  localStorage.setItem('nimesora_user', JSON.stringify(user));
-}
-function loadUserProfile() {
-  try {
-    const raw = localStorage.getItem('nimesora_profile');
-    if (raw) return JSON.parse(raw);
-  } catch(e) {}
-  return {};
-}
-function saveUserProfile(profile) {
-  localStorage.setItem('nimesora_profile', JSON.stringify(profile));
-}
+function loadUserSession() { try { const raw = localStorage.getItem('nimesora_user'); if (raw) { currentUser = JSON.parse(raw); applyUserToUI(currentUser); } } catch(e) {} }
+function saveUserSession(user) { localStorage.setItem('nimesora_user', JSON.stringify(user)); }
+function loadUserProfile() { try { const raw = localStorage.getItem('nimesora_profile'); if (raw) return JSON.parse(raw); } catch(e) {} return {}; }
+function saveUserProfile(profile) { localStorage.setItem('nimesora_profile', JSON.stringify(profile)); }
 
 function applyUserToUI(user) {
   if (!user) return;
@@ -947,242 +863,90 @@ function applyUserToUI(user) {
   document.getElementById('userNameText').textContent = profile.username ? '@'+profile.username : displayName;
 }
 
-function openLoginModal() {
-  const modal = document.getElementById('loginModal');
-  modal.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
-  if (!IS_LOCAL) try { history.pushState({ modal: 'login' }, '', '#login'); } catch(e) {}
-  // Render Google button
-  setTimeout(() => initGoogleButton(), 100);
-}
-function closeLoginModal() {
-  document.getElementById('loginModal').classList.add('hidden');
-  document.body.style.overflow = '';
-}
-function toggleUserDropdown() {
-  document.getElementById('userDropdown').classList.toggle('hidden');
-}
-document.addEventListener('click', function(e) {
-  const area = document.getElementById('authArea');
-  if (area && !area.contains(e.target)) {
-    const dd = document.getElementById('userDropdown');
-    if (dd) dd.classList.add('hidden');
-  }
-});
+function openLoginModal() { document.getElementById('loginModal').classList.remove('hidden'); document.body.style.overflow = 'hidden'; if (!IS_LOCAL) try { history.pushState({ modal: 'login' }, '', '#login'); } catch(e) {} setTimeout(() => initGoogleButton(), 100); }
+function closeLoginModal() { document.getElementById('loginModal').classList.add('hidden'); document.body.style.overflow = ''; }
+function toggleUserDropdown() { document.getElementById('userDropdown').classList.toggle('hidden'); }
+document.addEventListener('click', function(e) { const area = document.getElementById('authArea'); if (area && !area.contains(e.target)) { const dd = document.getElementById('userDropdown'); if (dd) dd.classList.add('hidden'); } });
 function logoutUser() {
-  currentUser = null;
-  localStorage.removeItem('nimesora_user');
-  document.getElementById('btnMasuk').classList.remove('hidden');
-  document.getElementById('userArea').classList.add('hidden');
+  currentUser = null; localStorage.removeItem('nimesora_user');
+  document.getElementById('btnMasuk').classList.remove('hidden'); document.getElementById('userArea').classList.add('hidden');
   document.getElementById('userDropdown').classList.add('hidden');
   if (window.google?.accounts?.id) google.accounts.id.disableAutoSelect();
   showToast('Berhasil keluar. Sampai jumpa! 👋', '🚪');
 }
 
-// Google Identity Services — decode JWT callback
 function handleGoogleLogin(response) {
   try {
-    const parts = response.credential.split('.');
-    const payload = JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+    const parts = response.credential.split('.'); const payload = JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
     currentUser = { name: payload.name, email: payload.email, picture: payload.picture, sub: payload.sub, provider: 'google' };
     saveUserSession(currentUser);
-    // Jika belum punya profil, pre-fill dari Google data
-    const existing = loadUserProfile();
-    if (!existing.name) {
-      saveUserProfile({ ...existing, name: payload.name, avatarDataUrl: payload.picture || '' });
-    }
-    applyUserToUI(currentUser);
-    closeLoginModal();
-    showToast(`Halo, ${payload.name.split(' ')[0]}! 👋`, '✅');
-  } catch(e) {
-    console.error('Google login error:', e);
-    showToast('Login gagal. Coba lagi.', '❌');
-  }
+    const existing = loadUserProfile(); if (!existing.name) saveUserProfile({ ...existing, name: payload.name, avatarDataUrl: payload.picture || '' });
+    applyUserToUI(currentUser); closeLoginModal(); showToast(`Halo, ${payload.name.split(' ')[0]}! 👋`, '✅');
+  } catch(e) { console.error('Google login error:', e); showToast('Login gagal. Coba lagi.', '❌'); }
 }
 
 function initGoogleButton() {
-  const container = document.getElementById('googleBtnContainer');
-  const fallback  = document.getElementById('btnGoogleFallback');
-  const warn      = document.getElementById('loginClientIdWarn');
+  const container = document.getElementById('googleBtnContainer'); const fallback = document.getElementById('btnGoogleFallback'); const warn = document.getElementById('loginClientIdWarn');
   if (!container) return;
-
   const clientIdSet = GOOGLE_CLIENT_ID !== 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
-
   if (window.google?.accounts?.id && clientIdSet) {
     google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleLogin, auto_select: false });
     google.accounts.id.renderButton(container, { theme: 'filled_black', size: 'large', width: 300, text: 'continue_with', shape: 'pill' });
-    fallback.style.display = 'none';
-    warn.classList.add('hidden');
-  } else {
-    // Tampilkan tombol custom + warning setup
-    container.innerHTML = '';
-    fallback.style.display = 'flex';
-    if (!clientIdSet) warn.classList.remove('hidden');
-  }
+    fallback.style.display = 'none'; warn.classList.add('hidden');
+  } else { container.innerHTML = ''; fallback.style.display = 'flex'; if (!clientIdSet) warn.classList.remove('hidden'); }
 }
 
 function triggerGoogleLogin() {
   const clientIdSet = GOOGLE_CLIENT_ID !== 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
-  if (window.google?.accounts?.id && clientIdSet) {
-    google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleLogin, auto_select: false });
-    google.accounts.id.prompt();
-  } else {
-    document.getElementById('loginClientIdWarn').classList.remove('hidden');
-  }
+  if (window.google?.accounts?.id && clientIdSet) { google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleLogin, auto_select: false }); google.accounts.id.prompt(); }
+  else document.getElementById('loginClientIdWarn').classList.remove('hidden');
 }
 
 // ============================================================
 // PROFILE MODAL
 // ============================================================
-function openProfileModal() {
-  if (!currentUser) { openLoginModal(); return; }
-  const modal = document.getElementById('profileModal');
-  modal.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
-  // Load existing profile
-  const profile = loadUserProfile();
-  const avatarSrc = profile.avatarDataUrl || currentUser.picture || '';
-  const previewEl = document.getElementById('profileAvatarPreview');
-  previewEl.src = avatarSrc;
-  previewEl.onerror = () => { previewEl.src=''; previewEl.parentElement.style.background='linear-gradient(135deg,#7c3aed,var(--pink))'; };
-  document.getElementById('pf_name').value     = profile.name     || currentUser.name  || '';
-  document.getElementById('pf_username').value = profile.username || '';
-  document.getElementById('pf_gender').value   = profile.gender   || '';
-  document.getElementById('pf_age').value      = profile.age      || '';
-  document.getElementById('pf_waifu').value    = profile.waifu    || '';
-  document.getElementById('pf_bio').value      = profile.bio      || '';
-  updateBioCount();
-  updateWaifuLabel();
-  // Load genre checkboxes
-  const favGenres = profile.favGenres || [];
-  document.querySelectorAll('#genreCheckGrid input[type=checkbox]').forEach(cb => {
-    cb.checked = favGenres.includes(cb.value);
-  });
-}
-function closeProfileModal() {
-  document.getElementById('profileModal').classList.add('hidden');
-  document.body.style.overflow = '';
-}
-function updateWaifuLabel() {
-  const gender = document.getElementById('pf_gender').value;
-  const label  = document.getElementById('waifuLabel');
-  label.textContent = gender === 'female' ? 'Husbando Favorit 💙' : gender === 'male' ? 'Waifu Favorit 💕' : 'Waifu / Husbando Favorit 💕';
-}
-function updateBioCount() {
-  const bio = document.getElementById('pf_bio');
-  document.getElementById('bioCount').textContent = bio.value.length;
-  bio.addEventListener('input', () => document.getElementById('bioCount').textContent = bio.value.length);
-}
-function handleAvatarUpload(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  if (file.size > 2 * 1024 * 1024) { showToast('Ukuran foto maks 2MB', '⚠️'); return; }
-  const reader = new FileReader();
-  reader.onload = ev => {
-    document.getElementById('profileAvatarPreview').src = ev.target.result;
-    document.getElementById('profileAvatarPreview')._newData = ev.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-function saveProfile() {
-  const previewEl = document.getElementById('profileAvatarPreview');
-  const favGenres = [...document.querySelectorAll('#genreCheckGrid input:checked')].map(cb => cb.value);
-  const profile = {
-    name:        document.getElementById('pf_name').value.trim(),
-    username:    document.getElementById('pf_username').value.trim(),
-    gender:      document.getElementById('pf_gender').value,
-    age:         document.getElementById('pf_age').value,
-    waifu:       document.getElementById('pf_waifu').value.trim(),
-    bio:         document.getElementById('pf_bio').value.trim(),
-    favGenres,
-    avatarDataUrl: previewEl._newData || previewEl.src || loadUserProfile().avatarDataUrl || '',
-  };
-  saveUserProfile(profile);
-  applyUserToUI(currentUser);
-  closeProfileModal();
-  showToast('Profil berhasil disimpan! ✨', '💾');
-}
-
-// Tutup profile modal saat klik backdrop
+function openProfileModal() { if (!currentUser) { openLoginModal(); return; } document.getElementById('profileModal').classList.remove('hidden'); document.body.style.overflow = 'hidden'; const profile = loadUserProfile(); const avatarSrc = profile.avatarDataUrl || currentUser.picture || ''; const previewEl = document.getElementById('profileAvatarPreview'); previewEl.src = avatarSrc; previewEl.onerror = () => { previewEl.src=''; previewEl.parentElement.style.background='linear-gradient(135deg,#7c3aed,var(--pink))'; }; document.getElementById('pf_name').value = profile.name || currentUser.name || ''; document.getElementById('pf_username').value = profile.username || ''; document.getElementById('pf_gender').value = profile.gender || ''; document.getElementById('pf_age').value = profile.age || ''; document.getElementById('pf_waifu').value = profile.waifu || ''; document.getElementById('pf_bio').value = profile.bio || ''; updateBioCount(); updateWaifuLabel(); const favGenres = profile.favGenres || []; document.querySelectorAll('#genreCheckGrid input[type=checkbox]').forEach(cb => { cb.checked = favGenres.includes(cb.value); }); }
+function closeProfileModal() { document.getElementById('profileModal').classList.add('hidden'); document.body.style.overflow = ''; }
+function updateWaifuLabel() { const gender = document.getElementById('pf_gender').value; const label = document.getElementById('waifuLabel'); label.textContent = gender === 'female' ? 'Husbando Favorit 💙' : gender === 'male' ? 'Waifu Favorit 💕' : 'Waifu / Husbando Favorit 💕'; }
+function updateBioCount() { const bio = document.getElementById('pf_bio'); document.getElementById('bioCount').textContent = bio.value.length; bio.addEventListener('input', () => document.getElementById('bioCount').textContent = bio.value.length); }
+function handleAvatarUpload(e) { const file = e.target.files[0]; if (!file) return; if (file.size > 2 * 1024 * 1024) { showToast('Ukuran foto maks 2MB', '⚠️'); return; } const reader = new FileReader(); reader.onload = ev => { document.getElementById('profileAvatarPreview').src = ev.target.result; document.getElementById('profileAvatarPreview')._newData = ev.target.result; }; reader.readAsDataURL(file); }
+function saveProfile() { const previewEl = document.getElementById('profileAvatarPreview'); const favGenres = [...document.querySelectorAll('#genreCheckGrid input:checked')].map(cb => cb.value); const profile = { name: document.getElementById('pf_name').value.trim(), username: document.getElementById('pf_username').value.trim(), gender: document.getElementById('pf_gender').value, age: document.getElementById('pf_age').value, waifu: document.getElementById('pf_waifu').value.trim(), bio: document.getElementById('pf_bio').value.trim(), favGenres, avatarDataUrl: previewEl._newData || previewEl.src || loadUserProfile().avatarDataUrl || '' }; saveUserProfile(profile); applyUserToUI(currentUser); closeProfileModal(); showToast('Profil berhasil disimpan! ✨', '💾'); }
 document.getElementById('profileModal').addEventListener('click', function(e){ if(e.target===this) closeProfileModal(); });
 
 // ============================================================
-// HISTORY API — Back / Forward Browser
+// HISTORY API
 // ============================================================
-function slugify(str) {
-  return (str || '')
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-');
-}
-
+function slugify(str) { return (str || '').toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-'); }
 const IS_LOCAL = location.protocol === 'file:';
 
 function pushModalState(modalName, params = {}) {
-  if (IS_LOCAL) return; // skip history manipulation on local files
-  try {
-    const state = { modal: modalName, ...params };
-    let url;
-    if (modalName === 'detail' && params.slug) {
-      url = '/' + params.slug;
-    } else {
-      url = '#' + modalName + (params.id ? '-' + params.id : '');
-    }
-    history.pushState(state, '', url);
-  } catch(e) {}
+  if (IS_LOCAL) return;
+  try { const state = { modal: modalName, ...params }; let url; if (modalName === 'detail' && params.slug) url = '/' + params.slug; else url = '#' + modalName + (params.id ? '-' + params.id : ''); history.pushState(state, '', url); } catch(e) {}
 }
 
 window.addEventListener('popstate', function(e) {
   const state = e.state;
-  // Tutup semua modal yang terbuka saat tombol Back ditekan
-  if (!state || !state.modal) {
-    // Kembali ke halaman utama — tutup semua modal
-    _closeAllModals();
-    return;
-  }
-  // Jika ada state tapi modal berbeda, tutup modal yang sekarang
-  if (state.modal !== 'detail')  { const dm = document.getElementById('detailModal');  if(dm  && !dm.classList.contains('hidden'))  { dm.classList.add('hidden'); document.body.style.overflow=''; const f=document.getElementById('trailerFrame'); if(f) f.innerHTML=`<div class="trailer-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:.4"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg><span>Memuat trailer...</span></div>`; currentDetailAnime=null; } }
-  if (state.modal !== 'search')  { const sm = document.getElementById('searchModal');  if(sm  && !sm.classList.contains('hidden'))  { sm.classList.add('hidden');  document.body.style.overflow=''; } }
-  if (state.modal !== 'fav')     { const fm = document.getElementById('favModal');     if(fm  && !fm.classList.contains('hidden'))  { fm.classList.add('hidden');  document.body.style.overflow=''; } }
-  if (state.modal !== 'login')   { const lm = document.getElementById('loginModal');   if(lm  && !lm.classList.contains('hidden'))  { lm.classList.add('hidden');  document.body.style.overflow=''; } }
+  if (!state || !state.modal) { _closeAllModals(); return; }
+  if (state.modal !== 'detail') { const dm = document.getElementById('detailModal'); if(dm && !dm.classList.contains('hidden')) { dm.classList.add('hidden'); document.body.style.overflow=''; const f=document.getElementById('trailerFrame'); if(f) f.innerHTML=`<div class="trailer-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:.4"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg><span>Memuat trailer...</span></div>`; currentDetailAnime=null; } }
+  if (state.modal !== 'search') { const sm = document.getElementById('searchModal'); if(sm && !sm.classList.contains('hidden')) { sm.classList.add('hidden'); document.body.style.overflow=''; } }
+  if (state.modal !== 'fav') { const fm = document.getElementById('favModal'); if(fm && !fm.classList.contains('hidden')) { fm.classList.add('hidden'); document.body.style.overflow=''; } }
+  if (state.modal !== 'login') { const lm = document.getElementById('loginModal'); if(lm && !lm.classList.contains('hidden')) { lm.classList.add('hidden'); document.body.style.overflow=''; } }
 });
 
 function _closeAllModals() {
-  ['detailModal','searchModal','favModal','loginModal','profileModal'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el && !el.classList.contains('hidden')) {
-      el.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-  });
-  const f = document.getElementById('trailerFrame');
-  if (f) f.innerHTML = `<div class="trailer-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:.4"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg><span>Memuat trailer...</span></div>`;
-  currentDetailAnime = null;
+  ['detailModal','searchModal','favModal','loginModal','profileModal'].forEach(id => { const el = document.getElementById(id); if (el && !el.classList.contains('hidden')) { el.classList.add('hidden'); document.body.style.overflow = ''; } });
+  const f = document.getElementById('trailerFrame'); if (f) f.innerHTML = `<div class="trailer-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:.4"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg><span>Memuat trailer...</span></div>`; currentDetailAnime = null;
 }
 
 // ============================================================
-// CONFIG — menggunakan Jikan API langsung (tanpa backend)
+// CONFIG — Jikan API
 // ============================================================
 const JIKAN_BASE = 'https://api.jikan.moe/v4';
-const API_CACHE_TTL = 60 * 60 * 1000; // 1 jam cache
+const API_CACHE_TTL = 60 * 60 * 1000;
 
-// Simpan/ambil cache API response ke localStorage
-function apiCacheGet(key) {
-  try {
-    const raw = localStorage.getItem('apicache_' + key);
-    if (!raw) return null;
-    const { data, ts } = JSON.parse(raw);
-    if (Date.now() - ts > API_CACHE_TTL) { localStorage.removeItem('apicache_' + key); return null; }
-    return data;
-  } catch(e) { return null; }
-}
-function apiCacheSet(key, data) {
-  try { localStorage.setItem('apicache_' + key, JSON.stringify({ data, ts: Date.now() })); } catch(e) {}
-}
+function apiCacheGet(key) { try { const raw = localStorage.getItem('apicache_' + key); if (!raw) return null; const { data, ts } = JSON.parse(raw); if (Date.now() - ts > API_CACHE_TTL) { localStorage.removeItem('apicache_' + key); return null; } return data; } catch(e) { return null; } }
+function apiCacheSet(key, data) { try { localStorage.setItem('apicache_' + key, JSON.stringify({ data, ts: Date.now() })); } catch(e) {} }
 
-// Helper fetch — coba direct dulu, kalau gagal otomatis pakai CORS proxy
 const CORS_PROXIES = [
   u => "https://api.allorigins.win/raw?url=" + encodeURIComponent(u),
   u => "https://corsproxy.io/?url=" + encodeURIComponent(u),
@@ -1190,83 +954,39 @@ const CORS_PROXIES = [
 ];
 
 async function _fetchWithFallback(url) {
-  // 1. Coba direct fetch
-  try {
-    const r = await fetch(url);
-    if (r.ok || r.status === 429) return r;
-  } catch(_) {}
-
-  // 2. Direct gagal → coba satu per satu CORS proxy
-  for (const makeProxy of CORS_PROXIES) {
-    try {
-      const r = await fetch(makeProxy(url));
-      if (r.ok || r.status === 429) return r;
-    } catch(_) {}
-  }
-
+  try { const r = await fetch(url); if (r.ok || r.status === 429) return r; } catch(_) {}
+  for (const makeProxy of CORS_PROXIES) { try { const r = await fetch(makeProxy(url)); if (r.ok || r.status === 429) return r; } catch(_) {} }
   throw new Error("all-failed");
 }
 
 async function jikanFetch(url, retries = 2, rateRetries = 3) {
-  const cacheKey = url.replace(JIKAN_BASE, "");
-  const cached = apiCacheGet(cacheKey);
-  if (cached) return cached;
-
+  const cacheKey = url.replace(JIKAN_BASE, ""); const cached = apiCacheGet(cacheKey); if (cached) return cached;
   const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 15000));
-
   try {
     const res = await Promise.race([_fetchWithFallback(url), timeout]);
-
-    if (res.status === 429) {
-      if (rateRetries <= 0) { console.warn("Rate limit max reached:", url); return null; }
-      await new Promise(r => setTimeout(r, 2000));
-      return jikanFetch(url, retries, rateRetries - 1);
-    }
+    if (res.status === 429) { if (rateRetries <= 0) { console.warn("Rate limit max reached:", url); return null; } await new Promise(r => setTimeout(r, 2000)); return jikanFetch(url, retries, rateRetries - 1); }
     if (!res.ok) throw new Error("HTTP " + res.status);
-    const json = await res.json();
-    const data = json.data;
-    if (data) apiCacheSet(cacheKey, data);
-    return data;
+    const json = await res.json(); const data = json.data; if (data) apiCacheSet(cacheKey, data); return data;
   } catch (e) {
     if (e.message === "timeout") { console.warn("Jikan timeout:", url); return null; }
-    if (e.message === "all-failed") {
-      if (retries > 0) {
-        await new Promise(r => setTimeout(r, 1000));
-        return jikanFetch(url, retries - 1, rateRetries);
-      }
-      console.warn("Jikan tidak bisa diakses (cek koneksi internet):", url);
-      return null;
-    }
-    if (retries > 0) {
-      await new Promise(r => setTimeout(r, 800));
-      return jikanFetch(url, retries - 1, rateRetries);
-    }
-    console.warn("Jikan error:", url, e.message);
-    return null;
+    if (e.message === "all-failed") { if (retries > 0) { await new Promise(r => setTimeout(r, 1000)); return jikanFetch(url, retries - 1, rateRetries); } console.warn("Jikan tidak bisa diakses:", url); return null; }
+    if (retries > 0) { await new Promise(r => setTimeout(r, 800)); return jikanFetch(url, retries - 1, rateRetries); }
+    console.warn("Jikan error:", url, e.message); return null;
   }
 }
 
 // ============================================================
-// STATE (localStorage untuk Favorit & History)
+// STATE
 // ============================================================
 let seasonData = [], topData = [], heroList = [];
 let currentHeroIdx = 0, heroTimer = null, searchTimer = null;
 let currentScheduleDay = null;
 let currentDetailAnime = null;
-
-// Favorit & History menggunakan localStorage
-let favorites = [];     // array of anime objects (simpan minimal: id, title, images, type, score)
-let historyList = [];   // { anime: {...}, watchedAt: string }
+let favorites = [], historyList = [];
 
 function loadLocalData() {
-  try {
-    const favRaw = localStorage.getItem('nimesora_favorites');
-    if (favRaw) favorites = JSON.parse(favRaw);
-    const histRaw = localStorage.getItem('nimesora_history');
-    if (histRaw) historyList = JSON.parse(histRaw);
-  } catch(e) { console.warn(e); }
-  updateFavCount();
-  renderHistorySidebar();
+  try { const favRaw = localStorage.getItem('nimesora_favorites'); if (favRaw) favorites = JSON.parse(favRaw); const histRaw = localStorage.getItem('nimesora_history'); if (histRaw) historyList = JSON.parse(histRaw); } catch(e) {}
+  updateFavCount(); renderHistorySidebar();
 }
 function saveFavorites() { localStorage.setItem('nimesora_favorites', JSON.stringify(favorites)); }
 function saveHistory() { localStorage.setItem('nimesora_history', JSON.stringify(historyList.slice(0, 20))); }
@@ -1275,681 +995,295 @@ function saveHistory() { localStorage.setItem('nimesora_history', JSON.stringify
 // UTILS
 // ============================
 function truncate(str, n){ if(!str)return''; return str.length>n?str.slice(0,n)+'...':str; }
-function relTime(dt){
-  if(!dt)return'';
-  const diff=(Date.now()-new Date(dt))/1000;
-  if(diff<3600)return`${Math.floor(diff/60)} menit lalu`;
-  if(diff<86400)return`${Math.floor(diff/3600)} jam lalu`;
-  if(diff<604800)return`${Math.floor(diff/86400)} hari lalu`;
-  return new Date(dt).toLocaleDateString('id-ID');
-}
-function getTypeClass(type){
-  if(!type)return'type-tv';
-  if(type==='Movie')return'type-movie';
-  if(type==='OVA'||type==='ONA')return'type-ova';
-  return'type-tv';
-}
-function imgError(img,id){
-  const colors=['#1a1f3a','#0d1f2d','#1a0a2e','#1c1a12'];
-  img.style.background=colors[id%colors.length];
-  img.style.opacity='0.6';
-  img.removeAttribute('src');
-}
-function showToast(msg, icon='✅') {
-  const t = document.getElementById('toast');
-  document.getElementById('toastMsg').textContent = msg;
-  document.getElementById('toastIcon').textContent = icon;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3200);
-}
+function relTime(dt){ if(!dt)return''; const diff=(Date.now()-new Date(dt))/1000; if(diff<3600)return`${Math.floor(diff/60)} menit lalu`; if(diff<86400)return`${Math.floor(diff/3600)} jam lalu`; if(diff<604800)return`${Math.floor(diff/86400)} hari lalu`; return new Date(dt).toLocaleDateString('id-ID'); }
+function getTypeClass(type){ if(!type)return'type-tv'; if(type==='Movie')return'type-movie'; if(type==='OVA'||type==='ONA')return'type-ova'; return'type-tv'; }
+function imgError(img,id){ const colors=['#1a1f3a','#0d1f2d','#1a0a2e','#1c1a12']; img.style.background=colors[id%colors.length]; img.style.opacity='0.6'; img.removeAttribute('src'); }
+function showToast(msg, icon='✅') { const t = document.getElementById('toast'); document.getElementById('toastMsg').textContent = msg; document.getElementById('toastIcon').textContent = icon; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3200); }
 
 // ============================
 // FAVORITES
 // ============================
-function isFaved(anime) {
-  const id = anime.mal_id || anime.id;
-  return favorites.some(f => (f.mal_id||f.id) === id);
-}
-function addFavorite(anime) {
-  if (!isFaved(anime)) {
-    favorites.push(anime);
-    saveFavorites();
-    updateFavCount();
-  }
-}
-function removeFavorite(animeId) {
-  favorites = favorites.filter(f => (f.mal_id||f.id) !== animeId);
-  saveFavorites();
-  updateFavCount();
-}
+function isFaved(anime) { const id = anime.mal_id || anime.id; return favorites.some(f => (f.mal_id||f.id) === id); }
+function addFavorite(anime) { if (!isFaved(anime)) { favorites.push(anime); saveFavorites(); updateFavCount(); } }
+function removeFavorite(animeId) { favorites = favorites.filter(f => (f.mal_id||f.id) !== animeId); saveFavorites(); updateFavCount(); }
 function toggleFav(anime, btnEl) {
   const id = anime.mal_id || anime.id;
   if (isFaved(anime)) {
-    removeFavorite(id);
-    if(btnEl){ btnEl.classList.remove('faved'); btnEl.textContent='🤍'; }
-    showToast('Dihapus dari Favorit', '💔');
+    removeFavorite(id); if(btnEl){ btnEl.classList.remove('faved'); btnEl.textContent='🤍'; } showToast('Dihapus dari Favorit', '💔');
   } else {
-    addFavorite(anime);
-    if(btnEl){ btnEl.classList.add('faved'); btnEl.textContent='❤️'; }
-    showToast(`${anime.title_english||anime.title} ditambahkan ke Favorit!`, '❤️');
+    addFavorite(anime); if(btnEl){ btnEl.classList.add('faved'); btnEl.textContent='❤️'; } showToast(`${anime.title_english||anime.title} ditambahkan ke Favorit!`, '❤️');
   }
-  // update detail button if open
-  const detFav = document.getElementById('detailFavBtn');
-  if(currentDetailAnime && (currentDetailAnime.mal_id||currentDetailAnime.id)===id) {
-    detFav.classList.toggle('faved', isFaved(anime));
-    detFav.textContent = isFaved(anime) ? '❤️ Favorit' : '🤍 Favorit';
-  }
-  // update all card buttons
-  document.querySelectorAll(`.card-fav-btn[data-id="${id}"]`).forEach(b => {
-    b.classList.toggle('faved', isFaved(anime));
-    b.textContent = isFaved(anime) ? '❤️' : '🤍';
-  });
+  const detFav = document.getElementById('detailFavBtn'); if(currentDetailAnime && (currentDetailAnime.mal_id||currentDetailAnime.id)===id) { detFav.classList.toggle('faved', isFaved(anime)); detFav.textContent = isFaved(anime) ? '❤️ Favorit' : '🤍 Favorit'; }
+  document.querySelectorAll(`.card-fav-btn[data-id="${id}"]`).forEach(b => { b.classList.toggle('faved', isFaved(anime)); b.textContent = isFaved(anime) ? '❤️' : '🤍'; });
 }
-function toggleFavFromDetail() {
-  if(!currentDetailAnime) return;
-  const btn = document.getElementById('detailFavBtn');
-  toggleFav(currentDetailAnime, null);
-  btn.classList.toggle('faved', isFaved(currentDetailAnime));
-  btn.textContent = isFaved(currentDetailAnime) ? '❤️ Favorit' : '🤍 Favorit';
-}
-function updateFavCount() {
-  const badge = document.getElementById('favCount');
-  if(favorites.length > 0) {
-    badge.textContent = favorites.length;
-    badge.style.display = 'inline-block';
-  } else { badge.style.display = 'none'; }
-}
-function openFavModal() {
-  const modal = document.getElementById('favModal');
-  const grid  = document.getElementById('favGrid');
-  const empty = document.getElementById('favEmpty');
-  modal.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
-  pushModalState('fav');
-  grid.innerHTML = '';
-  if(favorites.length === 0) {
-    empty.classList.remove('hidden');
-    grid.classList.add('hidden');
-  } else {
-    empty.classList.add('hidden');
-    grid.classList.remove('hidden');
-    favorites.forEach((anime, i) => grid.appendChild(buildCard(anime, i*40)));
-  }
-}
-function closeFavModal() {
-  document.getElementById('favModal').classList.add('hidden');
-  document.body.style.overflow = '';
-}
+function toggleFavFromDetail() { if(!currentDetailAnime) return; const btn = document.getElementById('detailFavBtn'); toggleFav(currentDetailAnime, null); btn.classList.toggle('faved', isFaved(currentDetailAnime)); btn.textContent = isFaved(currentDetailAnime) ? '❤️ Favorit' : '🤍 Favorit'; }
+function updateFavCount() { const badge = document.getElementById('favCount'); if(favorites.length > 0) { badge.textContent = favorites.length; badge.style.display = 'inline-block'; } else { badge.style.display = 'none'; } }
+function openFavModal() { const modal = document.getElementById('favModal'); const grid = document.getElementById('favGrid'); const empty = document.getElementById('favEmpty'); modal.classList.remove('hidden'); document.body.style.overflow = 'hidden'; pushModalState('fav'); grid.innerHTML = ''; if(favorites.length === 0) { empty.classList.remove('hidden'); grid.classList.add('hidden'); } else { empty.classList.add('hidden'); grid.classList.remove('hidden'); favorites.forEach((anime, i) => grid.appendChild(buildCard(anime, i*40))); } }
+function closeFavModal() { document.getElementById('favModal').classList.add('hidden'); document.body.style.overflow = ''; }
 
 // ============================
-// HISTORY (Local)
+// HISTORY
 // ============================
-function addHistory(anime) {
-  const id = anime.mal_id || anime.id;
-  historyList = historyList.filter(h => (h.anime?.mal_id||h.anime?.id) !== id);
-  historyList.unshift({ anime, watchedAt: new Date().toISOString() });
-  if(historyList.length > 15) historyList.pop();
-  saveHistory();
-  renderHistorySidebar();
-}
+function addHistory(anime) { const id = anime.mal_id || anime.id; historyList = historyList.filter(h => (h.anime?.mal_id||h.anime?.id) !== id); historyList.unshift({ anime, watchedAt: new Date().toISOString() }); if(historyList.length > 15) historyList.pop(); saveHistory(); renderHistorySidebar(); }
 function renderHistorySidebar() {
-  const list = document.getElementById('historyList');
-  list.innerHTML = '';
-  if(!historyList.length){
-    list.innerHTML = '<p style="color:var(--muted);font-size:12px;padding:12px 14px;">Belum ada riwayat tontonan.</p>';
-    return;
-  }
+  const list = document.getElementById('historyList'); list.innerHTML = '';
+  if(!historyList.length){ list.innerHTML = '<p style="color:var(--muted);font-size:12px;padding:12px 14px;">Belum ada riwayat tontonan.</p>'; return; }
   historyList.slice(0, 5).forEach(h => {
-    const anime = h.anime;
-    const div = document.createElement('div');
-    div.className = 'history-item';
-    const im = document.createElement('img');
-    im.className = 'history-thumb';
-    im.src = anime.images?.jpg?.image_url||'';
-    im.alt = anime.title||'';
-    im.onerror = () => imgError(im, anime.mal_id||0);
+    const anime = h.anime; const div = document.createElement('div'); div.className = 'history-item';
+    const im = document.createElement('img'); im.className = 'history-thumb'; im.src = anime.images?.jpg?.image_url||''; im.alt = anime.title||''; im.onerror = () => imgError(im, anime.mal_id||0);
     div.innerHTML = `<div class="history-info"><div class="history-name">${anime.title_english||anime.title||'Unknown'}</div><div class="history-time">${relTime(h.watchedAt)}</div></div>`;
-    div.insertBefore(im, div.firstChild);
-    div.onclick = () => openDetail(anime);
-    list.appendChild(div);
+    div.insertBefore(im, div.firstChild); div.onclick = () => openDetail(anime); list.appendChild(div);
   });
 }
 
 // ============================
-// TRAILER — embed YouTube dari Jikan API
+// TRAILER
+// ============================
 async function loadTrailer(anime) {
-  const frame = document.getElementById('trailerFrame');
-  frame.innerHTML = `<div class="trailer-placeholder"><div class="spinner"></div><span>Mencari trailer...</span></div>`;
-
-  let youtubeId = anime.trailer?.youtube_id;
-  let embedUrl  = anime.trailer?.embed_url;
-
-  // Jika belum ada (mis. bukan dari /full), coba endpoint /videos
-  if (!youtubeId && !embedUrl) {
-    const id = anime.mal_id || anime.id;
-    if (id) {
-      await new Promise(r => setTimeout(r, 600)); // beri jeda agar tidak kena rate limit
-      const videos = await jikanFetch(`${JIKAN_BASE}/anime/${id}/videos`);
-      if (videos?.promo?.[0]?.trailer?.youtube_id) {
-        youtubeId = videos.promo[0].trailer.youtube_id;
-      } else if (videos?.promo?.[0]?.trailer?.embed_url) {
-        embedUrl = videos.promo[0].trailer.embed_url;
-      }
-    }
-  }
-
-  if (youtubeId) {
-    frame.innerHTML = `<iframe
-      src="https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0&modestbranding=1"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-      loading="lazy"
-    ></iframe>`;
-  } else if (embedUrl) {
-    // bersihkan autoplay dari embed_url bawaan Jikan agar tidak auto-play
-    const cleanUrl = embedUrl.replace(/[?&]autoplay=1/, '').replace('?&', '?') + (embedUrl.includes('?') ? '&rel=0' : '?rel=0');
-    frame.innerHTML = `<iframe
-      src="${cleanUrl}"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-      loading="lazy"
-    ></iframe>`;
-  } else {
-    // Fallback: tombol cari di YouTube
-    const title = encodeURIComponent((anime.title_english || anime.title || '') + ' trailer');
-    frame.innerHTML = `<div class="trailer-placeholder" style="cursor:pointer;gap:12px;" onclick="window.open('https://www.youtube.com/results?search_query=${title}','_blank')">
-      <svg viewBox="0 0 24 24" fill="currentColor" style="width:48px;height:48px;color:#ff0000;opacity:.85"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      <span style="font-size:14px;font-weight:700;color:var(--text);">Trailer tidak tersedia di database</span>
-      <span style="font-size:12px;color:var(--cyan);">🔍 Klik untuk cari di YouTube</span>
-    </div>`;
-  }
+  const frame = document.getElementById('trailerFrame'); frame.innerHTML = `<div class="trailer-placeholder"><div class="spinner"></div><span>Mencari trailer...</span></div>`;
+  let youtubeId = anime.trailer?.youtube_id; let embedUrl = anime.trailer?.embed_url;
+  if (!youtubeId && !embedUrl) { const id = anime.mal_id || anime.id; if (id) { await new Promise(r => setTimeout(r, 600)); const videos = await jikanFetch(`${JIKAN_BASE}/anime/${id}/videos`); if (videos?.promo?.[0]?.trailer?.youtube_id) { youtubeId = videos.promo[0].trailer.youtube_id; } else if (videos?.promo?.[0]?.trailer?.embed_url) { embedUrl = videos.promo[0].trailer.embed_url; } } }
+  if (youtubeId) { frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`; }
+  else if (embedUrl) { const cleanUrl = embedUrl.replace(/[?&]autoplay=1/, '').replace('?&', '?') + (embedUrl.includes('?') ? '&rel=0' : '?rel=0'); frame.innerHTML = `<iframe src="${cleanUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`; }
+  else { const title = encodeURIComponent((anime.title_english || anime.title || '') + ' trailer'); frame.innerHTML = `<div class="trailer-placeholder" style="cursor:pointer;gap:12px;" onclick="window.open('https://www.youtube.com/results?search_query=${title}','_blank')"><svg viewBox="0 0 24 24" fill="currentColor" style="width:48px;height:48px;color:#ff0000;opacity:.85"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg><span style="font-size:14px;font-weight:700;color:var(--text);">Trailer tidak tersedia di database</span><span style="font-size:12px;color:var(--cyan);">🔍 Klik untuk cari di YouTube</span></div>`; }
 }
 
 // ============================
 // HERO & PARTICLES
 // ============================
-function initParticles() {
-  const container = document.getElementById('heroParticles');
-  for(let i=0;i<24;i++){
-    const p=document.createElement('div');
-    p.className='particle';
-    p.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;--x1:${(Math.random()-.5)*60}px;--y1:${(Math.random()-.5)*60}px;--x2:${(Math.random()-.5)*120}px;--y2:${(Math.random()-.5)*120}px;--d:${6+Math.random()*8}s;--delay:${Math.random()*6}s;background:${Math.random()>.5?'var(--cyan)':'var(--pink)'};width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;`;
-    container.appendChild(p);
-  }
-}
-function setHero(anime, idx) {
-  const bgDiv = document.getElementById('heroBg');
-  const img = document.getElementById('heroBgImg');
-  // Fade animasi saat ganti hero
-  bgDiv.classList.add('fade-out');
-  setTimeout(() => {
-    img.src = anime.images?.jpg?.large_image_url || anime.images?.jpg?.image_url || '';
-    img.onerror = () => imgError(img, anime.mal_id||0);
-    bgDiv.classList.remove('fade-out');
-  }, 400);
-  document.getElementById('heroTitle').textContent = anime.title_english||anime.title||'Unknown';
-  const tags = document.getElementById('heroTags');
-  tags.innerHTML = '';
-  const genres = anime.genres?.slice(0,3)||[];
-  if(anime.type)     tags.innerHTML+=`<span class="tag cyan">${anime.type}</span>`;
-  if(anime.year)     tags.innerHTML+=`<span class="tag">${anime.year}</span>`;
-  genres.forEach(g=>tags.innerHTML+=`<span class="tag">${g.name||g}</span>`);
-  if(anime.episodes) tags.innerHTML+=`<span class="tag green">${anime.episodes} EP</span>`;
-  const score = document.getElementById('heroScore');
-  score.innerHTML = anime.score ? `<span class="stars">★</span><span class="score-num">${anime.score}</span><span class="score-of">/ 10</span>` : '';
-  document.getElementById('heroDesc').textContent = truncate(anime.synopsis||anime.description,200);
-  document.getElementById('heroWatchBtn').onclick = () => openStreaming(anime);
-  document.getElementById('heroInfoBtn').onclick  = () => openDetail(anime);
-  updateStrip(idx);
-}
-function updateStrip(activeIdx) {
-  document.getElementById('heroStrip').querySelectorAll('.strip-item').forEach((el,i)=> el.classList.toggle('active', i===activeIdx));
-}
-function buildStrip() {
-  const strip = document.getElementById('heroStrip');
-  strip.innerHTML = '';
-  heroList.forEach((anime,i)=>{
-    const div=document.createElement('div');
-    div.className='strip-item'+(i===0?' active':'');
-    const im=document.createElement('img');
-    im.src=anime.images?.jpg?.image_url||'';
-    im.alt=anime.title||'';
-    im.onerror=()=>imgError(im,anime.mal_id||i);
-    div.appendChild(im);
-    div.onclick=()=>goHero(i);
-    strip.appendChild(div);
-  });
-}
-function goHero(idx) {
-  currentHeroIdx=idx;
-  setHero(heroList[idx],idx);
-  clearInterval(heroTimer);
-  heroTimer=setInterval(nextHero,6000);
-}
+function initParticles() { const container = document.getElementById('heroParticles'); for(let i=0;i<24;i++){ const p=document.createElement('div'); p.className='particle'; p.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;--x1:${(Math.random()-.5)*60}px;--y1:${(Math.random()-.5)*60}px;--x2:${(Math.random()-.5)*120}px;--y2:${(Math.random()-.5)*120}px;--d:${6+Math.random()*8}s;--delay:${Math.random()*6}s;background:${Math.random()>.5?'var(--cyan)':'var(--pink)'};width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;`; container.appendChild(p); } }
+function setHero(anime, idx) { const bgDiv = document.getElementById('heroBg'); const img = document.getElementById('heroBgImg'); bgDiv.classList.add('fade-out'); setTimeout(() => { img.src = anime.images?.jpg?.large_image_url || anime.images?.jpg?.image_url || ''; img.onerror = () => imgError(img, anime.mal_id||0); bgDiv.classList.remove('fade-out'); }, 400); document.getElementById('heroTitle').textContent = anime.title_english||anime.title||'Unknown'; const tags = document.getElementById('heroTags'); tags.innerHTML = ''; const genres = anime.genres?.slice(0,3)||[]; if(anime.type) tags.innerHTML+=`<span class="tag cyan">${anime.type}</span>`; if(anime.year) tags.innerHTML+=`<span class="tag">${anime.year}</span>`; genres.forEach(g=>tags.innerHTML+=`<span class="tag">${g.name||g}</span>`); if(anime.episodes) tags.innerHTML+=`<span class="tag green">${anime.episodes} EP</span>`; const score = document.getElementById('heroScore'); score.innerHTML = anime.score ? `<span class="stars">★</span><span class="score-num">${anime.score}</span><span class="score-of">/ 10</span>` : ''; document.getElementById('heroDesc').textContent = truncate(anime.synopsis||anime.description,200); document.getElementById('heroWatchBtn').onclick = () => openStreaming(anime); document.getElementById('heroInfoBtn').onclick = () => openDetail(anime); updateStrip(idx); }
+function updateStrip(activeIdx) { document.getElementById('heroStrip').querySelectorAll('.strip-item').forEach((el,i)=> el.classList.toggle('active', i===activeIdx)); }
+function buildStrip() { const strip = document.getElementById('heroStrip'); strip.innerHTML = ''; heroList.forEach((anime,i)=>{ const div=document.createElement('div'); div.className='strip-item'+(i===0?' active':''); const im=document.createElement('img'); im.src=anime.images?.jpg?.image_url||''; im.alt=anime.title||''; im.onerror=()=>imgError(im,anime.mal_id||i); div.appendChild(im); div.onclick=()=>goHero(i); strip.appendChild(div); }); }
+function goHero(idx) { currentHeroIdx=idx; setHero(heroList[idx],idx); clearInterval(heroTimer); heroTimer=setInterval(nextHero,6000); }
 function nextHero() { goHero((currentHeroIdx+1)%heroList.length); }
 
 // ============================
 // CARD & EPISODE CARD
 // ============================
 function buildCard(anime, delay=0) {
-  const div=document.createElement('div');
-  div.className='anime-card';
-  div.style.animationDelay=delay+'ms';
-  const type=anime.type||'TV';
-  const imgUrl=anime.images?.jpg?.large_image_url||anime.images?.jpg?.image_url||'';
-  const animeId = anime.mal_id||anime.id||0;
-  const faved = isFaved(anime);
-  div.innerHTML=`
-    <div class="card-thumb"><div class="card-shine"></div><div class="card-overlay"><div class="play-circle"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div>${anime.episodes?`<div class="card-badge badge-ep">${anime.episodes} EP</div>`:''}<div class="card-type-badge ${getTypeClass(type)}">${type}</div></div>
-    <button class="card-fav-btn ${faved?'faved':''}" data-id="${animeId}" title="${faved?'Hapus dari Favorit':'Tambah ke Favorit'}">${faved?'❤️':'🤍'}</button>
-    <div class="card-info"><div class="card-title" title="${anime.title||''}">${anime.title_english||anime.title||'Unknown'}</div><div class="card-footer"><div class="card-score">★ ${anime.score||'?'}</div><span class="card-genre">${anime.genres?.[0]?.name||anime.genres?.[0]||''}</span></div></div>`;
-  const imgEl=document.createElement('img');
-  imgEl.src=imgUrl;
-  imgEl.alt=anime.title||'';
-  imgEl.loading='lazy';
-  imgEl.onerror=()=>imgError(imgEl,animeId);
+  const div=document.createElement('div'); div.className='anime-card'; div.style.animationDelay=delay+'ms';
+  const type=anime.type||'TV'; const imgUrl=anime.images?.jpg?.large_image_url||anime.images?.jpg?.image_url||''; const animeId = anime.mal_id||anime.id||0; const faved = isFaved(anime);
+  div.innerHTML=`<div class="card-thumb"><div class="card-shine"></div><div class="card-overlay"><div class="play-circle"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div>${anime.episodes?`<div class="card-badge badge-ep">${anime.episodes} EP</div>`:''}<div class="card-type-badge ${getTypeClass(type)}">${type}</div></div><button class="card-fav-btn ${faved?'faved':''}" data-id="${animeId}" title="${faved?'Hapus dari Favorit':'Tambah ke Favorit'}">${faved?'❤️':'🤍'}</button><div class="card-info"><div class="card-title" title="${anime.title||''}">${anime.title_english||anime.title||'Unknown'}</div><div class="card-footer"><div class="card-score">★ ${anime.score||'?'}</div><span class="card-genre">${anime.genres?.[0]?.name||anime.genres?.[0]||''}</span></div></div>`;
+  const imgEl=document.createElement('img'); imgEl.src=imgUrl; imgEl.alt=anime.title||''; imgEl.loading='lazy'; imgEl.onerror=()=>imgError(imgEl,animeId);
   div.querySelector('.card-thumb').insertBefore(imgEl, div.querySelector('.card-shine'));
-  const favBtn = div.querySelector('.card-fav-btn');
-  favBtn.addEventListener('click', e => { e.stopPropagation(); toggleFav(anime, favBtn); });
-  div.addEventListener('click', () => openDetail(anime));
-  return div;
+  const favBtn = div.querySelector('.card-fav-btn'); favBtn.addEventListener('click', e => { e.stopPropagation(); toggleFav(anime, favBtn); });
+  div.addEventListener('click', () => openDetail(anime)); return div;
 }
 function buildEpCard(anime) {
-  const div=document.createElement('div');
-  div.className='ep-card';
-  const ep=anime.episodes||'?';
-  const aired=relTime(anime.aired?.from);
-  const imgEl=document.createElement('img');
-  imgEl.src=anime.images?.jpg?.image_url||'';
-  imgEl.alt=anime.title||'';
-  imgEl.loading='lazy';
-  imgEl.onerror=()=>imgError(imgEl,anime.mal_id||0);
+  const div=document.createElement('div'); div.className='ep-card'; const ep=anime.episodes||'?'; const aired=relTime(anime.aired?.from);
+  const imgEl=document.createElement('img'); imgEl.src=anime.images?.jpg?.image_url||''; imgEl.alt=anime.title||''; imgEl.loading='lazy'; imgEl.onerror=()=>imgError(imgEl,anime.mal_id||0);
   div.innerHTML=`<div class="ep-thumb"><div class="ep-hover"><div class="ep-play-sm"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div><div class="ep-num-badge">EP ${ep}</div></div><div class="ep-info"><div class="ep-anime-name">${anime.title_english||anime.title||'Unknown'}</div><div class="ep-ep-title">${anime.title||''}</div><div class="ep-ago">${aired||'Baru tayang'}</div></div>`;
-  div.querySelector('.ep-thumb').insertBefore(imgEl, div.querySelector('.ep-hover'));
-  div.addEventListener('click', ()=>openDetail(anime));
-  return div;
+  div.querySelector('.ep-thumb').insertBefore(imgEl, div.querySelector('.ep-hover')); div.addEventListener('click', ()=>openDetail(anime)); return div;
 }
 function buildRankItem(anime, rank) {
-  const div=document.createElement('div');
-  div.className='rank-item';
-  const rankClass=rank<=3?`rank-${rank}`:'rank-n';
-  const imgEl=document.createElement('img');
-  imgEl.className='rank-img';
-  imgEl.src=anime.images?.jpg?.image_url||'';
-  imgEl.alt=anime.title||'';
-  imgEl.loading='lazy';
-  imgEl.onerror=()=>imgError(imgEl,anime.mal_id||0);
+  const div=document.createElement('div'); div.className='rank-item'; const rankClass=rank<=3?`rank-${rank}`:'rank-n';
+  const imgEl=document.createElement('img'); imgEl.className='rank-img'; imgEl.src=anime.images?.jpg?.image_url||''; imgEl.alt=anime.title||''; imgEl.loading='lazy'; imgEl.onerror=()=>imgError(imgEl,anime.mal_id||0);
   div.innerHTML=`<div class="rank-num ${rankClass}">${rank}</div><div class="rank-info"><div class="rank-name">${anime.title_english||anime.title||'Unknown'}</div><div class="rank-meta">${anime.type||'TV'} · ${anime.year||'?'}</div></div><div class="rank-score">★ ${anime.score||'?'}</div>`;
-  div.insertBefore(imgEl, div.querySelector('.rank-info'));
-  div.addEventListener('click', ()=>openDetail(anime));
-  return div;
+  div.insertBefore(imgEl, div.querySelector('.rank-info')); div.addEventListener('click', ()=>openDetail(anime)); return div;
 }
 function filterByGenre(genre) {
-  const grid=document.getElementById('seasonGrid');
-  grid.innerHTML='';
+  const grid=document.getElementById('seasonGrid'); grid.innerHTML='';
   const filtered=genre==='all'?seasonData:seasonData.filter(a=>{ const gs=a.genres||[]; return gs.some(g=>(g.name||g)===genre); });
   if(!filtered.length){ grid.innerHTML='<p style="color:var(--muted);font-size:14px;padding:20px;">Tidak ada anime untuk genre ini.</p>'; return; }
   filtered.slice(0,18).forEach((anime,i)=>grid.appendChild(buildCard(anime,i*40)));
 }
 
 // ============================
-// SCHEDULE — Jikan /schedules?filter={day}
+// SCHEDULE
+// ============================
 const schedCache = {};
 const days=['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
 const dayLabels=['Sen','Sel','Rab','Kam','Jum','Sab','Min'];
 function buildScheduleDays() {
-  const container=document.getElementById('schedDays');
-  const today=new Date().getDay();
-  const todayIdx=today===0?6:today-1;
-  currentScheduleDay=days[todayIdx];
-  days.forEach((d,i)=>{
-    const btn=document.createElement('div');
-    btn.className='sched-day'+(i===todayIdx?' active':'');
-    btn.textContent=dayLabels[i];
-    btn.dataset.day=d;
-    btn.onclick=()=>{
-      document.querySelectorAll('.sched-day').forEach(x=>x.classList.remove('active'));
-      btn.classList.add('active');
-      currentScheduleDay=d;
-      loadSchedule(d);
-    };
-    container.appendChild(btn);
-  });
+  const container=document.getElementById('schedDays'); const today=new Date().getDay(); const todayIdx=today===0?6:today-1; currentScheduleDay=days[todayIdx];
+  days.forEach((d,i)=>{ const btn=document.createElement('div'); btn.className='sched-day'+(i===todayIdx?' active':''); btn.textContent=dayLabels[i]; btn.dataset.day=d; btn.onclick=()=>{ document.querySelectorAll('.sched-day').forEach(x=>x.classList.remove('active')); btn.classList.add('active'); currentScheduleDay=d; loadSchedule(d); }; container.appendChild(btn); });
 }
 async function loadSchedule(day) {
-  const list=document.getElementById('schedList');
-  if(schedCache[day]){
-    renderSchedule(schedCache[day]);
-    return;
-  }
+  const list=document.getElementById('schedList'); if(schedCache[day]){ renderSchedule(schedCache[day]); return; }
   list.innerHTML='<div class="spinner-wrap"><div class="spinner"></div></div>';
-  // Ambil 2 halaman sekaligus agar data lebih lengkap
-  const [p1, p2] = await Promise.all([
-    jikanFetch(`${JIKAN_BASE}/schedules?filter=${day}&limit=25&page=1&sfw=true`),
-    jikanFetch(`${JIKAN_BASE}/schedules?filter=${day}&limit=25&page=2&sfw=true`)
-  ]);
-  const raw = [...(p1||[]), ...(p2||[])];
-  // Deduplikat berdasarkan mal_id
-  const seen = new Set();
-  const items = raw.filter(a => {
-    const id = a.mal_id || a.id;
-    if (!id || seen.has(id)) return false;
-    seen.add(id);
-    return true;
-  });
-  // Urutkan berdasarkan jam tayang
-  items.sort((a, b) => {
-    const ta = a.broadcast?.time || '99:99';
-    const tb = b.broadcast?.time || '99:99';
-    return ta.localeCompare(tb);
-  });
-  schedCache[day] = items;
-  renderSchedule(items);
+  const [p1, p2] = await Promise.all([ jikanFetch(`${JIKAN_BASE}/schedules?filter=${day}&limit=25&page=1&sfw=true`), jikanFetch(`${JIKAN_BASE}/schedules?filter=${day}&limit=25&page=2&sfw=true`) ]);
+  const raw = [...(p1||[]), ...(p2||[])]; const seen = new Set(); const items = raw.filter(a => { const id = a.mal_id || a.id; if (!id || seen.has(id)) return false; seen.add(id); return true; });
+  items.sort((a, b) => { const ta = a.broadcast?.time || '99:99'; const tb = b.broadcast?.time || '99:99'; return ta.localeCompare(tb); });
+  schedCache[day] = items; renderSchedule(items);
 }
 function renderSchedule(items) {
-  const list=document.getElementById('schedList');
-  list.innerHTML='';
-  if(!items.length){
-    list.innerHTML='<p style="color:var(--muted);font-size:12px;padding:12px 14px;">Tidak ada jadwal untuk hari ini.</p>';
-    return;
-  }
-  // Tampilkan jumlah total
-  const counter = document.createElement('div');
-  counter.style.cssText='padding:6px 14px 2px;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;';
-  counter.textContent = `${items.length} anime tayang`;
-  list.appendChild(counter);
-
-  items.forEach(anime=>{
-    const div=document.createElement('div');
-    div.className='sched-item';
-    const timeRaw = anime.broadcast?.time || '??:??';
-    const imgUrl  = anime.images?.jpg?.image_url||'';
-    const score   = anime.score ? `★${anime.score}` : '';
-    div.innerHTML=`
-      <div class="sched-time">${timeRaw}</div>
-      ${imgUrl?`<img src="${imgUrl}" style="width:34px;height:48px;border-radius:5px;object-fit:cover;flex-shrink:0;" onerror="this.style.display='none'">`:'' }
-      <div style="flex:1;min-width:0;">
-        <div class="sched-name">${anime.title_english||anime.title||'Unknown'}</div>
-        <div class="sched-ep">${anime.type||'TV'}${anime.episodes?' · '+anime.episodes+' EP':''}${score?' · '+score:''}</div>
-      </div>`;
-    div.addEventListener('click',()=>openDetail(anime));
-    list.appendChild(div);
-  });
+  const list=document.getElementById('schedList'); list.innerHTML='';
+  if(!items.length){ list.innerHTML='<p style="color:var(--muted);font-size:12px;padding:12px 14px;">Tidak ada jadwal untuk hari ini.</p>'; return; }
+  const counter = document.createElement('div'); counter.style.cssText='padding:6px 14px 2px;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;'; counter.textContent = `${items.length} anime tayang`; list.appendChild(counter);
+  items.forEach(anime=>{ const div=document.createElement('div'); div.className='sched-item'; const timeRaw = anime.broadcast?.time || '??:??'; const imgUrl = anime.images?.jpg?.image_url||''; const score = anime.score ? `★${anime.score}` : '';
+    div.innerHTML=`<div class="sched-time">${timeRaw}</div>${imgUrl?`<img src="${imgUrl}" style="width:34px;height:48px;border-radius:5px;object-fit:cover;flex-shrink:0;" onerror="this.style.display='none'">`:'' }<div style="flex:1;min-width:0;"><div class="sched-name">${anime.title_english||anime.title||'Unknown'}</div><div class="sched-ep">${anime.type||'TV'}${anime.episodes?' · '+anime.episodes+' EP':''}${score?' · '+score:''}</div></div>`; div.addEventListener('click',()=>openDetail(anime)); list.appendChild(div); });
 }
 
 // ============================
 // DETAIL MODAL
 // ============================
 async function openDetail(anime) {
-  currentDetailAnime = anime;
-  const modal = document.getElementById('detailModal');
-  const id = anime.mal_id || anime.id;
-  const slug = slugify(anime.title_english || anime.title || 'anime');
-  pushModalState('detail', { id: id || 0, slug });
-  let a = anime;
-  // coba fetch detail lebih lengkap
-  if(id){
-    const fresh = await jikanFetch(`${JIKAN_BASE}/anime/${id}/full`);
-    if(fresh) { a = fresh; currentDetailAnime = a; } // update currentDetailAnime ke data lengkap
-  }
-  const bg=document.getElementById('detailBgImg');
-  bg.src=a.images?.jpg?.large_image_url||'';
-  bg.onerror=()=>imgError(bg,a.mal_id||0);
-  const poster=document.getElementById('detailPoster');
-  poster.src=a.images?.jpg?.image_url||'';
-  poster.onerror=()=>imgError(poster,a.mal_id||0);
+  currentDetailAnime = anime; const modal = document.getElementById('detailModal'); const id = anime.mal_id || anime.id; const slug = slugify(anime.title_english || anime.title || 'anime'); pushModalState('detail', { id: id || 0, slug });
+  let a = anime; if(id){ const fresh = await jikanFetch(`${JIKAN_BASE}/anime/${id}/full`); if(fresh) { a = fresh; currentDetailAnime = a; } }
+  const bg=document.getElementById('detailBgImg'); bg.src=a.images?.jpg?.large_image_url||''; bg.onerror=()=>imgError(bg,a.mal_id||0);
+  const poster=document.getElementById('detailPoster'); poster.src=a.images?.jpg?.image_url||''; poster.onerror=()=>imgError(poster,a.mal_id||0);
   document.getElementById('detailTitle').textContent=a.title_english||a.title||'';
-  const meta=document.getElementById('detailMeta');
-  meta.innerHTML='';
-  if(a.type)     meta.innerHTML+=`<span class="tag cyan">${a.type}</span>`;
-  if(a.year)     meta.innerHTML+=`<span class="tag">${a.year}</span>`;
-  if(a.episodes) meta.innerHTML+=`<span class="tag green">${a.episodes} EP</span>`;
-  if(a.status)   meta.innerHTML+=`<span class="tag">${a.status}</span>`;
-  (a.genres||[]).slice(0,4).forEach(g=>meta.innerHTML+=`<span class="tag">${g.name||g}</span>`);
-  const scoreEl=document.getElementById('detailScore');
-  scoreEl.innerHTML=a.score?`<span style="color:var(--gold);font-size:18px;">★</span> ${a.score} <span style="font-size:13px;color:var(--muted);font-family:var(--font-b);">/ 10 · ${(a.scored_by||0).toLocaleString('id-ID')} votes</span>`:'';
+  const meta=document.getElementById('detailMeta'); meta.innerHTML=''; if(a.type) meta.innerHTML+=`<span class="tag cyan">${a.type}</span>`; if(a.year) meta.innerHTML+=`<span class="tag">${a.year}</span>`; if(a.episodes) meta.innerHTML+=`<span class="tag green">${a.episodes} EP</span>`; if(a.status) meta.innerHTML+=`<span class="tag">${a.status}</span>`; (a.genres||[]).slice(0,4).forEach(g=>meta.innerHTML+=`<span class="tag">${g.name||g}</span>`);
+  const scoreEl=document.getElementById('detailScore'); scoreEl.innerHTML=a.score?`<span style="color:var(--gold);font-size:18px;">★</span> ${a.score} <span style="font-size:13px;color:var(--muted);font-family:var(--font-b);">/ 10 · ${(a.scored_by||0).toLocaleString('id-ID')} votes</span>`:'';
   document.getElementById('detailDesc').textContent=truncate(a.synopsis||a.description,400)||'Tidak ada sinopsis.';
-  const favBtn=document.getElementById('detailFavBtn');
-  favBtn.classList.toggle('faved', isFaved(a));
-  favBtn.textContent=isFaved(a)?'❤️ Favorit':'🤍 Favorit';
+  const favBtn=document.getElementById('detailFavBtn'); favBtn.classList.toggle('faved', isFaved(a)); favBtn.textContent=isFaved(a)?'❤️ Favorit':'🤍 Favorit';
   document.getElementById('detailWatchBtn').onclick=()=>openStreaming(a);
-  modal.classList.remove('hidden');
-  document.body.style.overflow='hidden';
-  loadTrailer(a);
-  addHistory(a);
+  modal.classList.remove('hidden'); document.body.style.overflow='hidden'; loadTrailer(a); addHistory(a);
 }
-function closeDetail() {
-  document.getElementById('detailModal').classList.add('hidden');
-  document.body.style.overflow='';
-  const frame=document.getElementById('trailerFrame');
-  // Hentikan video yang sedang diputar dengan menghapus iframe
-  frame.innerHTML=`<div class="trailer-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:.4"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg><span>Memuat trailer...</span></div>`;
-  currentDetailAnime=null;
-  if (!IS_LOCAL && window.location.pathname !== '/') try { history.pushState({ modal: null }, '', '/'); } catch(e) {}
-}
+function closeDetail() { document.getElementById('detailModal').classList.add('hidden'); document.body.style.overflow=''; const frame=document.getElementById('trailerFrame'); frame.innerHTML=`<div class="trailer-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:.4"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg><span>Memuat trailer...</span></div>`; currentDetailAnime=null; if (!IS_LOCAL && window.location.pathname !== '/') try { history.pushState({ modal: null }, '', '/'); } catch(e) {} }
 
 // ============================
 // SEARCH MODAL
 // ============================
-function openSearch() {
-  document.getElementById('searchModal').classList.remove('hidden');
-  document.body.style.overflow='hidden';
-  document.getElementById('modalSearchInput').focus();
-  pushModalState('search');
-}
-function closeSearch() {
-  document.getElementById('searchModal').classList.add('hidden');
-  document.body.style.overflow='';
-}
+function openSearch() { document.getElementById('searchModal').classList.remove('hidden'); document.body.style.overflow='hidden'; document.getElementById('modalSearchInput').focus(); pushModalState('search'); }
+function closeSearch() { document.getElementById('searchModal').classList.add('hidden'); document.body.style.overflow=''; }
 document.getElementById('modalSearchInput').addEventListener('input', function() {
-  clearTimeout(searchTimer);
-  const q=this.value.trim();
-  const grid=document.getElementById('searchResultsGrid');
-  const status=document.getElementById('searchStatus');
-  if(q.length<2){
-    grid.innerHTML='';
-    status.textContent='Ketik minimal 2 karakter...';
-    status.style.display='block';
-    return;
-  }
-  status.textContent='Mencari...';
-  grid.innerHTML='';
-  searchTimer=setTimeout(async()=>{
-    const data = await jikanFetch(`${JIKAN_BASE}/anime?q=${encodeURIComponent(q)}&limit=12&sfw=true`);
-    grid.innerHTML='';
-    const items = data || [];
-    if(!items.length){
-      status.textContent=`Tidak ada hasil untuk "${q}"`;
-      return;
-    }
-    status.style.display='none';
-    items.forEach((anime,i)=>grid.appendChild(buildCard(anime,i*40)));
-  }, 500);
+  clearTimeout(searchTimer); const q=this.value.trim(); const grid=document.getElementById('searchResultsGrid'); const status=document.getElementById('searchStatus');
+  if(q.length<2){ grid.innerHTML=''; status.textContent='Ketik minimal 2 karakter...'; status.style.display='block'; return; }
+  status.textContent='Mencari...'; grid.innerHTML='';
+  searchTimer=setTimeout(async()=>{ const data = await jikanFetch(`${JIKAN_BASE}/anime?q=${encodeURIComponent(q)}&limit=12&sfw=true`); grid.innerHTML=''; const items = data || []; if(!items.length){ status.textContent=`Tidak ada hasil untuk "${q}"`; return; } status.style.display='none'; items.forEach((anime,i)=>grid.appendChild(buildCard(anime,i*40))); }, 500);
 });
-document.getElementById('searchInput').addEventListener('keydown',function(e){
-  if(e.key==='Enter'){
-    document.getElementById('modalSearchInput').value=this.value;
-    openSearch();
-    document.getElementById('modalSearchInput').dispatchEvent(new Event('input'));
-  }
-});
+document.getElementById('searchInput').addEventListener('keydown',function(e){ if(e.key==='Enter'){ document.getElementById('modalSearchInput').value=this.value; openSearch(); document.getElementById('modalSearchInput').dispatchEvent(new Event('input')); } });
 document.getElementById('navSearch').addEventListener('click',e=>{e.preventDefault();openSearch();});
 document.getElementById('searchModal').addEventListener('click',function(e){if(e.target===this)closeSearch();});
 document.getElementById('detailModal').addEventListener('click',function(e){if(e.target===this)closeDetail();});
 document.getElementById('favModal').addEventListener('click',function(e){if(e.target===this)closeFavModal();});
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){closeSearch();closeDetail();closeFavModal();closeProfileModal();} });
-document.getElementById('genreFilter').addEventListener('click',function(e){
-  const btn=e.target.closest('.filter-pill');
-  if(!btn)return;
-  document.querySelectorAll('.filter-pill').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  filterByGenre(btn.dataset.genre||'all');
-});
+document.getElementById('genreFilter').addEventListener('click',function(e){ const btn=e.target.closest('.filter-pill'); if(!btn)return; document.querySelectorAll('.filter-pill').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); filterByGenre(btn.dataset.genre||'all'); });
 
-// Scroll-to-top button
-(function(){
-  const btn = document.getElementById('scrollTopBtn');
-  window.addEventListener('scroll', () => {
-    btn.classList.toggle('visible', window.scrollY > 400);
-  }, { passive: true });
-})();
+// Scroll-to-top
+(function(){ const btn = document.getElementById('scrollTopBtn'); window.addEventListener('scroll', () => { btn.classList.toggle('visible', window.scrollY > 400); }, { passive: true }); })();
 
 // ============================
 // MAIN LOAD
 // ============================
 async function loadAll() {
-  initParticles();
-  buildScheduleDays();
-  loadLocalData();
-  loadUserSession();
+  initParticles(); buildScheduleDays(); loadLocalData(); loadUserSession();
   if (!IS_LOCAL) try { history.replaceState({ modal: null }, '', '/'); } catch(e) {}
-  setApiStatus(false, 'Menghubungkan ke Jikan...');
-
-  // Tampilkan hero placeholder langsung agar halaman tidak kosong
   showHeroPlaceholder();
-
-  // Cek apakah ada cached data — tampilkan SEGERA tanpa tunggu API
-  const cachedSeason = apiCacheGet('/seasons/now?limit=24&sfw=true');
-  const cachedTop    = apiCacheGet('/top/anime?limit=12&sfw=true');
-  if (cachedSeason && cachedSeason.length) {
-    applySeason(cachedSeason);
-    setApiStatus(true, 'Cache ✓');
-  }
-  if (cachedTop && cachedTop.length) {
-    applyTop(cachedTop);
-  }
-
-  // Fetch semua secara PARALEL (bukan sequential) — jauh lebih cepat
-  const [seasonNow, topRes] = await Promise.all([
-    jikanFetch(`${JIKAN_BASE}/seasons/now?limit=24&sfw=true`),
-    jikanFetch(`${JIKAN_BASE}/top/anime?limit=12&sfw=true`)
-  ]);
-
+  const cachedSeason = apiCacheGet('/seasons/now?limit=24&sfw=true'); const cachedTop = apiCacheGet('/top/anime?limit=12&sfw=true');
+  if (cachedSeason && cachedSeason.length) { applySeason(cachedSeason); setApiStatus(true, 'Cache ✓'); }
+  if (cachedTop && cachedTop.length) { applyTop(cachedTop); }
+  const [seasonNow, topRes] = await Promise.all([ jikanFetch(`${JIKAN_BASE}/seasons/now?limit=24&sfw=true`), jikanFetch(`${JIKAN_BASE}/top/anime?limit=12&sfw=true`) ]);
   let anySuccess = false;
-  if (seasonNow && seasonNow.length) { applySeason(seasonNow); anySuccess = true; }
-  else if (!cachedSeason) showSeasonError();
-
-  if (topRes && topRes.length) { applyTop(topRes); anySuccess = true; }
-  else if (!cachedTop) document.getElementById('topGrid').innerHTML = errorHtml('Top anime tidak tersedia.');
-
-  // Schedule load terpisah agar tidak block
+  if (seasonNow && seasonNow.length) { applySeason(seasonNow); anySuccess = true; } else if (!cachedSeason) showSeasonError();
+  if (topRes && topRes.length) { applyTop(topRes); anySuccess = true; } else if (!cachedTop) document.getElementById('topGrid').innerHTML = errorHtml('Top anime tidak tersedia.');
   loadSchedule(currentScheduleDay);
-
-  if (anySuccess || cachedSeason) {
-    setApiStatus(true, 'OK');
-    if (anySuccess) showToast('Data berhasil dimuat! 🎌', '✅');
-  } else {
-    setApiStatus(false, 'Error');
-    showToast('Koneksi ke Jikan gagal. Silakan refresh halaman.', '⚠️');
-  }
+  if (anySuccess || cachedSeason) { setApiStatus(true, 'OK'); if (anySuccess) showToast('Data berhasil dimuat! 🎌', '✅'); } else { setApiStatus(false, 'Error'); showToast('Koneksi ke Jikan gagal. Silakan refresh halaman.', '⚠️'); }
 }
 
-function showHeroPlaceholder() {
-  // Tunjukkan hero dengan gradien agar tidak kosong saat loading
-  document.getElementById('heroTitle').textContent = 'Memuat data...';
-  document.getElementById('heroDesc').textContent  = 'Mengambil data anime dari Jikan API...';
-  document.getElementById('heroTags').innerHTML    = '<span class="tag">Loading...</span>';
-  document.getElementById('heroScore').innerHTML   = '';
-  document.getElementById('heroBg').style.background = 'linear-gradient(135deg,#0c0e1a 0%,#111428 100%)';
-}
-
-function errorHtml(msg) {
-  return `<p style="color:var(--muted);font-size:14px;padding:20px;grid-column:1/-1;">${msg} <button onclick="loadAll()" style="color:var(--cyan);background:none;border:1px solid var(--cyan);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px;margin-left:8px;">↺ Retry</button></p>`;
-}
-function showSeasonError() {
-  document.getElementById('seasonGrid').innerHTML = errorHtml('Gagal memuat data season.');
-  document.getElementById('epScroll').innerHTML   = '';
-}
-
+function showHeroPlaceholder() { document.getElementById('heroTitle').textContent = 'Memuat data...'; document.getElementById('heroDesc').textContent = 'Mengambil data anime dari Jikan API...'; document.getElementById('heroTags').innerHTML = '<span class="tag">Loading...</span>'; document.getElementById('heroScore').innerHTML = ''; document.getElementById('heroBg').style.background = 'linear-gradient(135deg,#0c0e1a 0%,#111428 100%)'; }
+function errorHtml(msg) { return `<p style="color:var(--muted);font-size:14px;padding:20px;grid-column:1/-1;">${msg} <button onclick="loadAll()" style="color:var(--cyan);background:none;border:1px solid var(--cyan);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px;margin-left:8px;">↺ Retry</button></p>`; }
+function showSeasonError() { document.getElementById('seasonGrid').innerHTML = errorHtml('Gagal memuat data season.'); document.getElementById('epScroll').innerHTML = ''; }
 function applySeason(data) {
-  seasonData = data;
-  heroList = [...seasonData].sort((a,b)=>(b.score||0)-(a.score||0)).slice(0,5);
-  if (heroList.length) {
-    buildStrip();
-    clearInterval(heroTimer);
-    setHero(heroList[0], 0);
-    heroTimer = setInterval(nextHero, 6000);
-  }
-  const seasonGrid = document.getElementById('seasonGrid');
-  seasonGrid.innerHTML = '';
-  seasonData.slice(0,18).forEach((anime,i) => seasonGrid.appendChild(buildCard(anime, i*40)));
-  const epScroll = document.getElementById('epScroll');
-  epScroll.innerHTML = '';
-  const recentEps = [...seasonData].sort((a,b)=>new Date(b.aired?.from||0)-new Date(a.aired?.from||0)).slice(0,12);
-  recentEps.forEach(anime => epScroll.appendChild(buildEpCard(anime)));
+  seasonData = data; heroList = [...seasonData].sort((a,b)=>(b.score||0)-(a.score||0)).slice(0,5);
+  if (heroList.length) { buildStrip(); clearInterval(heroTimer); setHero(heroList[0], 0); heroTimer = setInterval(nextHero, 6000); }
+  const seasonGrid = document.getElementById('seasonGrid'); seasonGrid.innerHTML = ''; seasonData.slice(0,18).forEach((anime,i) => seasonGrid.appendChild(buildCard(anime, i*40)));
+  const epScroll = document.getElementById('epScroll'); epScroll.innerHTML = ''; const recentEps = [...seasonData].sort((a,b)=>new Date(b.aired?.from||0)-new Date(a.aired?.from||0)).slice(0,12); recentEps.forEach(anime => epScroll.appendChild(buildEpCard(anime)));
 }
-
-function applyTop(data) {
-  topData = data;
-  const topGrid = document.getElementById('topGrid');
-  topGrid.innerHTML = '';
-  topData.slice(0,12).forEach((anime,i) => topGrid.appendChild(buildCard(anime, i*40)));
-  const rankList = document.getElementById('rankList');
-  rankList.innerHTML = '';
-  topData.slice(0,7).forEach((anime,i) => rankList.appendChild(buildRankItem(anime, i+1)));
-}
-
-function setApiStatus(ok, text) { /* Status bar hidden — handled via toast */ }
+function applyTop(data) { topData = data; const topGrid = document.getElementById('topGrid'); topGrid.innerHTML = ''; topData.slice(0,12).forEach((anime,i) => topGrid.appendChild(buildCard(anime, i*40))); const rankList = document.getElementById('rankList'); rankList.innerHTML = ''; topData.slice(0,7).forEach((anime,i) => rankList.appendChild(buildRankItem(anime, i+1))); }
+function setApiStatus(ok, text) {}
 loadAll();
 
 // ============================================================
-// MANGA — MangaDex API (Gratis & Legal)
+// MANGA — MangaDex API (Fixed CORS & Cover Images)
 // ============================================================
 const MANGADEX_BASE = 'https://api.mangadex.org';
 const MANGADEX_UPLOADS = 'https://uploads.mangadex.org';
+
+// Image proxy alternatif — coba satu per satu kalau gagal
+const IMAGE_PROXIES = [
+  (url) => `https://wsrv.nl/?url=${encodeURIComponent(url)}&default=404`,
+  (url) => `https://images.weserv.nl/?url=${encodeURIComponent(url)}&default=404`,
+  (url) => url
+];
+let currentProxyIdx = 0;
 
 let mangaCurrentOffset = 0;
 let mangaCurrentQuery = '';
 let mangaCurrentTag = '';
 let mangaCurrentChapterList = [];
 let mangaCurrentChapterIdx = 0;
-let mangaReaderMode = 'scroll'; // 'scroll' | 'page'
+let mangaReaderMode = 'scroll';
 let mangaCurrentPage = 0;
 let mangaCurrentPages = [];
 let currentMangaTitle = '';
 
-const MANGADEX_PROXIES = [
-  url => url,
-  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-  url => `https://thingproxy.freeboard.io/fetch/${url}`,
-  url => `https://cors.eu.org/${url}`
-];
-
 async function mangaFetch(url) {
-  for (const proxyFn of MANGADEX_PROXIES) {
+  const cleanUrl = url.replace(/\[/g, '%5B').replace(/\]/g, '%5D');
+  
+  const PROXIES = [
+    (u) => u,
+    (u) => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+    (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+  ];
+
+  for (const proxyFn of PROXIES) {
     try {
       const controller = new AbortController();
-      // Timeout lebih pendek per proxy (8 detik) agar cepat pindah ke proxy berikutnya
-      const timeout = setTimeout(() => controller.abort(), 8000);
-      const finalUrl = proxyFn(url);
+      const timeout = setTimeout(() => controller.abort(), 10000);
+      const finalUrl = proxyFn(cleanUrl);
+      
       const r = await fetch(finalUrl, {
         headers: { 'Accept': 'application/json' },
         signal: controller.signal
       });
       clearTimeout(timeout);
-      if (!r.ok) throw new Error('HTTP ' + r.status);
+      
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
       const data = await r.json();
-      // Validasi: pastikan response adalah objek MangaDex yang valid
-      if (data && (data.result || data.data !== undefined)) return data;
-      throw new Error('Invalid response format');
+      
+      if (data && (data.result === 'ok' || data.data !== undefined)) return data;
+      throw new Error('Invalid response');
     } catch(e) {
-      console.warn('MangaDex proxy gagal, mencoba berikutnya:', e.message);
+      console.warn('MangaDex proxy failed:', e.message);
+      continue;
     }
   }
   return null;
 }
 
-// Tampilkan/sembunyikan manga section
+function getCoverUrl(manga, size = '256') {
+  const coverRel = manga.relationships?.find(r => r.type === 'cover_art');
+  const coverFile = coverRel?.attributes?.fileName;
+  
+  if (!coverFile) return null;
+  
+  const directUrl = `${MANGADEX_UPLOADS}/covers/${manga.id}/${coverFile}.${size}.jpg`;
+  
+  return {
+    url: directUrl,
+    getFallbackSrc: function(imgEl, proxyIdx = 0) {
+      if (proxyIdx >= IMAGE_PROXIES.length) {
+        imgEl.style.display = 'none';
+        return;
+      }
+      const proxyUrl = IMAGE_PROXIES[proxyIdx](directUrl);
+      imgEl.onerror = () => this.getFallbackSrc(imgEl, proxyIdx + 1);
+      imgEl.src = proxyUrl;
+    }
+  };
+}
+
+function retryWithNextProxy() {
+  currentProxyIdx = (currentProxyIdx + 1) % IMAGE_PROXIES.length;
+  showToast(`Menggunakan proxy gambar #${currentProxyIdx + 1}...`, '🔄');
+  document.querySelectorAll('.manga-card img, #mdPoster').forEach(img => {
+    if (img.naturalWidth === 0 || !img.complete) {
+      const src = img.src;
+      img.src = IMAGE_PROXIES[currentProxyIdx](src);
+    }
+  });
+  loadManga(true);
+}
+
 let mangaTagFilterListenerAdded = false;
 function openMangaSection() {
   document.getElementById('manga').style.display = '';
   document.getElementById('manga').scrollIntoView({ behavior: 'smooth', block: 'start' });
   const grid = document.getElementById('mangaGrid');
-  if (!grid.querySelector('.manga-card')) {
-    loadManga(true);
-  }
-  // Event listener filter — hanya tambah sekali, cegah duplikat
+  if (!grid.querySelector('.manga-card')) loadManga(true);
   if (!mangaTagFilterListenerAdded) {
     mangaTagFilterListenerAdded = true;
     document.getElementById('mangaTagFilter').addEventListener('click', function(e) {
@@ -1965,31 +1299,13 @@ function openMangaSection() {
   }
 }
 
-function closeMangaSection() {
-  document.getElementById('manga').style.display = 'none';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function searchManga() {
-  mangaCurrentQuery = document.getElementById('mangaSearchInput').value.trim();
-  mangaCurrentTag = '';
-  document.querySelectorAll('#mangaTagFilter .filter-pill').forEach(b => b.classList.remove('active'));
-  document.querySelector('#mangaTagFilter .filter-pill').classList.add('active');
-  loadManga(true);
-}
-
-document.getElementById('mangaSearchInput')?.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') searchManga();
-});
+function closeMangaSection() { document.getElementById('manga').style.display = 'none'; window.scrollTo({ top: 0, behavior: 'smooth' }); }
+function searchManga() { mangaCurrentQuery = document.getElementById('mangaSearchInput').value.trim(); mangaCurrentTag = ''; document.querySelectorAll('#mangaTagFilter .filter-pill').forEach(b => b.classList.remove('active')); document.querySelector('#mangaTagFilter .filter-pill').classList.add('active'); loadManga(true); }
+document.getElementById('mangaSearchInput')?.addEventListener('keydown', function(e) { if (e.key === 'Enter') searchManga(); });
 
 let mangaTagCache = null;
 async function getMangaTagId(name) {
-  if (!mangaTagCache) {
-    const res = await mangaFetch(`${MANGADEX_BASE}/manga/tag`);
-    if (!res || !res.data) return null;
-    mangaTagCache = res.data;
-  }
-  // Cari dengan toLowerCase agar "Slice of Life" dan "slice of life" cocok
+  if (!mangaTagCache) { const res = await mangaFetch(`${MANGADEX_BASE}/manga/tag`); if (!res || !res.data) return null; mangaTagCache = res.data; }
   const found = mangaTagCache.find(t => t.attributes.name.en?.toLowerCase() === name.toLowerCase());
   return found ? found.id : null;
 }
@@ -1997,36 +1313,18 @@ async function getMangaTagId(name) {
 async function loadManga(reset = false) {
   const grid = document.getElementById('mangaGrid');
   const loadMoreBtn = document.getElementById('mangaLoadMore');
-  if (reset) {
-    mangaCurrentOffset = 0;
-    grid.innerHTML = '<div class="spinner-wrap"><div class="spinner"></div></div>';
-    loadMoreBtn.style.display = 'none';
-  }
+  if (reset) { mangaCurrentOffset = 0; grid.innerHTML = '<div class="spinner-wrap"><div class="spinner"></div></div>'; loadMoreBtn.style.display = 'none'; }
 
-  // Hapus filter availableTranslatedLanguage dari URL utama agar semua manga muncul
-  let url = `${MANGADEX_BASE}/manga?limit=24&offset=${mangaCurrentOffset}&contentRating[]=safe&contentRating[]=suggestive&includes[]=cover_art&order[followedCount]=desc`;
+  let url = `${MANGADEX_BASE}/manga?limit=24&offset=${mangaCurrentOffset}&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&includes%5B%5D=cover_art&order%5BfollowedCount%5D=desc`;
 
-  if (mangaCurrentQuery) {
-    url += `&title=${encodeURIComponent(mangaCurrentQuery)}`;
-  }
-
-  if (mangaCurrentTag) {
-    const tagId = await getMangaTagId(mangaCurrentTag);
-    if (tagId) url += `&includedTags[]=${tagId}`;
-  }
+  if (mangaCurrentQuery) url += `&title=${encodeURIComponent(mangaCurrentQuery)}`;
+  if (mangaCurrentTag) { const tagId = await getMangaTagId(mangaCurrentTag); if (tagId) url += `&includedTags%5B%5D=${tagId}`; }
 
   const res = await mangaFetch(url);
   if (reset) grid.innerHTML = '';
 
-  if (!res) {
-    // API error / koneksi gagal
-    if (reset) grid.innerHTML = `<p style="color:var(--pink);font-size:14px;padding:20px;grid-column:1/-1;">⚠️ Gagal terhubung ke MangaDex. Periksa koneksi internet kamu. <button onclick="loadManga(true)" style="color:var(--cyan);background:none;border:1px solid var(--cyan);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px;margin-left:8px;">↺ Coba Lagi</button></p>`;
-    loadMoreBtn.style.display = 'none';
-    return;
-  }
-
-  if (!res.data || !res.data.length) {
-    if (reset) grid.innerHTML = '<p style="color:var(--muted);font-size:14px;padding:20px;grid-column:1/-1;">Tidak ada manga ditemukan. Coba kata kunci lain.</p>';
+  if (!res || !res.data || !res.data.length) {
+    if (reset) grid.innerHTML = '<p style="color:var(--muted);font-size:14px;padding:20px;grid-column:1/-1;">Tidak ada manga ditemukan. Coba kata kunci lain atau <button onclick="retryWithNextProxy()" style="color:var(--cyan);background:none;border:1px solid var(--cyan);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px;">🔄 Ganti Proxy</button></p>';
     loadMoreBtn.style.display = 'none';
     return;
   }
@@ -2042,29 +1340,45 @@ function loadMoreManga() { loadManga(false); }
 
 function buildMangaCard(manga, delay = 0) {
   const attr = manga.attributes;
-  const title = attr.title.en || attr.title.id || attr.title['ja-ro'] || Object.values(attr.title)[0] || 'Untitled';
-  const coverRel = manga.relationships?.find(r => r.type === 'cover_art');
-  const coverFile = coverRel?.attributes?.fileName;
-  const coverUrl = coverFile ? `${MANGADEX_UPLOADS}/covers/${manga.id}/${coverFile}.256.jpg` : '';
+  const title = attr.title.en || Object.values(attr.title)[0] || 'Untitled';
+  
+  const coverData = getCoverUrl(manga);
   const status = attr.status || '';
   const year = attr.year || '';
   const tags = (attr.tags || []).slice(0, 2).map(t => t.attributes?.name?.en || '').filter(Boolean);
-  const type = attr.publicationDemographic || attr.originalLanguage || 'manga';
 
   const card = document.createElement('div');
   card.className = 'manga-card';
   card.style.animationDelay = delay + 'ms';
-  card.innerHTML = `
-    <div class="card-thumb">
-      ${coverUrl ? `<img src="${coverUrl}" alt="${title}" loading="lazy" onerror="this.style.display='none'">` : '<div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1f3a,#0d1f2d);"></div>'}
-      <span class="manga-badge-type">${type.toUpperCase()}</span>
-    </div>
-    <div class="card-info">
-      <div class="card-title">${title}</div>
-      <div class="card-sub">${[year, status].filter(Boolean).join(' · ')}</div>
-      <div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:4px;">${tags.map(t=>`<span class="tag" style="font-size:10px;padding:2px 6px;">${t}</span>`).join('')}</div>
-    </div>
+  
+  const thumbDiv = document.createElement('div');
+  thumbDiv.className = 'card-thumb';
+  
+  if (coverData) {
+    const img = document.createElement('img');
+    img.alt = title;
+    img.loading = 'lazy';
+    coverData.getFallbackSrc(img);
+    thumbDiv.appendChild(img);
+  } else {
+    thumbDiv.innerHTML = '<div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1f3a,#0d1f2d);display:flex;align-items:center;justify-content:center;font-size:40px;">📖</div>';
+  }
+  
+  const badge = document.createElement('span');
+  badge.className = 'manga-badge-type';
+  badge.textContent = (attr.publicationDemographic || attr.originalLanguage || 'manga').toUpperCase();
+  thumbDiv.appendChild(badge);
+  
+  const infoDiv = document.createElement('div');
+  infoDiv.className = 'card-info';
+  infoDiv.innerHTML = `
+    <div class="card-title">${title}</div>
+    <div class="card-sub">${[year, status].filter(Boolean).join(' · ')}</div>
+    <div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:4px;">${tags.map(t=>`<span class="tag" style="font-size:10px;padding:2px 6px;">${t}</span>`).join('')}</div>
   `;
+  
+  card.appendChild(thumbDiv);
+  card.appendChild(infoDiv);
   card.onclick = () => openMangaDetail(manga);
   return card;
 }
@@ -2075,76 +1389,53 @@ async function openMangaDetail(manga) {
   document.body.style.overflow = 'hidden';
 
   const attr = manga.attributes;
-  const title = attr.title.en || attr.title.id || attr.title['ja-ro'] || Object.values(attr.title)[0] || 'Untitled';
+  const title = attr.title.en || Object.values(attr.title)[0] || 'Untitled';
   currentMangaTitle = title;
 
-  const coverRel = manga.relationships?.find(r => r.type === 'cover_art');
-  const coverFile = coverRel?.attributes?.fileName;
-  const coverUrl = coverFile
-  ? `https://wsrv.nl/?url=${encodeURIComponent(`${MANGADEX_UPLOADS}/covers/${manga.id}/${coverFile}.256.jpg`)}&default=404`
-  : '';
+  const coverData = getCoverUrl(manga);
+  const posterEl = document.getElementById('mdPoster');
+  if (coverData) {
+    coverData.getFallbackSrc(posterEl);
+  } else {
+    posterEl.style.background = 'linear-gradient(135deg,#1a1f3a,#0d1f2d)';
+    posterEl.style.display = 'flex';
+    posterEl.style.alignItems = 'center';
+    posterEl.style.justifyContent = 'center';
+    posterEl.style.fontSize = '40px';
+    posterEl.alt = '📖';
+  }
 
-  document.getElementById('mdPoster').src = coverUrl;
   document.getElementById('mdTitle').textContent = title;
-
   const tags = (attr.tags || []).slice(0, 5).map(t => t.attributes?.name?.en || '').filter(Boolean);
-  document.getElementById('mdMeta').innerHTML = `
-    <span class="tag cyan">${attr.status || 'unknown'}</span>
-    <span class="tag gold">${attr.year || '?'}</span>
-    ${tags.map(t => `<span class="tag">${t}</span>`).join('')}
-  `;
-
-  const desc = attr.description?.en || attr.description?.id || Object.values(attr.description || {})[0] || 'Tidak ada deskripsi.';
+  document.getElementById('mdMeta').innerHTML = `<span class="tag cyan">${attr.status || 'unknown'}</span><span class="tag gold">${attr.year || '?'}</span>${tags.map(t => `<span class="tag">${t}</span>`).join('')}`;
+  const desc = attr.description?.en || Object.values(attr.description || {})[0] || 'Tidak ada deskripsi.';
   document.getElementById('mdDesc').textContent = desc;
 
-  // Load chapters
   document.getElementById('chapterListWrap').innerHTML = '<div style="text-align:center;padding:24px;color:var(--muted);font-size:13px;"><div class="spinner" style="margin:0 auto 10px;"></div>Memuat chapter...</div>';
-
-  const chRes = await mangaFetch(`${MANGADEX_BASE}/manga/${manga.id}/feed?limit=96&translatedLanguage[]=id&translatedLanguage[]=en&order[chapter]=desc&contentRating[]=safe&contentRating[]=suggestive`);
+  const chRes = await mangaFetch(`${MANGADEX_BASE}/manga/${manga.id}/feed?limit=96&translatedLanguage%5B%5D=id&translatedLanguage%5B%5D=en&order%5Bchapter%5D=desc&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive`);
 
   if (!chRes || !chRes.data || !chRes.data.length) {
     document.getElementById('chapterListWrap').innerHTML = '<p style="color:var(--muted);font-size:13px;padding:16px;">Belum ada chapter yang tersedia dalam bahasa Indonesia/Inggris.</p>';
     return;
   }
 
-  // Deduplicate by chapter number — prefer Indonesian
   const chMap = new Map();
-  chRes.data.forEach(ch => {
-    const num = ch.attributes.chapter || '0';
-    if (!chMap.has(num) || ch.attributes.translatedLanguage === 'id') chMap.set(num, ch);
-  });
+  chRes.data.forEach(ch => { const num = ch.attributes.chapter || '0'; if (!chMap.has(num) || ch.attributes.translatedLanguage === 'id') chMap.set(num, ch); });
   mangaCurrentChapterList = [...chMap.values()].sort((a, b) => parseFloat(b.attributes.chapter || 0) - parseFloat(a.attributes.chapter || 0));
 
-  const list = document.createElement('div');
-  list.className = 'chapter-list';
+  const list = document.createElement('div'); list.className = 'chapter-list';
   mangaCurrentChapterList.forEach((ch, i) => {
-    const attr2 = ch.attributes;
-    const chNum = attr2.chapter || '?';
-    const chTitle = attr2.title || '';
-    const chDate = attr2.publishAt ? new Date(attr2.publishAt).toLocaleDateString('id-ID') : '';
-    const lang = attr2.translatedLanguage === 'id' ? '🇮🇩' : '🇬🇧';
-    const item = document.createElement('div');
-    item.className = 'chapter-item';
-    item.innerHTML = `
-      <span class="chapter-num">Ch.${chNum} ${lang}</span>
-      <span class="chapter-title-text">${chTitle || 'Chapter ' + chNum}</span>
-      <span class="chapter-date">${chDate}</span>
-      <button class="chapter-read-btn" data-idx="${i}">📖 Baca</button>
-    `;
-    item.querySelector('.chapter-read-btn').onclick = (e) => {
-      e.stopPropagation();
-      openMangaReader(i);
-    };
+    const attr2 = ch.attributes; const chNum = attr2.chapter || '?'; const chTitle = attr2.title || ''; const chDate = attr2.publishAt ? new Date(attr2.publishAt).toLocaleDateString('id-ID') : ''; const lang = attr2.translatedLanguage === 'id' ? '🇮🇩' : '🇬🇧';
+    const item = document.createElement('div'); item.className = 'chapter-item';
+    item.innerHTML = `<span class="chapter-num">Ch.${chNum} ${lang}</span><span class="chapter-title-text">${chTitle || 'Chapter ' + chNum}</span><span class="chapter-date">${chDate}</span><button class="chapter-read-btn" data-idx="${i}">📖 Baca</button>`;
+    item.querySelector('.chapter-read-btn').onclick = (e) => { e.stopPropagation(); openMangaReader(i); };
     list.appendChild(item);
   });
   document.getElementById('chapterListWrap').innerHTML = '';
   document.getElementById('chapterListWrap').appendChild(list);
 }
 
-function closeMangaDetail() {
-  document.getElementById('mangaDetailModal').classList.add('hidden');
-  document.body.style.overflow = '';
-}
+function closeMangaDetail() { document.getElementById('mangaDetailModal').classList.add('hidden'); document.body.style.overflow = ''; }
 
 async function openMangaReader(chapterIdx) {
   mangaCurrentChapterIdx = chapterIdx;
@@ -2158,25 +1449,18 @@ async function openMangaReader(chapterIdx) {
   document.getElementById('readerPages').innerHTML = '<div class="reader-loading"><div class="spinner"></div><span>Memuat halaman manga...</span></div>';
   document.getElementById('readerPageInfo').textContent = '';
 
-  const chAttr = ch.attributes;
-  const chNum = chAttr.chapter || '?';
+  const chAttr = ch.attributes; const chNum = chAttr.chapter || '?';
   document.getElementById('readerTitle').textContent = `${currentMangaTitle} · Chapter ${chNum}`;
-
-  // Prev/Next chapter buttons
   document.getElementById('prevChBtn').disabled = chapterIdx >= mangaCurrentChapterList.length - 1;
   document.getElementById('nextChBtn').disabled = chapterIdx <= 0;
 
   const atHome = await mangaFetch(`${MANGADEX_BASE}/at-home/server/${ch.id}`);
-  if (!atHome || !atHome.chapter) {
-    document.getElementById('readerPages').innerHTML = '<div class="reader-loading" style="color:var(--pink);">⚠️ Gagal memuat halaman. Coba lagi atau pilih chapter lain.</div>';
-    return;
-  }
+  if (!atHome || !atHome.chapter) { document.getElementById('readerPages').innerHTML = '<div class="reader-loading" style="color:var(--pink);">⚠️ Gagal memuat halaman. Coba lagi atau pilih chapter lain.</div>'; return; }
 
   const { baseUrl, chapter: chData } = atHome;
   const pages = chData.data.map(f => `${baseUrl}/data/${chData.hash}/${f}`);
   mangaCurrentPages = pages;
   mangaCurrentPage = 0;
-
   renderReaderPages(pages);
 }
 
@@ -2184,334 +1468,76 @@ function renderReaderPages(pages) {
   const container = document.getElementById('readerPages');
   container.innerHTML = '';
   document.getElementById('readerPageInfo').textContent = `${pages.length} halaman`;
-
   pages.forEach((src, i) => {
-    const img = document.createElement('img');
-    img.className = 'reader-page-img';
-    img.src = src;
-    img.alt = `Halaman ${i + 1}`;
-    img.loading = 'lazy';
-    img.onerror = () => { img.style.display = 'none'; };
+    const img = document.createElement('img'); img.className = 'reader-page-img'; img.src = src; img.alt = `Halaman ${i + 1}`; img.loading = 'lazy'; img.onerror = () => { img.style.display = 'none'; };
     container.appendChild(img);
   });
 }
 
-function changeChapter(delta) {
-  const newIdx = mangaCurrentChapterIdx - delta;
-  if (newIdx < 0 || newIdx >= mangaCurrentChapterList.length) return;
-  openMangaReader(newIdx);
-}
-
-function changeReaderMode() {
-  // Simple mode toggle label
-  const btn = document.getElementById('readerModeBtn');
-  mangaReaderMode = mangaReaderMode === 'scroll' ? 'page' : 'scroll';
-  btn.textContent = `Mode: ${mangaReaderMode === 'scroll' ? 'Scroll' : 'Per Halaman'}`;
-}
-
-function closeMangaReader() {
-  document.getElementById('mangaReaderModal').classList.add('hidden');
-  document.body.style.overflow = '';
-  mangaCurrentPages = [];
-  // Reopen detail
-  document.getElementById('mangaDetailModal').classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
-}
+function changeChapter(delta) { const newIdx = mangaCurrentChapterIdx - delta; if (newIdx < 0 || newIdx >= mangaCurrentChapterList.length) return; openMangaReader(newIdx); }
+function changeReaderMode() { const btn = document.getElementById('readerModeBtn'); mangaReaderMode = mangaReaderMode === 'scroll' ? 'page' : 'scroll'; btn.textContent = `Mode: ${mangaReaderMode === 'scroll' ? 'Scroll' : 'Per Halaman'}`; }
+function closeMangaReader() { document.getElementById('mangaReaderModal').classList.add('hidden'); document.body.style.overflow = ''; mangaCurrentPages = []; document.getElementById('mangaDetailModal').classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
 
 // ============================================================
-// STREAMING MODAL — YouTube Search + Embed
+// STREAMING MODAL
 // ============================================================
 const YT_API_KEY_STORAGE = 'nimesora_yt_apikey';
 const YT_API_KEY_DEFAULT = 'AIzaSyBjlan-wDkMAdsnr4sW465zLWfibxkWBVc';
 let streamCurrentAnime = null;
 let museChannelId = localStorage.getItem('museid_channel_id') || null;
 
-function getYtApiKey() {
-  return localStorage.getItem(YT_API_KEY_STORAGE) || YT_API_KEY_DEFAULT;
-}
-
-// Ambil channel ID Muse Indonesia sekali, lalu cache di localStorage
+function getYtApiKey() { return localStorage.getItem(YT_API_KEY_STORAGE) || YT_API_KEY_DEFAULT; }
 async function getMuseChannelId(apiKey) {
   if (museChannelId) return museChannelId;
-  try {
-    const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=MuseIndonesia&key=${apiKey}`);
-    const data = await res.json();
-    const id = data.items?.[0]?.id;
-    if (id) {
-      museChannelId = id;
-      localStorage.setItem('museid_channel_id', id);
-    }
-    return id || null;
-  } catch(e) { return null; }
+  try { const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=MuseIndonesia&key=${apiKey}`); const data = await res.json(); const id = data.items?.[0]?.id; if (id) { museChannelId = id; localStorage.setItem('museid_channel_id', id); } return id || null; } catch(e) { return null; }
 }
 
 function openStreaming(anime) {
-  streamCurrentAnime = anime;
-  const modal = document.getElementById('streamModal');
-  modal.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
-
-  const title = anime.title_english || anime.title || '';
-  document.getElementById('streamAnimeTitle').textContent = title;
-  document.getElementById('streamApiKeyInput').value = getYtApiKey();
-
-  // Query = judul anime saja, karena kita sudah filter ke channel Muse Indonesia
-  const defaultQuery = title;
-  document.getElementById('streamQueryInput').value = defaultQuery;
-
-  // Reset player
-  const wrap = document.getElementById('streamPlayerWrap');
-  wrap.innerHTML = `<div class="stream-player-placeholder">
-    <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
-    <span style="font-size:15px;font-weight:700;color:var(--muted2)">Pilih video dari daftar</span>
-    <span style="font-size:12px;">atau klik Cari untuk mencari episode</span>
-  </div>`;
-
-  // Update quick-links bar
+  streamCurrentAnime = anime; document.getElementById('streamModal').classList.remove('hidden'); document.body.style.overflow = 'hidden';
+  const title = anime.title_english || anime.title || ''; document.getElementById('streamAnimeTitle').textContent = title;
+  document.getElementById('streamQueryInput').value = title;
+  document.getElementById('streamPlayerWrap').innerHTML = `<div class="stream-player-placeholder"><svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg><span style="font-size:15px;font-weight:700;color:var(--muted2)">Pilih video dari daftar</span><span style="font-size:12px;">atau klik Cari untuk mencari episode</span></div>`;
   updateStreamLinks(title, anime.mal_id || anime.id);
-
-  // Auto-search jika API key sudah ada
-  const key = getYtApiKey();
-  if (key) {
-    searchYouTube(defaultQuery);
-  } else {
-    showStreamNoKey();
-  }
+  const key = getYtApiKey(); if (key) searchYouTube(title); else showStreamNoKey();
 }
 
-function closeStreaming() {
-  document.getElementById('streamModal').classList.add('hidden');
-  document.body.style.overflow = '';
-  // Hentikan video
-  document.getElementById('streamPlayerWrap').innerHTML = '';
-  streamCurrentAnime = null;
-}
-
-function saveStreamApiKey() {
-  const key = document.getElementById('streamApiKeyInput').value.trim();
-  if (!key) { showToast('Masukkan API Key terlebih dahulu', '⚠️'); return; }
-  localStorage.setItem(YT_API_KEY_STORAGE, key);
-  showToast('YouTube API Key disimpan! 🎉', '✅');
-  const query = document.getElementById('streamQueryInput').value.trim();
-  if (query) searchYouTube(query);
-}
-
-function showStreamNoKey() {
-  document.getElementById('streamResults').innerHTML = `
-    <div class="stream-no-key">
-      <p><strong style="color:var(--cyan)">Cara Mendapatkan API Key Gratis:</strong></p>
-      <p>
-        1. Buka <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank">Google Cloud Console</a><br>
-        2. Buat project baru → aktifkan <code>YouTube Data API v3</code><br>
-        3. Buat Credentials → API Key<br>
-        4. Paste di kolom di atas → klik Simpan
-      </p>
-      <p style="font-size:10px;color:var(--muted);">Gratis: 10.000 quota / hari · Tidak perlu kartu kredit</p>
-    </div>`;
-}
+function closeStreaming() { document.getElementById('streamModal').classList.add('hidden'); document.body.style.overflow = ''; document.getElementById('streamPlayerWrap').innerHTML = ''; streamCurrentAnime = null; }
+function saveStreamApiKey() { const key = document.getElementById('streamApiKeyInput').value.trim(); if (!key) { showToast('Masukkan API Key terlebih dahulu', '⚠️'); return; } localStorage.setItem(YT_API_KEY_STORAGE, key); showToast('YouTube API Key disimpan! 🎉', '✅'); const query = document.getElementById('streamQueryInput').value.trim(); if (query) searchYouTube(query); }
+function showStreamNoKey() { document.getElementById('streamResults').innerHTML = `<div class="stream-no-key"><p><strong style="color:var(--cyan)">Cara Mendapatkan API Key Gratis:</strong></p><p>1. Buka <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank">Google Cloud Console</a><br>2. Buat project baru → aktifkan <code>YouTube Data API v3</code><br>3. Buat Credentials → API Key<br>4. Paste di kolom di atas → klik Simpan</p><p style="font-size:10px;color:var(--muted);">Gratis: 10.000 quota / hari · Tidak perlu kartu kredit</p></div>`; }
 
 async function searchYouTube(query) {
-  if (!query || !query.trim()) return;
-  const key = getYtApiKey();
-  if (!key) { showStreamNoKey(); return; }
-
-  const results = document.getElementById('streamResults');
-  results.innerHTML = `<div class="stream-status"><div class="spinner" style="margin:0 auto 10px;width:24px;height:24px;"></div>Mencari episode di Muse Indonesia...</div>`;
-
-  // ── Normalisasi teks ──────────────────────────────────────────
-  function normalize(s) {
-    return s.toLowerCase().replace(/[:\-–—!?'".()\[\]]/g,' ').replace(/\s+/g,' ').trim();
-  }
-
-  // ── Kata kunci penting dari judul anime ───────────────────────
+  if (!query || !query.trim()) return; const key = getYtApiKey(); if (!key) { showStreamNoKey(); return; }
+  const results = document.getElementById('streamResults'); results.innerHTML = `<div class="stream-status"><div class="spinner" style="margin:0 auto 10px;width:24px;height:24px;"></div>Mencari episode di Muse Indonesia...</div>`;
+  function normalize(s) { return s.toLowerCase().replace(/[:\-–—!?'".()\[\]]/g,' ').replace(/\s+/g,' ').trim(); }
   const STOPWORDS = new Set(['the','a','an','in','of','on','at','to','for','and','or','is','are','was','with','by','as','from','this','it','sub','eng','english','bahasa','indo']);
-  function keyWords(title) {
-    return normalize(title).split(' ')
-      .filter(w => w.length > 1 && !STOPWORDS.has(w) && !/^\d{4}$/.test(w));
-  }
-
-  // ── Ekstrak nomor season dari judul ───────────────────────────
-  function extractSeasonNum(title) {
-    const tn = normalize(title);
-    const m = tn.match(/season\s*(\d+)/) || tn.match(/\bs(\d+)\b/) || tn.match(/cour\s*(\d+)/);
-    return m ? parseInt(m[1]) : null;
-  }
-
-  // ── Skor kecocokan + filter season ketat ─────────────────────
-  function matchScore(videoTitle, animeTitle) {
-    const vn = normalize(videoTitle);
-    const an = normalize(animeTitle);
-    const words = keyWords(animeTitle);
-    if (!words.length) return 1;
-
-    // Filter season ketat: jika anime punya season number,
-    // video HARUS cocok season-nya (atau tidak menyebut season lain)
-    const animeSeason = extractSeasonNum(animeTitle);
-    if (animeSeason !== null) {
-      // Cek apakah video menyebut season number lain yang berbeda
-      const videoSeasonMatch = vn.match(/season\s*(\d+)/);
-      if (videoSeasonMatch) {
-        const videoSeason = parseInt(videoSeasonMatch[1]);
-        if (videoSeason !== animeSeason) return 0; // Beda season → buang
-      }
-      // Jika tidak menyebut season sama sekali, tetap lolos tapi skor lebih rendah
-    }
-
-    return words.filter(w => vn.includes(w)).length / words.length;
-  }
-
-  // ── Ekstrak nomor episode (hindari tahun 1900-2099) ───────────
-  function extractEpNum(title) {
-    // Pola eksplisit — paling andal
-    const explicit = [
-      /\bepisode\s*0*(\d{1,3})\b/i,
-      /\bep\.?\s*0*(\d{1,3})\b/i,
-      /#\s*0*(\d{1,3})\b/,
-      /\|\s*ep(?:isode)?\s*0*(\d{1,3})/i,
-      /\b0*(\d{1,3})\s*\|/,
-    ];
-    for (const p of explicit) {
-      const m = title.match(p);
-      if (m) { const n=parseInt(m[1]); if(n>0&&n<500) return n; }
-    }
-    // Angka standalone — tapi bukan tahun dan bukan di dalam kata panjang
-    const tokens = title.match(/\b(\d{1,3})\b/g) || [];
-    for (const t of tokens) {
-      const n = parseInt(t);
-      if (n > 0 && n < 500 && !(n >= 90 && n <= 99 && title.includes(t+"'"))) return n;
-    }
-    return 9999;
-  }
+  function keyWords(title) { return normalize(title).split(' ').filter(w => w.length > 1 && !STOPWORDS.has(w) && !/^\d{4}$/.test(w)); }
+  function extractSeasonNum(title) { const tn = normalize(title); const m = tn.match(/season\s*(\d+)/) || tn.match(/\bs(\d+)\b/) || tn.match(/cour\s*(\d+)/); return m ? parseInt(m[1]) : null; }
+  function matchScore(videoTitle, animeTitle) { const vn = normalize(videoTitle); const an = normalize(animeTitle); const words = keyWords(animeTitle); if (!words.length) return 1; const animeSeason = extractSeasonNum(animeTitle); if (animeSeason !== null) { const videoSeasonMatch = vn.match(/season\s*(\d+)/); if (videoSeasonMatch) { const videoSeason = parseInt(videoSeasonMatch[1]); if (videoSeason !== animeSeason) return 0; } } return words.filter(w => vn.includes(w)).length / words.length; }
+  function extractEpNum(title) { const explicit = [/\bepisode\s*0*(\d{1,3})\b/i,/\bep\.?\s*0*(\d{1,3})\b/i,/#\s*0*(\d{1,3})\b/,/\|\s*ep(?:isode)?\s*0*(\d{1,3})/i,/\b0*(\d{1,3})\s*\|/,]; for (const p of explicit) { const m = title.match(p); if (m) { const n=parseInt(m[1]); if(n>0&&n<500) return n; } } const tokens = title.match(/\b(\d{1,3})\b/g) || []; for (const t of tokens) { const n = parseInt(t); if (n > 0 && n < 500 && !(n >= 90 && n <= 99 && title.includes(t+"'"))) return n; } return 9999; }
 
   try {
-    const channelId = await getMuseChannelId(key);
-    const animeTitle = streamCurrentAnime?.title_english || streamCurrentAnime?.title || query;
-
-    let url;
-    if (channelId) {
-      url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&channelId=${channelId}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&order=date`;
-    } else {
-      url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query + ' Muse Indonesia')}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&order=relevance`;
-    }
-
-    const res = await fetch(url);
-    const data = await res.json();
-
-    if (data.error) {
-      const msg = data.error.message || 'Error tidak diketahui';
-      const isInvalid = data.error.code === 400 || data.error.code === 403;
-      results.innerHTML = `<div class="stream-status" style="color:var(--pink);">
-        ⚠️ ${msg}
-        ${isInvalid ? '<br><small style="color:var(--muted)">Cek apakah API Key kamu sudah benar dan YouTube Data API v3 sudah diaktifkan.</small>' : ''}
-      </div>`;
-      return;
-    }
-
-    if (!data.items || !data.items.length) {
-      results.innerHTML = `<div class="stream-status" style="color:var(--muted2);">
-        😔 Anime ini belum tersedia di <strong style="color:var(--cyan)">Muse Indonesia</strong>.<br>
-        <small style="color:var(--muted)">Coba cari manual atau gunakan link legal di bawah.</small>
-      </div>`;
-      return;
-    }
-
-    // ── Filter: hanya video yang judulnya cocok dengan anime yang diklik ──
-    let filtered = data.items
-      .filter(item => item.id?.videoId)
-      .filter(item => matchScore(item.snippet.title, animeTitle) >= 0.45);
-
-    // Longgarkan threshold jika hasil terlalu sedikit
-    if (filtered.length < 3) {
-      filtered = data.items
-        .filter(item => item.id?.videoId)
-        .filter(item => matchScore(item.snippet.title, animeTitle) >= 0.25);
-    }
-
-    if (!filtered.length) {
-      results.innerHTML = `<div class="stream-status" style="color:var(--muted2);">
-        😔 <strong style="color:var(--cyan)">Muse Indonesia</strong> belum mengunggah anime ini.<br>
-        <small style="color:var(--muted)">Gunakan link legal di bawah untuk menonton.</small>
-      </div>`;
-      return;
-    }
-
-    // ── Urutkan EP 1 → terakhir ───────────────────────────────────
-    const sorted = filtered.sort((a,b) =>
-      extractEpNum(a.snippet.title) - extractEpNum(b.snippet.title)
-    );
-
+    const channelId = await getMuseChannelId(key); const animeTitle = streamCurrentAnime?.title_english || streamCurrentAnime?.title || query;
+    let url; if (channelId) url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&channelId=${channelId}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&order=date`; else url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query + ' Muse Indonesia')}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&order=relevance`;
+    const res = await fetch(url); const data = await res.json();
+    if (data.error) { results.innerHTML = `<div class="stream-status" style="color:var(--pink);">⚠️ ${data.error.message||'Error'}</div>`; return; }
+    if (!data.items || !data.items.length) { results.innerHTML = `<div class="stream-status" style="color:var(--muted2);">😔 Anime ini belum tersedia di <strong style="color:var(--cyan)">Muse Indonesia</strong>.</div>`; return; }
+    let filtered = data.items.filter(item => item.id?.videoId).filter(item => matchScore(item.snippet.title, animeTitle) >= 0.45);
+    if (filtered.length < 3) filtered = data.items.filter(item => item.id?.videoId).filter(item => matchScore(item.snippet.title, animeTitle) >= 0.25);
+    if (!filtered.length) { results.innerHTML = `<div class="stream-status" style="color:var(--muted2);">😔 <strong style="color:var(--cyan)">Muse Indonesia</strong> belum mengunggah anime ini.</div>`; return; }
+    const sorted = filtered.sort((a,b) => extractEpNum(a.snippet.title) - extractEpNum(b.snippet.title));
     results.innerHTML = `<div style="padding:6px 12px 4px;font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:.5px;text-transform:uppercase;border-bottom:1px solid var(--border);margin-bottom:4px;">📺 Muse Indonesia · ${sorted.length} episode</div>`;
-
-    let ep1Item = null;
-    sorted.forEach((item, i) => {
-      const videoId = item.id?.videoId;
-      if (!videoId) return;
-      const snippet = item.snippet;
-      const div = document.createElement('div');
-      div.className = 'stream-result-item';
-      const thumb = snippet.thumbnails?.medium?.url || snippet.thumbnails?.default?.url || '';
-      const epNum = extractEpNum(snippet.title);
-      const epLabel = epNum < 9999 ? `EP ${epNum}` : '';
-      div.innerHTML = `
-        <img class="stream-thumb" src="${thumb}" alt="" loading="lazy" onerror="this.style.opacity='.2'">
-        <div class="stream-result-info">
-          <div class="stream-result-title">${epLabel ? `<span style="color:var(--cyan);font-weight:800;margin-right:6px;flex-shrink:0;">${epLabel}</span>` : ''}${snippet.title}</div>
-          <div class="stream-result-ch" style="color:var(--green);">▶ ${snippet.channelTitle}</div>
-          <div class="stream-result-date">${snippet.publishedAt ? new Date(snippet.publishedAt).toLocaleDateString('id-ID') : ''}</div>
-        </div>`;
-      div.addEventListener('click', () => playStreamVideo(videoId, div));
-      results.appendChild(div);
-      if (i === 0) ep1Item = div;
-    });
-
+    let ep1Item = null; sorted.forEach((item, i) => { const videoId = item.id?.videoId; if (!videoId) return; const snippet = item.snippet; const div = document.createElement('div'); div.className = 'stream-result-item'; const thumb = snippet.thumbnails?.medium?.url || snippet.thumbnails?.default?.url || ''; const epNum = extractEpNum(snippet.title); const epLabel = epNum < 9999 ? `EP ${epNum}` : ''; div.innerHTML = `<img class="stream-thumb" src="${thumb}" alt="" loading="lazy" onerror="this.style.opacity='.2'"><div class="stream-result-info"><div class="stream-result-title">${epLabel ? `<span style="color:var(--cyan);font-weight:800;margin-right:6px;flex-shrink:0;">${epLabel}</span>` : ''}${snippet.title}</div><div class="stream-result-ch" style="color:var(--green);">▶ ${snippet.channelTitle}</div><div class="stream-result-date">${snippet.publishedAt ? new Date(snippet.publishedAt).toLocaleDateString('id-ID') : ''}</div></div>`; div.addEventListener('click', () => playStreamVideo(videoId, div)); results.appendChild(div); if (i === 0) ep1Item = div; });
     if (ep1Item) ep1Item.click();
-
-  } catch(e) {
-    results.innerHTML = `<div class="stream-status" style="color:var(--pink);">⚠️ Gagal mengambil data.<br><small>Cek koneksi internet & API Key.</small></div>`;
-  }
+  } catch(e) { results.innerHTML = `<div class="stream-status" style="color:var(--pink);">⚠️ Gagal mengambil data.</div>`; }
 }
 
-function playStreamVideo(videoId, itemEl) {
-  // Mark active
-  document.querySelectorAll('.stream-result-item').forEach(el => el.classList.remove('active'));
-  if (itemEl) itemEl.classList.add('active');
-  // Load iframe
-  document.getElementById('streamPlayerWrap').innerHTML = `
-    <iframe
-      src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-      allowfullscreen
-    ></iframe>`;
-}
+function playStreamVideo(videoId, itemEl) { document.querySelectorAll('.stream-result-item').forEach(el => el.classList.remove('active')); if (itemEl) itemEl.classList.add('active'); document.getElementById('streamPlayerWrap').innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>`; }
+function updateStreamLinks(title, malId) { const enc = encodeURIComponent(title); const linksBar = document.getElementById('streamLinksBar'); linksBar.innerHTML = `<span style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0;">Tonton Legal:</span><a class="stream-link-btn yt" href="https://www.youtube.com/@MuseIndonesia/search?query=${enc}" target="_blank" rel="noopener noreferrer">▶ MUSE Indonesia</a><a class="stream-link-btn yt" href="https://www.youtube.com/results?search_query=${enc}+full+episode+sub+indo+official" target="_blank" rel="noopener noreferrer">🔍 YouTube</a><a class="stream-link-btn cr" href="https://www.crunchyroll.com/search?q=${enc}" target="_blank" rel="noopener noreferrer">🍥 Crunchyroll</a>${malId ? `<a class="stream-link-btn" href="https://myanimelist.net/anime/${malId}" target="_blank" rel="noopener noreferrer">📋 MAL</a>` : ''}`; }
 
-function updateStreamLinks(title, malId) {
-  const enc = encodeURIComponent(title);
-  const linksBar = document.getElementById('streamLinksBar');
-  linksBar.innerHTML = `
-    <span style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0;">Tonton Legal:</span>
-    <a class="stream-link-btn yt" href="https://www.youtube.com/@MuseIndonesia/search?query=${enc}" target="_blank" rel="noopener noreferrer">▶ MUSE Indonesia</a>
-    <a class="stream-link-btn yt" href="https://www.youtube.com/results?search_query=${enc}+full+episode+sub+indo+official" target="_blank" rel="noopener noreferrer">🔍 YouTube</a>
-    <a class="stream-link-btn cr" href="https://www.crunchyroll.com/search?q=${enc}" target="_blank" rel="noopener noreferrer">🍥 Crunchyroll</a>
-    ${malId ? `<a class="stream-link-btn" href="https://myanimelist.net/anime/${malId}" target="_blank" rel="noopener noreferrer">📋 MAL</a>` : ''}
-  `;
-}
-
-// Event listeners untuk streaming modal
-document.getElementById('streamModal').addEventListener('click', function(e) {
-  if (e.target === this) closeStreaming();
-});
-document.getElementById('streamSearchBtn').addEventListener('click', function() {
-  const q = document.getElementById('streamQueryInput').value.trim();
-  if (q) searchYouTube(q);
-});
-document.getElementById('streamQueryInput').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    const q = this.value.trim();
-    if (q) searchYouTube(q);
-  }
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeStreaming();
-});</script>
+document.getElementById('streamModal').addEventListener('click', function(e) { if (e.target === this) closeStreaming(); });
+document.getElementById('streamSearchBtn').addEventListener('click', function() { const q = document.getElementById('streamQueryInput').value.trim(); if (q) searchYouTube(q); });
+document.getElementById('streamQueryInput').addEventListener('keydown', function(e) { if (e.key === 'Enter') { const q = this.value.trim(); if (q) searchYouTube(q); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeStreaming(); });
+</script>
 </body>
 </html>
