@@ -2172,11 +2172,28 @@ loadAll();
 const MANGADEX_BASE = 'https://api.mangadex.org';
 const MANGADEX_UPLOADS = 'https://uploads.mangadex.org';
 
-// Proxy gambar MangaDex via wsrv.nl agar tidak kena hotlink block
+// Gambar MangaDex menggunakan referrerpolicy="no-referrer" di img tag
+// agar CDN Cloudflare tidak memblokir (hotlink check berdasarkan Referer header)
 function proxyCover(fileName, mangaId, size = 256) {
   if (!fileName || !mangaId) return '';
-  const raw = `${MANGADEX_UPLOADS}/covers/${mangaId}/${fileName}.${size}.jpg`;
-  return `https://wsrv.nl/?url=${encodeURIComponent(raw)}&w=${size}&h=${Math.round(size * 1.5)}&fit=cover&output=webp&q=80`;
+  return `${MANGADEX_UPLOADS}/covers/${mangaId}/${fileName}.${size}.jpg`;
+}
+
+// Fallback bertingkat jika gambar gagal load
+function coverError(img) {
+  if (!img.dataset.tried) {
+    img.dataset.tried = '1';
+    const raw = img.dataset.raw || img.src;
+    img.src = `https://wsrv.nl/?url=${encodeURIComponent(raw)}&output=webp&w=256`;
+  } else if (img.dataset.tried === '1') {
+    img.dataset.tried = '2';
+    const raw = img.dataset.raw || '';
+    img.src = `https://images.weserv.nl/?url=${encodeURIComponent(raw)}&w=256`;
+  } else {
+    img.onerror = null;
+    img.style.display = 'none';
+    img.closest('.card-thumb')?.classList.add('no-cover');
+  }
 }
 
 let mangaCurrentOffset = 0;
