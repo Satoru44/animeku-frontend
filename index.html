@@ -1908,21 +1908,31 @@ let mangaCurrentPage = 0;
 let mangaCurrentPages = [];
 let currentMangaTitle = '';
 
+const MANGADEX_PROXIES = [
+  url => url,
+  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`
+];
+
 async function mangaFetch(url) {
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 12000); // 12 detik timeout
-    const r = await fetch(url, {
-      headers: { 'Accept': 'application/json' },
-      signal: controller.signal
-    });
-    clearTimeout(timeout);
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return await r.json();
-  } catch(e) {
-    console.warn('MangaDex fetch error:', e.message, url);
-    return null;
+  for (const proxyFn of MANGADEX_PROXIES) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 14000);
+      const finalUrl = proxyFn(url);
+      const r = await fetch(finalUrl, {
+        headers: { 'Accept': 'application/json' },
+        signal: controller.signal
+      });
+      clearTimeout(timeout);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const data = await r.json();
+      return data;
+    } catch(e) {
+      console.warn('MangaDex fetch error (trying next proxy):', e.message, url);
+    }
   }
+  return null;
 }
 
 // Tampilkan/sembunyikan manga section
@@ -2222,7 +2232,7 @@ function openStreaming(anime) {
   document.getElementById('streamAnimeTitle').textContent = title;
   document.getElementById('streamApiKeyInput').value = getYtApiKey();
 
-  const defaultQuery = title + ' episode 1 sub indo -shorts';
+  const defaultQuery = title + ' episode sub indo';
   document.getElementById('streamQueryInput').value = defaultQuery;
 
   // Reset player
@@ -2284,8 +2294,25 @@ async function searchYouTube(query) {
   const results = document.getElementById('streamResults');
   results.innerHTML = `<div class="stream-status"><div class="spinner" style="margin:0 auto 10px;width:24px;height:24px;"></div>Mencari episode...</div>`;
 
+  // Helper: ekstrak nomor episode dari judul video
+  function extractEpNum(title) {
+    // Cari pola "episode 1", "ep.1", "ep 01", " - 1 ", dll.
+    const patterns = [
+      /(?:episode|ep)\.?\s*0*(\d+)/i,
+      /\s[-|]\s*0*(\d+)\s*[-|]/,
+      /\s0*(\d+)\s*(?:sub|end|fin)/i,
+      /\b0*(\d+)\b/
+    ];
+    for (const p of patterns) {
+      const m = title.match(p);
+      if (m) return parseInt(m[1]);
+    }
+    return 9999;
+  }
+
   try {
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=20&key=${encodeURIComponent(key)}&videoEmbeddable=true&videoDuration=medium&order=relevance`;
+    // Minta lebih banyak hasil agar lebih banyak episode tersedia setelah sort
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&videoDuration=medium&order=relevance`;
     const res = await fetch(url);
     const data = await res.json();
 
@@ -2304,30 +2331,39 @@ async function searchYouTube(query) {
       return;
     }
 
+    // Filter: buang video yang tidak mengandung angka episode di judul (kemungkinan bukan episode)
+    // dan buang Shorts (biasanya sangat pendek — tapi durasi medium sudah filter sebagian)
+    // Kemudian urutkan berdasarkan nomor episode (terendah = ep1 duluan)
+    const sorted = [...data.items]
+      .filter(item => item.id?.videoId)
+      .sort((a, b) => extractEpNum(a.snippet.title) - extractEpNum(b.snippet.title));
+
     results.innerHTML = '';
-    let firstItem = null;
-    data.items.forEach((item, i) => {
+    let ep1Item = null;
+    sorted.forEach((item, i) => {
       const videoId = item.id?.videoId;
       if (!videoId) return;
       const snippet = item.snippet;
       const div = document.createElement('div');
       div.className = 'stream-result-item';
       const thumb = snippet.thumbnails?.medium?.url || snippet.thumbnails?.default?.url || '';
-      const pubDate = snippet.publishedAt ? new Date(snippet.publishedAt).toLocaleDateString('id-ID') : '';
+      const epNum = extractEpNum(snippet.title);
+      const epLabel = epNum < 9999 ? `EP ${epNum}` : '';
       div.innerHTML = `
         <img class="stream-thumb" src="${thumb}" alt="" loading="lazy" onerror="this.style.opacity='.2'">
         <div class="stream-result-info">
-          <div class="stream-result-title">${snippet.title}</div>
+          <div class="stream-result-title">${epLabel ? `<span style="color:var(--cyan);font-weight:800;margin-right:6px;">${epLabel}</span>` : ''}${snippet.title}</div>
           <div class="stream-result-ch">${snippet.channelTitle}</div>
-          <div class="stream-result-date">${pubDate}</div>
+          <div class="stream-result-date">${snippet.publishedAt ? new Date(snippet.publishedAt).toLocaleDateString('id-ID') : ''}</div>
         </div>`;
       div.addEventListener('click', () => playStreamVideo(videoId, div));
       results.appendChild(div);
-      if (i === 0) firstItem = div;
+      // Tandai ep1 (nomor episode terkecil = item pertama setelah sort)
+      if (i === 0) ep1Item = div;
     });
 
-    // Auto-play hasil pertama
-    if (firstItem) firstItem.click();
+    // Auto-play episode 1 (item teratas setelah diurutkan)
+    if (ep1Item) ep1Item.click();
 
   } catch(e) {
     results.innerHTML = `<div class="stream-status" style="color:var(--pink);">⚠️ Gagal mengambil data.<br><small>Cek koneksi internet & API Key.</small></div>`;
