@@ -1911,14 +1911,17 @@ let currentMangaTitle = '';
 const MANGADEX_PROXIES = [
   url => url,
   url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`
+  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+  url => `https://thingproxy.freeboard.io/fetch/${url}`,
+  url => `https://cors.eu.org/${url}`
 ];
 
 async function mangaFetch(url) {
   for (const proxyFn of MANGADEX_PROXIES) {
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 14000);
+      // Timeout lebih pendek per proxy (8 detik) agar cepat pindah ke proxy berikutnya
+      const timeout = setTimeout(() => controller.abort(), 8000);
       const finalUrl = proxyFn(url);
       const r = await fetch(finalUrl, {
         headers: { 'Accept': 'application/json' },
@@ -1927,9 +1930,11 @@ async function mangaFetch(url) {
       clearTimeout(timeout);
       if (!r.ok) throw new Error('HTTP ' + r.status);
       const data = await r.json();
-      return data;
+      // Validasi: pastikan response adalah objek MangaDex yang valid
+      if (data && (data.result || data.data !== undefined)) return data;
+      throw new Error('Invalid response format');
     } catch(e) {
-      console.warn('MangaDex fetch error (trying next proxy):', e.message, url);
+      console.warn('MangaDex proxy gagal, mencoba berikutnya:', e.message);
     }
   }
   return null;
@@ -2217,22 +2222,22 @@ function closeMangaReader() {
 const YT_API_KEY_STORAGE = 'nimesora_yt_apikey';
 const YT_API_KEY_DEFAULT = 'AIzaSyBjlan-wDkMAdsnr4sW465zLWfibxkWBVc';
 let streamCurrentAnime = null;
-let museChannelId = localStorage.getItem('museasia_channel_id') || null;
+let museChannelId = localStorage.getItem('museid_channel_id') || null;
 
 function getYtApiKey() {
   return localStorage.getItem(YT_API_KEY_STORAGE) || YT_API_KEY_DEFAULT;
 }
 
-// Ambil channel ID Muse Asia sekali, lalu cache di localStorage
+// Ambil channel ID Muse Indonesia sekali, lalu cache di localStorage
 async function getMuseChannelId(apiKey) {
   if (museChannelId) return museChannelId;
   try {
-    const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=MuseAsia&key=${apiKey}`);
+    const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=MuseIndonesia&key=${apiKey}`);
     const data = await res.json();
     const id = data.items?.[0]?.id;
     if (id) {
       museChannelId = id;
-      localStorage.setItem('museasia_channel_id', id);
+      localStorage.setItem('museid_channel_id', id);
     }
     return id || null;
   } catch(e) { return null; }
@@ -2309,7 +2314,7 @@ async function searchYouTube(query) {
   if (!key) { showStreamNoKey(); return; }
 
   const results = document.getElementById('streamResults');
-  results.innerHTML = `<div class="stream-status"><div class="spinner" style="margin:0 auto 10px;width:24px;height:24px;"></div>Mencari episode di Muse Asia...</div>`;
+  results.innerHTML = `<div class="stream-status"><div class="spinner" style="margin:0 auto 10px;width:24px;height:24px;"></div>Mencari episode di Muse Indonesia...</div>`;
 
   // ── Normalisasi teks ──────────────────────────────────────────
   function normalize(s) {
@@ -2317,17 +2322,39 @@ async function searchYouTube(query) {
   }
 
   // ── Kata kunci penting dari judul anime ───────────────────────
-  const STOPWORDS = new Set(['the','a','an','in','of','on','at','to','for','and','or','is','are','was','with','by','as','from','this','it','season','part','cour','sub','eng','english','bahasa','indo']);
+  const STOPWORDS = new Set(['the','a','an','in','of','on','at','to','for','and','or','is','are','was','with','by','as','from','this','it','sub','eng','english','bahasa','indo']);
   function keyWords(title) {
     return normalize(title).split(' ')
       .filter(w => w.length > 1 && !STOPWORDS.has(w) && !/^\d{4}$/.test(w));
   }
 
-  // ── Skor kecocokan judul video vs judul anime ─────────────────
+  // ── Ekstrak nomor season dari judul ───────────────────────────
+  function extractSeasonNum(title) {
+    const tn = normalize(title);
+    const m = tn.match(/season\s*(\d+)/) || tn.match(/\bs(\d+)\b/) || tn.match(/cour\s*(\d+)/);
+    return m ? parseInt(m[1]) : null;
+  }
+
+  // ── Skor kecocokan + filter season ketat ─────────────────────
   function matchScore(videoTitle, animeTitle) {
     const vn = normalize(videoTitle);
+    const an = normalize(animeTitle);
     const words = keyWords(animeTitle);
     if (!words.length) return 1;
+
+    // Filter season ketat: jika anime punya season number,
+    // video HARUS cocok season-nya (atau tidak menyebut season lain)
+    const animeSeason = extractSeasonNum(animeTitle);
+    if (animeSeason !== null) {
+      // Cek apakah video menyebut season number lain yang berbeda
+      const videoSeasonMatch = vn.match(/season\s*(\d+)/);
+      if (videoSeasonMatch) {
+        const videoSeason = parseInt(videoSeasonMatch[1]);
+        if (videoSeason !== animeSeason) return 0; // Beda season → buang
+      }
+      // Jika tidak menyebut season sama sekali, tetap lolos tapi skor lebih rendah
+    }
+
     return words.filter(w => vn.includes(w)).length / words.length;
   }
 
@@ -2362,7 +2389,7 @@ async function searchYouTube(query) {
     if (channelId) {
       url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&channelId=${channelId}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&order=date`;
     } else {
-      url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query + ' Muse Asia')}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&order=relevance`;
+      url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query + ' Muse Indonesia')}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&order=relevance`;
     }
 
     const res = await fetch(url);
@@ -2380,7 +2407,7 @@ async function searchYouTube(query) {
 
     if (!data.items || !data.items.length) {
       results.innerHTML = `<div class="stream-status" style="color:var(--muted2);">
-        😔 Anime ini belum tersedia di <strong style="color:var(--cyan)">Muse Asia</strong>.<br>
+        😔 Anime ini belum tersedia di <strong style="color:var(--cyan)">Muse Indonesia</strong>.<br>
         <small style="color:var(--muted)">Coba cari manual atau gunakan link legal di bawah.</small>
       </div>`;
       return;
@@ -2400,7 +2427,7 @@ async function searchYouTube(query) {
 
     if (!filtered.length) {
       results.innerHTML = `<div class="stream-status" style="color:var(--muted2);">
-        😔 <strong style="color:var(--cyan)">Muse Asia</strong> belum mengunggah anime ini.<br>
+        😔 <strong style="color:var(--cyan)">Muse Indonesia</strong> belum mengunggah anime ini.<br>
         <small style="color:var(--muted)">Gunakan link legal di bawah untuk menonton.</small>
       </div>`;
       return;
@@ -2411,7 +2438,7 @@ async function searchYouTube(query) {
       extractEpNum(a.snippet.title) - extractEpNum(b.snippet.title)
     );
 
-    results.innerHTML = `<div style="padding:6px 12px 4px;font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:.5px;text-transform:uppercase;border-bottom:1px solid var(--border);margin-bottom:4px;">📺 Muse Asia · ${sorted.length} episode</div>`;
+    results.innerHTML = `<div style="padding:6px 12px 4px;font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:.5px;text-transform:uppercase;border-bottom:1px solid var(--border);margin-bottom:4px;">📺 Muse Indonesia · ${sorted.length} episode</div>`;
 
     let ep1Item = null;
     sorted.forEach((item, i) => {
