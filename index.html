@@ -2217,22 +2217,22 @@ function closeMangaReader() {
 const YT_API_KEY_STORAGE = 'nimesora_yt_apikey';
 const YT_API_KEY_DEFAULT = 'AIzaSyBjlan-wDkMAdsnr4sW465zLWfibxkWBVc';
 let streamCurrentAnime = null;
-let museChannelId = localStorage.getItem('muse_channel_id') || null;
+let museChannelId = localStorage.getItem('museasia_channel_id') || null;
 
 function getYtApiKey() {
   return localStorage.getItem(YT_API_KEY_STORAGE) || YT_API_KEY_DEFAULT;
 }
 
-// Ambil channel ID Muse Indonesia sekali, lalu cache di localStorage
+// Ambil channel ID Muse Asia sekali, lalu cache di localStorage
 async function getMuseChannelId(apiKey) {
   if (museChannelId) return museChannelId;
   try {
-    const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=MuseIndonesia&key=${apiKey}`);
+    const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=MuseAsia&key=${apiKey}`);
     const data = await res.json();
     const id = data.items?.[0]?.id;
     if (id) {
       museChannelId = id;
-      localStorage.setItem('muse_channel_id', id);
+      localStorage.setItem('museasia_channel_id', id);
     }
     return id || null;
   } catch(e) { return null; }
@@ -2309,7 +2309,7 @@ async function searchYouTube(query) {
   if (!key) { showStreamNoKey(); return; }
 
   const results = document.getElementById('streamResults');
-  results.innerHTML = `<div class="stream-status"><div class="spinner" style="margin:0 auto 10px;width:24px;height:24px;"></div>Mencari episode di Muse Indonesia...</div>`;
+  results.innerHTML = `<div class="stream-status"><div class="spinner" style="margin:0 auto 10px;width:24px;height:24px;"></div>Mencari episode di Muse Asia...</div>`;
 
   // Helper: ekstrak nomor episode dari judul video
   function extractEpNum(title) {
@@ -2338,8 +2338,8 @@ async function searchYouTube(query) {
       // Cari khusus di channel Muse Indonesia
       url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&channelId=${channelId}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&order=date`;
     } else {
-      // Fallback jika channel ID gagal didapat: tambahkan "Muse Indonesia" ke query
-      url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query + ' Muse Indonesia')}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&order=relevance`;
+      // Fallback jika channel ID gagal didapat: tambahkan "Muse Asia" ke query
+      url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query + ' Muse Asia')}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&order=relevance`;
     }
 
     const res = await fetch(url);
@@ -2357,7 +2357,7 @@ async function searchYouTube(query) {
 
     if (!data.items || !data.items.length) {
       results.innerHTML = `<div class="stream-status" style="color:var(--muted2);">
-        😔 Anime ini belum tersedia di <strong style="color:var(--cyan)">Muse Indonesia</strong>.<br>
+        😔 Anime ini belum tersedia di <strong style="color:var(--cyan)">Muse Asia</strong>.<br>
         <small style="color:var(--muted)">Coba cari secara manual atau gunakan link legal di bawah.</small>
       </div>`;
       return;
@@ -2368,7 +2368,7 @@ async function searchYouTube(query) {
       .filter(item => item.id?.videoId)
       .sort((a, b) => extractEpNum(a.snippet.title) - extractEpNum(b.snippet.title));
 
-    results.innerHTML = `<div style="padding:6px 12px 4px;font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:.5px;text-transform:uppercase;border-bottom:1px solid var(--border);margin-bottom:4px;">📺 Muse Indonesia · ${sorted.length} video ditemukan</div>`;
+    results.innerHTML = `<div style="padding:6px 12px 4px;font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:.5px;text-transform:uppercase;border-bottom:1px solid var(--border);margin-bottom:4px;">📺 Muse Asia · ${sorted.length} video ditemukan</div>`;
 
     let ep1Item = null;
     sorted.forEach((item, i) => {
