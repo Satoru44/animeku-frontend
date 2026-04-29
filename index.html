@@ -2217,9 +2217,25 @@ function closeMangaReader() {
 const YT_API_KEY_STORAGE = 'nimesora_yt_apikey';
 const YT_API_KEY_DEFAULT = 'AIzaSyBjlan-wDkMAdsnr4sW465zLWfibxkWBVc';
 let streamCurrentAnime = null;
+let museChannelId = localStorage.getItem('muse_channel_id') || null;
 
 function getYtApiKey() {
   return localStorage.getItem(YT_API_KEY_STORAGE) || YT_API_KEY_DEFAULT;
+}
+
+// Ambil channel ID Muse Indonesia sekali, lalu cache di localStorage
+async function getMuseChannelId(apiKey) {
+  if (museChannelId) return museChannelId;
+  try {
+    const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=MuseIndonesia&key=${apiKey}`);
+    const data = await res.json();
+    const id = data.items?.[0]?.id;
+    if (id) {
+      museChannelId = id;
+      localStorage.setItem('muse_channel_id', id);
+    }
+    return id || null;
+  } catch(e) { return null; }
 }
 
 function openStreaming(anime) {
@@ -2232,7 +2248,8 @@ function openStreaming(anime) {
   document.getElementById('streamAnimeTitle').textContent = title;
   document.getElementById('streamApiKeyInput').value = getYtApiKey();
 
-  const defaultQuery = title + ' episode sub indo';
+  // Query = judul anime saja, karena kita sudah filter ke channel Muse Indonesia
+  const defaultQuery = title;
   document.getElementById('streamQueryInput').value = defaultQuery;
 
   // Reset player
@@ -2292,27 +2309,39 @@ async function searchYouTube(query) {
   if (!key) { showStreamNoKey(); return; }
 
   const results = document.getElementById('streamResults');
-  results.innerHTML = `<div class="stream-status"><div class="spinner" style="margin:0 auto 10px;width:24px;height:24px;"></div>Mencari episode...</div>`;
+  results.innerHTML = `<div class="stream-status"><div class="spinner" style="margin:0 auto 10px;width:24px;height:24px;"></div>Mencari episode di Muse Indonesia...</div>`;
 
   // Helper: ekstrak nomor episode dari judul video
   function extractEpNum(title) {
-    // Cari pola "episode 1", "ep.1", "ep 01", " - 1 ", dll.
     const patterns = [
       /(?:episode|ep)\.?\s*0*(\d+)/i,
-      /\s[-|]\s*0*(\d+)\s*[-|]/,
-      /\s0*(\d+)\s*(?:sub|end|fin)/i,
-      /\b0*(\d+)\b/
+      /\|\s*0*(\d+)\s*(?:\||$)/i,
+      /-\s*0*(\d+)\s*(?:-|$|\|)/i,
+      /\b0*(\d{1,3})\b/
     ];
     for (const p of patterns) {
       const m = title.match(p);
-      if (m) return parseInt(m[1]);
+      if (m) {
+        const n = parseInt(m[1]);
+        if (n > 0 && n < 2000) return n;
+      }
     }
     return 9999;
   }
 
   try {
-    // Minta lebih banyak hasil agar lebih banyak episode tersedia setelah sort
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&videoDuration=medium&order=relevance`;
+    // Dapatkan channel ID Muse Indonesia (di-cache setelah pertama kali)
+    const channelId = await getMuseChannelId(key);
+
+    let url;
+    if (channelId) {
+      // Cari khusus di channel Muse Indonesia
+      url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&channelId=${channelId}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&order=date`;
+    } else {
+      // Fallback jika channel ID gagal didapat: tambahkan "Muse Indonesia" ke query
+      url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query + ' Muse Indonesia')}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&order=relevance`;
+    }
+
     const res = await fetch(url);
     const data = await res.json();
 
@@ -2327,18 +2356,20 @@ async function searchYouTube(query) {
     }
 
     if (!data.items || !data.items.length) {
-      results.innerHTML = `<div class="stream-status">Tidak ada hasil ditemukan.<br>Coba ubah kata pencarian.</div>`;
+      results.innerHTML = `<div class="stream-status" style="color:var(--muted2);">
+        😔 Anime ini belum tersedia di <strong style="color:var(--cyan)">Muse Indonesia</strong>.<br>
+        <small style="color:var(--muted)">Coba cari secara manual atau gunakan link legal di bawah.</small>
+      </div>`;
       return;
     }
 
-    // Filter: buang video yang tidak mengandung angka episode di judul (kemungkinan bukan episode)
-    // dan buang Shorts (biasanya sangat pendek — tapi durasi medium sudah filter sebagian)
-    // Kemudian urutkan berdasarkan nomor episode (terendah = ep1 duluan)
+    // Urutkan berdasarkan nomor episode (terkecil = EP 1 duluan)
     const sorted = [...data.items]
       .filter(item => item.id?.videoId)
       .sort((a, b) => extractEpNum(a.snippet.title) - extractEpNum(b.snippet.title));
 
-    results.innerHTML = '';
+    results.innerHTML = `<div style="padding:6px 12px 4px;font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:.5px;text-transform:uppercase;border-bottom:1px solid var(--border);margin-bottom:4px;">📺 Muse Indonesia · ${sorted.length} video ditemukan</div>`;
+
     let ep1Item = null;
     sorted.forEach((item, i) => {
       const videoId = item.id?.videoId;
@@ -2352,17 +2383,16 @@ async function searchYouTube(query) {
       div.innerHTML = `
         <img class="stream-thumb" src="${thumb}" alt="" loading="lazy" onerror="this.style.opacity='.2'">
         <div class="stream-result-info">
-          <div class="stream-result-title">${epLabel ? `<span style="color:var(--cyan);font-weight:800;margin-right:6px;">${epLabel}</span>` : ''}${snippet.title}</div>
-          <div class="stream-result-ch">${snippet.channelTitle}</div>
+          <div class="stream-result-title">${epLabel ? `<span style="color:var(--cyan);font-weight:800;margin-right:6px;flex-shrink:0;">${epLabel}</span>` : ''}${snippet.title}</div>
+          <div class="stream-result-ch" style="color:var(--green);">▶ ${snippet.channelTitle}</div>
           <div class="stream-result-date">${snippet.publishedAt ? new Date(snippet.publishedAt).toLocaleDateString('id-ID') : ''}</div>
         </div>`;
       div.addEventListener('click', () => playStreamVideo(videoId, div));
       results.appendChild(div);
-      // Tandai ep1 (nomor episode terkecil = item pertama setelah sort)
       if (i === 0) ep1Item = div;
     });
 
-    // Auto-play episode 1 (item teratas setelah diurutkan)
+    // Auto-play episode 1 (episode dengan nomor terkecil)
     if (ep1Item) ep1Item.click();
 
   } catch(e) {
