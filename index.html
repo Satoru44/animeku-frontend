@@ -206,6 +206,64 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 .skeleton-card{aspect-ratio:2/3;width:100%}
 @keyframes skel{0%{background-position:200%}100%{background-position:-200%}}
 
+/* ===== STREAMING MODAL ===== */
+#streamModal{position:fixed;inset:0;z-index:1100;background:rgba(6,7,16,.98);display:flex;flex-direction:column;overflow:hidden}
+#streamModal.hidden{display:none!important}
+.stream-topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border);background:var(--bg2);flex-shrink:0;gap:12px}
+.stream-title{font-family:var(--font-h);font-size:20px;letter-spacing:2px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.stream-title span{color:var(--cyan)}
+.stream-close-btn{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:15px;transition:all .2s;flex-shrink:0}
+.stream-close-btn:hover{background:rgba(255,45,120,.2);border-color:var(--pink);color:var(--pink)}
+.stream-body{display:flex;flex:1;overflow:hidden}
+.stream-sidebar{width:320px;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;background:var(--bg2)}
+.stream-search-area{padding:12px;border-bottom:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;gap:8px}
+.stream-apikey-row{display:flex;gap:6px;align-items:center}
+.stream-apikey-input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:7px 10px;color:var(--text);font-size:11px;font-family:var(--font-b);outline:none;min-width:0}
+.stream-apikey-input:focus{border-color:rgba(0,212,255,.4);box-shadow:0 0 0 2px rgba(0,212,255,.07)}
+.stream-apikey-input::placeholder{color:var(--muted)}
+.stream-save-btn{background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.35);color:var(--cyan);border-radius:6px;padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;font-family:var(--font-b)}
+.stream-save-btn:hover{background:rgba(0,212,255,.22)}
+.stream-query-row{display:flex;gap:6px}
+.stream-query-input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:8px 12px;color:var(--text);font-size:13px;font-family:var(--font-b);outline:none;min-width:0}
+.stream-query-input:focus{border-color:rgba(0,212,255,.4)}
+.stream-search-btn{background:linear-gradient(135deg,#7c3aed,var(--pink));border:none;color:#fff;border-radius:6px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .2s;font-family:var(--font-b)}
+.stream-search-btn:hover{opacity:.82}
+.stream-results{flex:1;overflow-y:auto;padding:6px}
+.stream-results::-webkit-scrollbar{width:4px}
+.stream-results::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:4px}
+.stream-result-item{display:flex;gap:10px;padding:8px;border-radius:8px;cursor:pointer;transition:background .15s;border:1px solid transparent;margin-bottom:2px}
+.stream-result-item:hover{background:rgba(255,255,255,.04);border-color:rgba(0,212,255,.15)}
+.stream-result-item.active{background:rgba(0,212,255,.07);border-color:rgba(0,212,255,.35)}
+.stream-thumb{width:88px;height:50px;border-radius:5px;object-fit:cover;flex-shrink:0;background:var(--bg3)}
+.stream-result-info{flex:1;min-width:0}
+.stream-result-title{font-size:11px;font-weight:600;color:var(--text);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:3px}
+.stream-result-ch{font-size:10px;color:var(--cyan);font-weight:600;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stream-result-date{font-size:10px;color:var(--muted)}
+.stream-player-area{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#000}
+.stream-player-wrap{flex:1;position:relative;background:#000}
+.stream-player-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.stream-player-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--muted);background:var(--bg)}
+.stream-player-placeholder svg{opacity:.25}
+.stream-links-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid var(--border);background:var(--bg2);flex-shrink:0;flex-wrap:wrap}
+.stream-link-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 13px;border-radius:6px;font-size:11px;font-weight:700;text-decoration:none;transition:all .15s;border:1px solid var(--border);color:var(--muted2);background:var(--bg3);cursor:pointer;white-space:nowrap;font-family:var(--font-b)}
+.stream-link-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+.stream-link-btn.yt{border-color:rgba(255,60,60,.35);color:#ff5252}
+.stream-link-btn.yt:hover{background:rgba(255,60,60,.1);border-color:#ff5252}
+.stream-link-btn.cr{border-color:rgba(249,115,22,.35);color:#f97316}
+.stream-link-btn.cr:hover{background:rgba(249,115,22,.1)}
+.stream-no-key{padding:16px}
+.stream-no-key p{font-size:11px;color:var(--muted2);line-height:1.7;margin-bottom:10px}
+.stream-no-key a{color:var(--cyan);text-decoration:none}
+.stream-no-key code{background:var(--bg3);padding:2px 6px;border-radius:4px;color:var(--cyan);font-size:10px}
+.stream-status{padding:20px;text-align:center;color:var(--muted);font-size:12px;line-height:1.6}
+.stream-apikey-hint{font-size:10px;color:var(--muted);text-align:center;padding:0 2px}
+.stream-apikey-hint a{color:var(--cyan);text-decoration:none}
+@media(max-width:700px){
+  .stream-body{flex-direction:column}
+  .stream-sidebar{width:100%;height:260px;border-right:none;border-bottom:1px solid var(--border)}
+  .stream-player-wrap{min-height:200px}
+}
+
 /* EPISODE RIBBON */
 .ep-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
 .ep-scroll::-webkit-scrollbar{display:none}
@@ -627,7 +685,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
       <button class="filter-pill" data-tag="drama">Drama</button>
       <button class="filter-pill" data-tag="horror">Horror</button>
       <button class="filter-pill" data-tag="adventure">Adventure</button>
-      <button class="filter-pill" data-tag="slice-of-life">Slice of Life</button>
+      <button class="filter-pill" data-tag="Slice of Life">Slice of Life</button>
     </div>
     <div class="manga-grid" id="mangaGrid"><div class="spinner-wrap"><div class="spinner"></div></div></div>
     <div class="manga-load-more" id="mangaLoadMore" style="display:none;">
@@ -670,6 +728,48 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
     <button class="reader-btn" id="prevChBtn" onclick="changeChapter(-1)">← Prev Chapter</button>
     <button class="reader-btn danger" onclick="closeMangaReader()" style="padding:10px 24px;">✕ Tutup Reader</button>
     <button class="reader-btn" id="nextChBtn" onclick="changeChapter(1)">Next Chapter →</button>
+  </div>
+</div>
+
+<!-- ===================== STREAMING MODAL ===================== -->
+<div id="streamModal" class="hidden">
+  <div class="stream-topbar">
+    <div class="stream-title">▶ <span id="streamAnimeTitle">Anime</span></div>
+    <button class="stream-close-btn" onclick="closeStreaming()">✕</button>
+  </div>
+  <div class="stream-body">
+    <!-- Sidebar: search + results list -->
+    <div class="stream-sidebar">
+      <div class="stream-search-area">
+        <div class="stream-apikey-row">
+          <input type="password" class="stream-apikey-input" id="streamApiKeyInput" placeholder="🔑 YouTube Data API v3 Key...">
+          <button class="stream-save-btn" onclick="saveStreamApiKey()">Simpan</button>
+        </div>
+        <div class="stream-apikey-hint">
+          Belum punya API Key? <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Dapatkan gratis di sini →</a>
+        </div>
+        <div class="stream-query-row">
+          <input type="text" class="stream-query-input" id="streamQueryInput" placeholder="Cari episode anime...">
+          <button class="stream-search-btn" id="streamSearchBtn">Cari</button>
+        </div>
+      </div>
+      <div class="stream-results" id="streamResults">
+        <div class="stream-status">Masukkan API Key lalu klik Cari</div>
+      </div>
+    </div>
+    <!-- Main player area -->
+    <div class="stream-player-area">
+      <div class="stream-player-wrap" id="streamPlayerWrap">
+        <div class="stream-player-placeholder">
+          <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+          <span style="font-size:15px;font-weight:700;color:var(--muted2)">Pilih video dari daftar</span>
+          <span style="font-size:12px;">atau klik Cari untuk mencari episode</span>
+        </div>
+      </div>
+      <div class="stream-links-bar" id="streamLinksBar">
+        <span style="font-size:11px;color:var(--muted);font-weight:600;">Tonton Legal:</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1398,7 +1498,7 @@ function setHero(anime, idx) {
   const score = document.getElementById('heroScore');
   score.innerHTML = anime.score ? `<span class="stars">★</span><span class="score-num">${anime.score}</span><span class="score-of">/ 10</span>` : '';
   document.getElementById('heroDesc').textContent = truncate(anime.synopsis||anime.description,200);
-  document.getElementById('heroWatchBtn').onclick = () => openDetail(anime);
+  document.getElementById('heroWatchBtn').onclick = () => openStreaming(anime);
   document.getElementById('heroInfoBtn').onclick  = () => openDetail(anime);
   updateStrip(idx);
 }
@@ -1612,7 +1712,7 @@ async function openDetail(anime) {
   const favBtn=document.getElementById('detailFavBtn');
   favBtn.classList.toggle('faved', isFaved(a));
   favBtn.textContent=isFaved(a)?'❤️ Favorit':'🤍 Favorit';
-  document.getElementById('detailWatchBtn').onclick=()=>window.open(`https://myanimelist.net/anime/${a.mal_id||a.id}`, '_blank');
+  document.getElementById('detailWatchBtn').onclick=()=>openStreaming(a);
   modal.classList.remove('hidden');
   document.body.style.overflow='hidden';
   loadTrailer(a);
@@ -1810,30 +1910,44 @@ let currentMangaTitle = '';
 
 async function mangaFetch(url) {
   try {
-    const r = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 12000); // 12 detik timeout
+    const r = await fetch(url, {
+      headers: { 'Accept': 'application/json' },
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
     if (!r.ok) throw new Error('HTTP ' + r.status);
     return await r.json();
-  } catch(e) { console.warn('MangaDex fetch error:', e.message, url); return null; }
+  } catch(e) {
+    console.warn('MangaDex fetch error:', e.message, url);
+    return null;
+  }
 }
 
 // Tampilkan/sembunyikan manga section
+let mangaTagFilterListenerAdded = false;
 function openMangaSection() {
   document.getElementById('manga').style.display = '';
   document.getElementById('manga').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  if (!document.getElementById('mangaGrid').querySelector('.manga-card')) {
+  const grid = document.getElementById('mangaGrid');
+  if (!grid.querySelector('.manga-card')) {
     loadManga(true);
   }
-  // Event listener filter
-  document.getElementById('mangaTagFilter').addEventListener('click', function(e) {
-    const btn = e.target.closest('.filter-pill');
-    if (!btn) return;
-    this.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    mangaCurrentTag = btn.dataset.tag || '';
-    mangaCurrentQuery = '';
-    document.getElementById('mangaSearchInput').value = '';
-    loadManga(true);
-  });
+  // Event listener filter — hanya tambah sekali, cegah duplikat
+  if (!mangaTagFilterListenerAdded) {
+    mangaTagFilterListenerAdded = true;
+    document.getElementById('mangaTagFilter').addEventListener('click', function(e) {
+      const btn = e.target.closest('.filter-pill');
+      if (!btn) return;
+      this.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      mangaCurrentTag = btn.dataset.tag || '';
+      mangaCurrentQuery = '';
+      document.getElementById('mangaSearchInput').value = '';
+      loadManga(true);
+    });
+  }
 }
 
 function closeMangaSection() {
@@ -1853,10 +1967,15 @@ document.getElementById('mangaSearchInput')?.addEventListener('keydown', functio
   if (e.key === 'Enter') searchManga();
 });
 
+let mangaTagCache = null;
 async function getMangaTagId(name) {
-  const res = await mangaFetch(`${MANGADEX_BASE}/manga/tag`);
-  if (!res || !res.data) return null;
-  const found = res.data.find(t => t.attributes.name.en?.toLowerCase() === name.toLowerCase());
+  if (!mangaTagCache) {
+    const res = await mangaFetch(`${MANGADEX_BASE}/manga/tag`);
+    if (!res || !res.data) return null;
+    mangaTagCache = res.data;
+  }
+  // Cari dengan toLowerCase agar "Slice of Life" dan "slice of life" cocok
+  const found = mangaTagCache.find(t => t.attributes.name.en?.toLowerCase() === name.toLowerCase());
   return found ? found.id : null;
 }
 
@@ -1869,7 +1988,8 @@ async function loadManga(reset = false) {
     loadMoreBtn.style.display = 'none';
   }
 
-  let url = `${MANGADEX_BASE}/manga?limit=24&offset=${mangaCurrentOffset}&availableTranslatedLanguage[]=id&availableTranslatedLanguage[]=en&contentRating[]=safe&contentRating[]=suggestive&includes[]=cover_art&order[followedCount]=desc`;
+  // Hapus filter availableTranslatedLanguage dari URL utama agar semua manga muncul
+  let url = `${MANGADEX_BASE}/manga?limit=24&offset=${mangaCurrentOffset}&contentRating[]=safe&contentRating[]=suggestive&includes[]=cover_art&order[followedCount]=desc`;
 
   if (mangaCurrentQuery) {
     url += `&title=${encodeURIComponent(mangaCurrentQuery)}`;
@@ -1883,7 +2003,14 @@ async function loadManga(reset = false) {
   const res = await mangaFetch(url);
   if (reset) grid.innerHTML = '';
 
-  if (!res || !res.data || !res.data.length) {
+  if (!res) {
+    // API error / koneksi gagal
+    if (reset) grid.innerHTML = `<p style="color:var(--pink);font-size:14px;padding:20px;grid-column:1/-1;">⚠️ Gagal terhubung ke MangaDex. Periksa koneksi internet kamu. <button onclick="loadManga(true)" style="color:var(--cyan);background:none;border:1px solid var(--cyan);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px;margin-left:8px;">↺ Coba Lagi</button></p>`;
+    loadMoreBtn.style.display = 'none';
+    return;
+  }
+
+  if (!res.data || !res.data.length) {
     if (reset) grid.innerHTML = '<p style="color:var(--muted);font-size:14px;padding:20px;grid-column:1/-1;">Tidak ada manga ditemukan. Coba kata kunci lain.</p>';
     loadMoreBtn.style.display = 'none';
     return;
@@ -2073,6 +2200,180 @@ function closeMangaReader() {
   document.getElementById('mangaDetailModal').classList.remove('hidden');
   document.body.style.overflow = 'hidden';
 }
-</script>
+
+// ============================================================
+// STREAMING MODAL — YouTube Search + Embed
+// ============================================================
+const YT_API_KEY_STORAGE = 'nimesora_yt_apikey';
+let streamCurrentAnime = null;
+
+function getYtApiKey() {
+  return localStorage.getItem(YT_API_KEY_STORAGE) || '';
+}
+
+function openStreaming(anime) {
+  streamCurrentAnime = anime;
+  const modal = document.getElementById('streamModal');
+  modal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+
+  const title = anime.title_english || anime.title || '';
+  document.getElementById('streamAnimeTitle').textContent = title;
+  document.getElementById('streamApiKeyInput').value = getYtApiKey();
+
+  const defaultQuery = title + ' MUSE Asia full episode sub indo';
+  document.getElementById('streamQueryInput').value = defaultQuery;
+
+  // Reset player
+  const wrap = document.getElementById('streamPlayerWrap');
+  wrap.innerHTML = `<div class="stream-player-placeholder">
+    <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+    <span style="font-size:15px;font-weight:700;color:var(--muted2)">Pilih video dari daftar</span>
+    <span style="font-size:12px;">atau klik Cari untuk mencari episode</span>
+  </div>`;
+
+  // Update quick-links bar
+  updateStreamLinks(title, anime.mal_id || anime.id);
+
+  // Auto-search jika API key sudah ada
+  const key = getYtApiKey();
+  if (key) {
+    searchYouTube(defaultQuery);
+  } else {
+    showStreamNoKey();
+  }
+}
+
+function closeStreaming() {
+  document.getElementById('streamModal').classList.add('hidden');
+  document.body.style.overflow = '';
+  // Hentikan video
+  document.getElementById('streamPlayerWrap').innerHTML = '';
+  streamCurrentAnime = null;
+}
+
+function saveStreamApiKey() {
+  const key = document.getElementById('streamApiKeyInput').value.trim();
+  if (!key) { showToast('Masukkan API Key terlebih dahulu', '⚠️'); return; }
+  localStorage.setItem(YT_API_KEY_STORAGE, key);
+  showToast('YouTube API Key disimpan! 🎉', '✅');
+  const query = document.getElementById('streamQueryInput').value.trim();
+  if (query) searchYouTube(query);
+}
+
+function showStreamNoKey() {
+  document.getElementById('streamResults').innerHTML = `
+    <div class="stream-no-key">
+      <p><strong style="color:var(--cyan)">Cara Mendapatkan API Key Gratis:</strong></p>
+      <p>
+        1. Buka <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank">Google Cloud Console</a><br>
+        2. Buat project baru → aktifkan <code>YouTube Data API v3</code><br>
+        3. Buat Credentials → API Key<br>
+        4. Paste di kolom di atas → klik Simpan
+      </p>
+      <p style="font-size:10px;color:var(--muted);">Gratis: 10.000 quota / hari · Tidak perlu kartu kredit</p>
+    </div>`;
+}
+
+async function searchYouTube(query) {
+  if (!query || !query.trim()) return;
+  const key = getYtApiKey();
+  if (!key) { showStreamNoKey(); return; }
+
+  const results = document.getElementById('streamResults');
+  results.innerHTML = `<div class="stream-status"><div class="spinner" style="margin:0 auto 10px;width:24px;height:24px;"></div>Mencari episode...</div>`;
+
+  try {
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=15&key=${encodeURIComponent(key)}&videoEmbeddable=true`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.error) {
+      const msg = data.error.message || 'Error tidak diketahui';
+      const isInvalid = data.error.code === 400 || data.error.code === 403;
+      results.innerHTML = `<div class="stream-status" style="color:var(--pink);">
+        ⚠️ ${msg}
+        ${isInvalid ? '<br><small style="color:var(--muted)">Cek apakah API Key kamu sudah benar dan YouTube Data API v3 sudah diaktifkan.</small>' : ''}
+      </div>`;
+      return;
+    }
+
+    if (!data.items || !data.items.length) {
+      results.innerHTML = `<div class="stream-status">Tidak ada hasil ditemukan.<br>Coba ubah kata pencarian.</div>`;
+      return;
+    }
+
+    results.innerHTML = '';
+    let firstItem = null;
+    data.items.forEach((item, i) => {
+      const videoId = item.id?.videoId;
+      if (!videoId) return;
+      const snippet = item.snippet;
+      const div = document.createElement('div');
+      div.className = 'stream-result-item';
+      const thumb = snippet.thumbnails?.medium?.url || snippet.thumbnails?.default?.url || '';
+      const pubDate = snippet.publishedAt ? new Date(snippet.publishedAt).toLocaleDateString('id-ID') : '';
+      div.innerHTML = `
+        <img class="stream-thumb" src="${thumb}" alt="" loading="lazy" onerror="this.style.opacity='.2'">
+        <div class="stream-result-info">
+          <div class="stream-result-title">${snippet.title}</div>
+          <div class="stream-result-ch">${snippet.channelTitle}</div>
+          <div class="stream-result-date">${pubDate}</div>
+        </div>`;
+      div.addEventListener('click', () => playStreamVideo(videoId, div));
+      results.appendChild(div);
+      if (i === 0) firstItem = div;
+    });
+
+    // Auto-play hasil pertama
+    if (firstItem) firstItem.click();
+
+  } catch(e) {
+    results.innerHTML = `<div class="stream-status" style="color:var(--pink);">⚠️ Gagal mengambil data.<br><small>Cek koneksi internet & API Key.</small></div>`;
+  }
+}
+
+function playStreamVideo(videoId, itemEl) {
+  // Mark active
+  document.querySelectorAll('.stream-result-item').forEach(el => el.classList.remove('active'));
+  if (itemEl) itemEl.classList.add('active');
+  // Load iframe
+  document.getElementById('streamPlayerWrap').innerHTML = `
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+      allowfullscreen
+    ></iframe>`;
+}
+
+function updateStreamLinks(title, malId) {
+  const enc = encodeURIComponent(title);
+  const linksBar = document.getElementById('streamLinksBar');
+  linksBar.innerHTML = `
+    <span style="font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0;">Tonton Legal:</span>
+    <a class="stream-link-btn yt" href="https://www.youtube.com/@MUSEasia/search?query=${enc}" target="_blank" rel="noopener noreferrer">▶ MUSE Asia</a>
+    <a class="stream-link-btn yt" href="https://www.youtube.com/results?search_query=${enc}+full+episode+sub+indo+official" target="_blank" rel="noopener noreferrer">🔍 YouTube</a>
+    <a class="stream-link-btn cr" href="https://www.crunchyroll.com/search?q=${enc}" target="_blank" rel="noopener noreferrer">🍥 Crunchyroll</a>
+    ${malId ? `<a class="stream-link-btn" href="https://myanimelist.net/anime/${malId}" target="_blank" rel="noopener noreferrer">📋 MAL</a>` : ''}
+  `;
+}
+
+// Event listeners untuk streaming modal
+document.getElementById('streamModal').addEventListener('click', function(e) {
+  if (e.target === this) closeStreaming();
+});
+document.getElementById('streamSearchBtn').addEventListener('click', function() {
+  const q = document.getElementById('streamQueryInput').value.trim();
+  if (q) searchYouTube(q);
+});
+document.getElementById('streamQueryInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    const q = this.value.trim();
+    if (q) searchYouTube(q);
+  }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeStreaming();
+});</script>
 </body>
 </html>
