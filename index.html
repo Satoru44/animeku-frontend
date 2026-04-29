@@ -2311,34 +2311,57 @@ async function searchYouTube(query) {
   const results = document.getElementById('streamResults');
   results.innerHTML = `<div class="stream-status"><div class="spinner" style="margin:0 auto 10px;width:24px;height:24px;"></div>Mencari episode di Muse Asia...</div>`;
 
-  // Helper: ekstrak nomor episode dari judul video
+  // ── Normalisasi teks ──────────────────────────────────────────
+  function normalize(s) {
+    return s.toLowerCase().replace(/[:\-–—!?'".()\[\]]/g,' ').replace(/\s+/g,' ').trim();
+  }
+
+  // ── Kata kunci penting dari judul anime ───────────────────────
+  const STOPWORDS = new Set(['the','a','an','in','of','on','at','to','for','and','or','is','are','was','with','by','as','from','this','it','season','part','cour','sub','eng','english','bahasa','indo']);
+  function keyWords(title) {
+    return normalize(title).split(' ')
+      .filter(w => w.length > 1 && !STOPWORDS.has(w) && !/^\d{4}$/.test(w));
+  }
+
+  // ── Skor kecocokan judul video vs judul anime ─────────────────
+  function matchScore(videoTitle, animeTitle) {
+    const vn = normalize(videoTitle);
+    const words = keyWords(animeTitle);
+    if (!words.length) return 1;
+    return words.filter(w => vn.includes(w)).length / words.length;
+  }
+
+  // ── Ekstrak nomor episode (hindari tahun 1900-2099) ───────────
   function extractEpNum(title) {
-    const patterns = [
-      /(?:episode|ep)\.?\s*0*(\d+)/i,
-      /\|\s*0*(\d+)\s*(?:\||$)/i,
-      /-\s*0*(\d+)\s*(?:-|$|\|)/i,
-      /\b0*(\d{1,3})\b/
+    // Pola eksplisit — paling andal
+    const explicit = [
+      /\bepisode\s*0*(\d{1,3})\b/i,
+      /\bep\.?\s*0*(\d{1,3})\b/i,
+      /#\s*0*(\d{1,3})\b/,
+      /\|\s*ep(?:isode)?\s*0*(\d{1,3})/i,
+      /\b0*(\d{1,3})\s*\|/,
     ];
-    for (const p of patterns) {
+    for (const p of explicit) {
       const m = title.match(p);
-      if (m) {
-        const n = parseInt(m[1]);
-        if (n > 0 && n < 2000) return n;
-      }
+      if (m) { const n=parseInt(m[1]); if(n>0&&n<500) return n; }
+    }
+    // Angka standalone — tapi bukan tahun dan bukan di dalam kata panjang
+    const tokens = title.match(/\b(\d{1,3})\b/g) || [];
+    for (const t of tokens) {
+      const n = parseInt(t);
+      if (n > 0 && n < 500 && !(n >= 90 && n <= 99 && title.includes(t+"'"))) return n;
     }
     return 9999;
   }
 
   try {
-    // Dapatkan channel ID Muse Indonesia (di-cache setelah pertama kali)
     const channelId = await getMuseChannelId(key);
+    const animeTitle = streamCurrentAnime?.title_english || streamCurrentAnime?.title || query;
 
     let url;
     if (channelId) {
-      // Cari khusus di channel Muse Indonesia
       url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&channelId=${channelId}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&order=date`;
     } else {
-      // Fallback jika channel ID gagal didapat: tambahkan "Muse Asia" ke query
       url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query + ' Muse Asia')}&type=video&maxResults=50&key=${encodeURIComponent(key)}&videoEmbeddable=true&order=relevance`;
     }
 
@@ -2358,17 +2381,37 @@ async function searchYouTube(query) {
     if (!data.items || !data.items.length) {
       results.innerHTML = `<div class="stream-status" style="color:var(--muted2);">
         😔 Anime ini belum tersedia di <strong style="color:var(--cyan)">Muse Asia</strong>.<br>
-        <small style="color:var(--muted)">Coba cari secara manual atau gunakan link legal di bawah.</small>
+        <small style="color:var(--muted)">Coba cari manual atau gunakan link legal di bawah.</small>
       </div>`;
       return;
     }
 
-    // Urutkan berdasarkan nomor episode (terkecil = EP 1 duluan)
-    const sorted = [...data.items]
+    // ── Filter: hanya video yang judulnya cocok dengan anime yang diklik ──
+    let filtered = data.items
       .filter(item => item.id?.videoId)
-      .sort((a, b) => extractEpNum(a.snippet.title) - extractEpNum(b.snippet.title));
+      .filter(item => matchScore(item.snippet.title, animeTitle) >= 0.45);
 
-    results.innerHTML = `<div style="padding:6px 12px 4px;font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:.5px;text-transform:uppercase;border-bottom:1px solid var(--border);margin-bottom:4px;">📺 Muse Asia · ${sorted.length} video ditemukan</div>`;
+    // Longgarkan threshold jika hasil terlalu sedikit
+    if (filtered.length < 3) {
+      filtered = data.items
+        .filter(item => item.id?.videoId)
+        .filter(item => matchScore(item.snippet.title, animeTitle) >= 0.25);
+    }
+
+    if (!filtered.length) {
+      results.innerHTML = `<div class="stream-status" style="color:var(--muted2);">
+        😔 <strong style="color:var(--cyan)">Muse Asia</strong> belum mengunggah anime ini.<br>
+        <small style="color:var(--muted)">Gunakan link legal di bawah untuk menonton.</small>
+      </div>`;
+      return;
+    }
+
+    // ── Urutkan EP 1 → terakhir ───────────────────────────────────
+    const sorted = filtered.sort((a,b) =>
+      extractEpNum(a.snippet.title) - extractEpNum(b.snippet.title)
+    );
+
+    results.innerHTML = `<div style="padding:6px 12px 4px;font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:.5px;text-transform:uppercase;border-bottom:1px solid var(--border);margin-bottom:4px;">📺 Muse Asia · ${sorted.length} episode</div>`;
 
     let ep1Item = null;
     sorted.forEach((item, i) => {
@@ -2392,7 +2435,6 @@ async function searchYouTube(query) {
       if (i === 0) ep1Item = div;
     });
 
-    // Auto-play episode 1 (episode dengan nomor terkecil)
     if (ep1Item) ep1Item.click();
 
   } catch(e) {
