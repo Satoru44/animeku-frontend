@@ -2080,7 +2080,9 @@ async function openMangaDetail(manga) {
 
   const coverRel = manga.relationships?.find(r => r.type === 'cover_art');
   const coverFile = coverRel?.attributes?.fileName;
-  const coverUrl = coverFile ? `${MANGADEX_UPLOADS}/covers/${manga.id}/${coverFile}.256.jpg` : '';
+  const coverUrl = coverFile
+  ? `https://wsrv.nl/?url=${encodeURIComponent(`${MANGADEX_UPLOADS}/covers/${manga.id}/${coverFile}.256.jpg`)}&default=404`
+  : '';
 
   document.getElementById('mdPoster').src = coverUrl;
   document.getElementById('mdTitle').textContent = title;
