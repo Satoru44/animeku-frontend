@@ -741,11 +741,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:56px 40p
     <!-- Sidebar: search + results list -->
     <div class="stream-sidebar">
       <div class="stream-search-area">
-        <div class="stream-apikey-row">
+        <div class="stream-apikey-row" id="streamApiKeyRow" style="display:none;">
           <input type="password" class="stream-apikey-input" id="streamApiKeyInput" placeholder="🔑 YouTube Data API v3 Key...">
           <button class="stream-save-btn" onclick="saveStreamApiKey()">Simpan</button>
         </div>
-        <div class="stream-apikey-hint">
+        <div class="stream-apikey-hint" id="streamApiKeyHint" style="display:none;">
           Belum punya API Key? <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Dapatkan gratis di sini →</a>
         </div>
         <div class="stream-query-row">
@@ -2205,10 +2205,11 @@ function closeMangaReader() {
 // STREAMING MODAL — YouTube Search + Embed
 // ============================================================
 const YT_API_KEY_STORAGE = 'nimesora_yt_apikey';
+const YT_API_KEY_DEFAULT = 'AIzaSyBjlan-wDkMAdsnr4sW465zLWfibxkWBVc';
 let streamCurrentAnime = null;
 
 function getYtApiKey() {
-  return localStorage.getItem(YT_API_KEY_STORAGE) || '';
+  return localStorage.getItem(YT_API_KEY_STORAGE) || YT_API_KEY_DEFAULT;
 }
 
 function openStreaming(anime) {
@@ -2221,7 +2222,7 @@ function openStreaming(anime) {
   document.getElementById('streamAnimeTitle').textContent = title;
   document.getElementById('streamApiKeyInput').value = getYtApiKey();
 
-  const defaultQuery = title + ' MUSE Asia full episode sub indo';
+  const defaultQuery = title + ' episode 1 sub indo -shorts';
   document.getElementById('streamQueryInput').value = defaultQuery;
 
   // Reset player
@@ -2284,7 +2285,7 @@ async function searchYouTube(query) {
   results.innerHTML = `<div class="stream-status"><div class="spinner" style="margin:0 auto 10px;width:24px;height:24px;"></div>Mencari episode...</div>`;
 
   try {
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=15&key=${encodeURIComponent(key)}&videoEmbeddable=true`;
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=20&key=${encodeURIComponent(key)}&videoEmbeddable=true&videoDuration=medium&order=relevance`;
     const res = await fetch(url);
     const data = await res.json();
 
