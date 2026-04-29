@@ -6,6 +6,7 @@
 <title>AnimeKu — Nonton Anime Sub Indo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -180,7 +181,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 .sched-days{display:flex;gap:4px;padding:12px 14px 0}
 .sched-day{flex:1;text-align:center;padding:7px 2px;border-radius:6px;font-size:10px;font-weight:700;border:1px solid var(--border);background:var(--bg3);color:var(--muted);cursor:pointer;transition:all .2s;text-transform:uppercase}
 .sched-day.active{background:linear-gradient(135deg,rgba(0,212,255,.2),rgba(255,45,120,.1));border-color:rgba(0,212,255,.4);color:var(--cyan)}
-.sched-list{padding:8px 0}
+.sched-list{padding:4px 0;max-height:380px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--bg3) transparent}
 .sched-item{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:background .2s}
 .sched-item:hover{background:rgba(255,255,255,.03)}
 .sched-time{font-size:12px;font-weight:700;color:var(--cyan);width:46px;flex-shrink:0}
@@ -278,6 +279,50 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:48px 40p
 .api-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
 .api-dot.err{background:#ef4444;animation:none}
 
+/* HERO BG loading state */
+#heroBg{background:linear-gradient(135deg,#0c0e1a 0%,#111428 50%,#0d1020 100%)}
+.hero-bg img{transition:opacity .6s ease}
+
+/* API status clickable on error */
+.api-dot.err ~ span{cursor:pointer}
+#apiStatus{cursor:default;transition:all .2s}
+#apiStatus:hover{opacity:1!important}
+
+/* PARTICLES */
+.hero-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:3}
+.particle{position:absolute;border-radius:50%;opacity:0;animation:particleFloat var(--d,8s) var(--delay,0s) infinite ease-in-out}
+@keyframes particleFloat{0%{transform:translate(0,0);opacity:0}20%{opacity:.7}50%{transform:translate(var(--x1,20px),var(--y1,-30px));opacity:.4}80%{opacity:.6}100%{transform:translate(var(--x2,40px),var(--y2,-80px));opacity:0}}
+
+/* LOGIN MODAL */
+#loginModal{position:fixed;inset:0;z-index:10000;background:rgba(6,7,16,.95);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:20px}
+.login-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;width:100%;max-width:400px;padding:40px;text-align:center;animation:popIn .3s cubic-bezier(.34,1.56,.64,1) both;position:relative}
+.login-logo{font-family:var(--font-h);font-size:36px;letter-spacing:4px;margin-bottom:6px}
+.login-logo .la{color:var(--cyan);text-shadow:0 0 20px var(--cyan)}.login-logo .lb{color:#fff}.login-logo .ld{color:var(--pink)}
+.login-sub{color:var(--muted2);font-size:13px;margin-bottom:32px}
+.login-divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--muted);font-size:12px}
+.login-divider::before,.login-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.btn-google{width:100%;padding:13px 20px;border-radius:10px;background:#fff;color:#1f1f1f;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:600;font-family:var(--font-b);transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+.btn-google:hover{box-shadow:0 4px 20px rgba(0,0,0,.25);transform:translateY(-1px)}
+.btn-google svg{flex-shrink:0}
+.login-terms{font-size:11px;color:var(--muted);margin-top:20px;line-height:1.6}
+.login-terms a{color:var(--cyan);text-decoration:none}
+.login-close{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--muted2);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.login-close:hover{border-color:var(--pink);color:var(--pink)}
+
+/* USER AVATAR di navbar */
+.user-avatar-wrap{display:flex;align-items:center;gap:8px;cursor:pointer;padding:5px 10px;border-radius:99px;border:1px solid var(--border2);background:var(--bg3);transition:all .2s}
+.user-avatar-wrap:hover{border-color:rgba(0,212,255,.4)}
+.user-avatar{width:28px;height:28px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan);background:var(--bg3)}
+.user-name{font-size:12px;font-weight:700;color:var(--text);max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* USER DROPDOWN */
+.user-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;min-width:180px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.4);z-index:1000;animation:fadeUp .2s ease both}
+.user-dropdown-item{display:flex;align-items:center;gap:10px;padding:11px 16px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;transition:background .2s}
+.user-dropdown-item:hover{background:rgba(255,255,255,.05)}
+.user-dropdown-item.danger{color:#ef4444}
+.user-dropdown-item.danger:hover{background:rgba(239,68,68,.1)}
+.user-dropdown-sep{height:1px;background:var(--border);margin:4px 0}
+
 @media(max-width:1024px){.layout-grid{grid-template-columns:1fr}.sidebar{display:none}.footer-grid{grid-template-columns:1fr 1fr}.hero-strip{display:none}}
 @media(max-width:768px){#navbar{padding:0 16px}.nav-menu{display:none}.search-wrap{display:none}.main-container{padding:0 16px}.hero-content{padding:0 20px 60px}.hero-title{font-size:36px}footer{padding:32px 16px 20px}.footer-grid{grid-template-columns:1fr}.anime-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}}
 </style>
@@ -298,7 +343,21 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:48px 40p
       <input type="text" id="searchInput" placeholder="Cari anime...">
     </div>
     <button class="btn-fav-nav" onclick="openFavModal()">❤️ Favorit <span id="favCount" style="background:var(--pink);color:#fff;border-radius:99px;padding:1px 7px;font-size:10px;display:none;">0</span></button>
-    <button class="btn btn-primary" onclick="openSearch()">Masuk</button>
+    <div id="authArea" style="position:relative;">
+      <button class="btn btn-primary" id="btnMasuk" onclick="openLoginModal()">Masuk</button>
+      <div id="userArea" class="hidden">
+        <div class="user-avatar-wrap" onclick="toggleUserDropdown()">
+          <img class="user-avatar" id="userAvatarImg" src="" alt="">
+          <span class="user-name" id="userNameText"></span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg>
+        </div>
+        <div class="user-dropdown hidden" id="userDropdown">
+          <div class="user-dropdown-item" onclick="openFavModal();toggleUserDropdown()">❤️ Favorit Saya</div>
+          <div class="user-dropdown-sep"></div>
+          <div class="user-dropdown-item danger" onclick="logoutUser()">🚪 Keluar</div>
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -374,27 +433,231 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:48px 40p
 <div class="toast" id="toast"><span class="toast-icon" id="toastIcon">✅</span><span id="toastMsg">Berhasil!</span></div>
 <div class="api-status" id="apiStatus"><div class="api-dot" id="apiDot"></div><span id="apiStatusText">Menghubungkan ke Jikan API...</span></div>
 
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="hidden">
+  <div class="login-box">
+    <button class="login-close" onclick="closeLoginModal()">✕</button>
+    <div class="login-logo"><span class="la">ANIME</span><span class="lb">KU</span><span class="ld">.</span></div>
+    <p class="login-sub">Masuk untuk simpan favorit & riwayat di cloud</p>
+    <button class="btn-google" onclick="triggerGoogleLogin()">
+      <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.36-8.16 2.36-6.26 0-11.57-3.59-13.46-8.83l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+      Masuk dengan Google
+    </button>
+    <div class="login-divider">atau</div>
+    <button class="btn-google" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);box-shadow:none;" onclick="demoLogin()">
+      👤 Demo Login (tanpa akun)
+    </button>
+    <p class="login-terms">Dengan masuk, kamu setuju dengan <a href="#">Syarat & Ketentuan</a> dan <a href="#">Kebijakan Privasi</a> kami.</p>
+  </div>
+</div>
+
 <script>
+// ============================================================
+// GOOGLE LOGIN & AUTH
+// ============================================================
+// Ganti dengan Google Client ID kamu dari console.cloud.google.com
+const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+
+let currentUser = null;
+
+function loadUserSession() {
+  try {
+    const raw = localStorage.getItem('animeku_user');
+    if (raw) { currentUser = JSON.parse(raw); applyUserToUI(currentUser); }
+  } catch(e) {}
+}
+function saveUserSession(user) {
+  localStorage.setItem('animeku_user', JSON.stringify(user));
+}
+function applyUserToUI(user) {
+  if (!user) return;
+  document.getElementById('btnMasuk').classList.add('hidden');
+  document.getElementById('userArea').classList.remove('hidden');
+  document.getElementById('userAvatarImg').src = user.picture || '';
+  document.getElementById('userAvatarImg').onerror = function(){ this.src=''; this.style.background='linear-gradient(135deg,#7c3aed,var(--pink))'; };
+  document.getElementById('userNameText').textContent = user.name || user.email || 'User';
+}
+function openLoginModal() {
+  document.getElementById('loginModal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  history.pushState({ modal: 'login' }, '', '#login');
+}
+function closeLoginModal() {
+  document.getElementById('loginModal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+function toggleUserDropdown() {
+  document.getElementById('userDropdown').classList.toggle('hidden');
+}
+document.addEventListener('click', function(e) {
+  const area = document.getElementById('authArea');
+  if (area && !area.contains(e.target)) {
+    const dd = document.getElementById('userDropdown');
+    if (dd) dd.classList.add('hidden');
+  }
+});
+function logoutUser() {
+  currentUser = null;
+  localStorage.removeItem('animeku_user');
+  document.getElementById('btnMasuk').classList.remove('hidden');
+  document.getElementById('userArea').classList.add('hidden');
+  document.getElementById('userDropdown').classList.add('hidden');
+  // Sign out dari Google juga
+  if (window.google?.accounts?.id) google.accounts.id.disableAutoSelect();
+  showToast('Berhasil keluar. Sampai jumpa! 👋', '🚪');
+}
+
+// Google Identity Services callback
+function handleGoogleLogin(response) {
+  try {
+    // Decode JWT dari Google
+    const payload = JSON.parse(atob(response.credential.split('.')[1]));
+    currentUser = {
+      name: payload.name,
+      email: payload.email,
+      picture: payload.picture,
+      sub: payload.sub,
+      provider: 'google'
+    };
+    saveUserSession(currentUser);
+    applyUserToUI(currentUser);
+    closeLoginModal();
+    showToast(`Halo, ${currentUser.name}! 👋`, '✅');
+  } catch(e) {
+    console.error('Google login error:', e);
+    showToast('Login gagal. Coba lagi.', '❌');
+  }
+}
+
+function triggerGoogleLogin() {
+  // Coba inisialisasi Google GSI jika sudah loaded
+  if (window.google?.accounts?.id && GOOGLE_CLIENT_ID !== 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com') {
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: handleGoogleLogin,
+      auto_select: false,
+    });
+    google.accounts.id.prompt((notification) => {
+      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+        // One Tap tidak muncul, render button manual
+        google.accounts.id.renderButton(
+          document.getElementById('loginModal').querySelector('.btn-google'),
+          { theme: 'filled_black', size: 'large', width: 320, text: 'signin_with' }
+        );
+      }
+    });
+  } else {
+    // Client ID belum dikonfigurasi — tampilkan pesan
+    showToast('Konfigurasikan GOOGLE_CLIENT_ID di kode untuk login nyata 🔧', '⚙️');
+    // Tetap izinkan demo login
+    setTimeout(() => demoLogin(), 1200);
+  }
+}
+
+// Demo login tanpa akun Google
+function demoLogin() {
+  currentUser = {
+    name: 'Otaku-kun',
+    email: 'demo@animeku.id',
+    picture: '',
+    provider: 'demo'
+  };
+  saveUserSession(currentUser);
+  applyUserToUI(currentUser);
+  closeLoginModal();
+  showToast('Masuk sebagai Demo User 🎌', '👤');
+}
+
+// ============================================================
+// HISTORY API — Back / Forward Browser
+// ============================================================
+function pushModalState(modalName, params = {}) {
+  const state = { modal: modalName, ...params };
+  const hash = `#${modalName}${params.id ? '-'+params.id : ''}`;
+  history.pushState(state, '', hash);
+}
+
+window.addEventListener('popstate', function(e) {
+  const state = e.state;
+  // Tutup semua modal yang terbuka saat tombol Back ditekan
+  if (!state || !state.modal) {
+    // Kembali ke halaman utama — tutup semua modal
+    _closeAllModals();
+    return;
+  }
+  // Jika ada state tapi modal berbeda, tutup modal yang sekarang
+  if (state.modal !== 'detail')  { const dm = document.getElementById('detailModal');  if(dm  && !dm.classList.contains('hidden'))  { dm.classList.add('hidden'); document.body.style.overflow=''; const f=document.getElementById('trailerFrame'); if(f) f.innerHTML=`<div class="trailer-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:.4"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg><span>Memuat trailer...</span></div>`; currentDetailAnime=null; } }
+  if (state.modal !== 'search')  { const sm = document.getElementById('searchModal');  if(sm  && !sm.classList.contains('hidden'))  { sm.classList.add('hidden');  document.body.style.overflow=''; } }
+  if (state.modal !== 'fav')     { const fm = document.getElementById('favModal');     if(fm  && !fm.classList.contains('hidden'))  { fm.classList.add('hidden');  document.body.style.overflow=''; } }
+  if (state.modal !== 'login')   { const lm = document.getElementById('loginModal');   if(lm  && !lm.classList.contains('hidden'))  { lm.classList.add('hidden');  document.body.style.overflow=''; } }
+});
+
+function _closeAllModals() {
+  ['detailModal','searchModal','favModal','loginModal'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && !el.classList.contains('hidden')) {
+      el.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+  });
+  const f = document.getElementById('trailerFrame');
+  if (f) f.innerHTML = `<div class="trailer-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:.4"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg><span>Memuat trailer...</span></div>`;
+  currentDetailAnime = null;
+}
+
 // ============================================================
 // CONFIG — menggunakan Jikan API langsung (tanpa backend)
 // ============================================================
 const JIKAN_BASE = 'https://api.jikan.moe/v4';
+const API_CACHE_TTL = 60 * 60 * 1000; // 1 jam cache
 
-// Helper fetch dengan retry dan rate limit (Jikan butuh delay ~1 detik antar request)
-async function jikanFetch(url, retries = 2) {
+// Simpan/ambil cache API response ke localStorage
+function apiCacheGet(key) {
   try {
-    const res = await fetch(url);
+    const raw = localStorage.getItem('apicache_' + key);
+    if (!raw) return null;
+    const { data, ts } = JSON.parse(raw);
+    if (Date.now() - ts > API_CACHE_TTL) { localStorage.removeItem('apicache_' + key); return null; }
+    return data;
+  } catch(e) { return null; }
+}
+function apiCacheSet(key, data) {
+  try { localStorage.setItem('apicache_' + key, JSON.stringify({ data, ts: Date.now() })); } catch(e) {}
+}
+
+// Helper fetch dengan timeout, retry, rate limit, dan cache
+async function jikanFetch(url, retries = 2, rateRetries = 3) {
+  // Cek cache dulu
+  const cacheKey = url.replace(JIKAN_BASE, '');
+  const cached = apiCacheGet(cacheKey);
+  if (cached) return cached;
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 detik timeout
+
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeoutId);
+
     if (res.status === 429) {
-      await new Promise(r => setTimeout(r, 1500));
-      return jikanFetch(url, retries);
+      if (rateRetries <= 0) { console.warn('Rate limit max reached:', url); return null; }
+      await new Promise(r => setTimeout(r, 2000));
+      return jikanFetch(url, retries, rateRetries - 1);
     }
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
-    return json.data;
+    const data = json.data;
+    if (data) apiCacheSet(cacheKey, data); // simpan ke cache
+    return data;
   } catch (e) {
+    clearTimeout(timeoutId);
+    if (e.name === 'AbortError') {
+      console.warn('Jikan timeout:', url);
+      return null;
+    }
     if (retries > 0) {
-      await new Promise(r => setTimeout(r, 1000));
-      return jikanFetch(url, retries - 1);
+      await new Promise(r => setTimeout(r, 800));
+      return jikanFetch(url, retries - 1, rateRetries);
     }
     console.warn('Jikan error:', url, e);
     return null;
@@ -520,6 +783,7 @@ function openFavModal() {
   const empty = document.getElementById('favEmpty');
   modal.classList.remove('hidden');
   document.body.style.overflow = 'hidden';
+  pushModalState('fav');
   grid.innerHTML = '';
   if(favorites.length === 0) {
     empty.classList.remove('hidden');
@@ -570,15 +834,53 @@ function renderHistorySidebar() {
 }
 
 // ============================
-// TRAILER (search youtube via Jikan? Jikan tidak punya trailer langsung, fallback ke placeholder.)
+// TRAILER — embed YouTube dari Jikan API
 async function loadTrailer(anime) {
   const frame = document.getElementById('trailerFrame');
   frame.innerHTML = `<div class="trailer-placeholder"><div class="spinner"></div><span>Mencari trailer...</span></div>`;
-  // Jikan API tidak menyediakan trailer resmi, kita gunakan pencarian dummy atau hanya tampilkan placeholder.
-  // Tampilkan pesan bahwa trailer tidak tersedia melalui API, tapi menggunakan fallback.
-  setTimeout(() => {
-    frame.innerHTML = `<div class="trailer-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:.4"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg><span style="font-size:13px;">Trailer tidak tersedia (API tidak menyediakan video)</span></div>`;
-  }, 800);
+
+  let youtubeId = anime.trailer?.youtube_id;
+  let embedUrl  = anime.trailer?.embed_url;
+
+  // Jika belum ada (mis. bukan dari /full), coba endpoint /videos
+  if (!youtubeId && !embedUrl) {
+    const id = anime.mal_id || anime.id;
+    if (id) {
+      await new Promise(r => setTimeout(r, 600)); // beri jeda agar tidak kena rate limit
+      const videos = await jikanFetch(`${JIKAN_BASE}/anime/${id}/videos`);
+      if (videos?.promo?.[0]?.trailer?.youtube_id) {
+        youtubeId = videos.promo[0].trailer.youtube_id;
+      } else if (videos?.promo?.[0]?.trailer?.embed_url) {
+        embedUrl = videos.promo[0].trailer.embed_url;
+      }
+    }
+  }
+
+  if (youtubeId) {
+    frame.innerHTML = `<iframe
+      src="https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0&modestbranding=1"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      loading="lazy"
+    ></iframe>`;
+  } else if (embedUrl) {
+    // bersihkan autoplay dari embed_url bawaan Jikan agar tidak auto-play
+    const cleanUrl = embedUrl.replace(/[?&]autoplay=1/, '').replace('?&', '?') + (embedUrl.includes('?') ? '&rel=0' : '?rel=0');
+    frame.innerHTML = `<iframe
+      src="${cleanUrl}"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      loading="lazy"
+    ></iframe>`;
+  } else {
+    // Fallback: tombol cari di YouTube
+    const title = encodeURIComponent((anime.title_english || anime.title || '') + ' trailer');
+    frame.innerHTML = `<div class="trailer-placeholder" style="cursor:pointer;gap:12px;" onclick="window.open('https://www.youtube.com/results?search_query=${title}','_blank')">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:48px;height:48px;color:#ff0000;opacity:.85"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      <span style="font-size:14px;font-weight:700;color:var(--text);">Trailer tidak tersedia di database</span>
+      <span style="font-size:12px;color:var(--cyan);">🔍 Klik untuk cari di YouTube</span>
+    </div>`;
+  }
 }
 
 // ============================
@@ -594,9 +896,15 @@ function initParticles() {
   }
 }
 function setHero(anime, idx) {
+  const bgDiv = document.getElementById('heroBg');
   const img = document.getElementById('heroBgImg');
-  img.src = anime.images?.jpg?.large_image_url || anime.images?.jpg?.image_url || '';
-  img.onerror = () => imgError(img, anime.mal_id||0);
+  // Fade animasi saat ganti hero
+  bgDiv.classList.add('fade-out');
+  setTimeout(() => {
+    img.src = anime.images?.jpg?.large_image_url || anime.images?.jpg?.image_url || '';
+    img.onerror = () => imgError(img, anime.mal_id||0);
+    bgDiv.classList.remove('fade-out');
+  }, 400);
   document.getElementById('heroTitle').textContent = anime.title_english||anime.title||'Unknown';
   const tags = document.getElementById('heroTags');
   tags.innerHTML = '';
@@ -703,7 +1011,8 @@ function filterByGenre(genre) {
 }
 
 // ============================
-// SCHEDULE (Jikan tidak memiliki jadwal per hari, kita gunakan data dari season/current + filter)
+// SCHEDULE — Jikan /schedules?filter={day}
+const schedCache = {};
 const days=['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
 const dayLabels=['Sen','Sel','Rab','Kam','Jum','Sab','Min'];
 function buildScheduleDays() {
@@ -715,6 +1024,7 @@ function buildScheduleDays() {
     const btn=document.createElement('div');
     btn.className='sched-day'+(i===todayIdx?' active':'');
     btn.textContent=dayLabels[i];
+    btn.dataset.day=d;
     btn.onclick=()=>{
       document.querySelectorAll('.sched-day').forEach(x=>x.classList.remove('active'));
       btn.classList.add('active');
@@ -726,20 +1036,60 @@ function buildScheduleDays() {
 }
 async function loadSchedule(day) {
   const list=document.getElementById('schedList');
-  list.innerHTML='<div class="spinner-wrap"><div class="spinner"></div></div>';
-  // fetch season now untuk jadwal dummy, karena Jikan tak punya endpoint schedule per hari, gunakan airing anime 
-  const data = await jikanFetch(`${JIKAN_BASE}/seasons/now?limit=10&sfw=true`);
-  list.innerHTML='';
-  const items = data || [];
-  if(!items.length){
-    list.innerHTML='<p style="color:var(--muted);font-size:12px;padding:12px 14px;">Data tidak tersedia.</p>';
+  if(schedCache[day]){
+    renderSchedule(schedCache[day]);
     return;
   }
-  items.slice(0,8).forEach(anime=>{
+  list.innerHTML='<div class="spinner-wrap"><div class="spinner"></div></div>';
+  // Ambil 2 halaman sekaligus agar data lebih lengkap
+  const [p1, p2] = await Promise.all([
+    jikanFetch(`${JIKAN_BASE}/schedules?filter=${day}&limit=25&page=1&sfw=true`),
+    jikanFetch(`${JIKAN_BASE}/schedules?filter=${day}&limit=25&page=2&sfw=true`)
+  ]);
+  const raw = [...(p1||[]), ...(p2||[])];
+  // Deduplikat berdasarkan mal_id
+  const seen = new Set();
+  const items = raw.filter(a => {
+    const id = a.mal_id || a.id;
+    if (!id || seen.has(id)) return false;
+    seen.add(id);
+    return true;
+  });
+  // Urutkan berdasarkan jam tayang
+  items.sort((a, b) => {
+    const ta = a.broadcast?.time || '99:99';
+    const tb = b.broadcast?.time || '99:99';
+    return ta.localeCompare(tb);
+  });
+  schedCache[day] = items;
+  renderSchedule(items);
+}
+function renderSchedule(items) {
+  const list=document.getElementById('schedList');
+  list.innerHTML='';
+  if(!items.length){
+    list.innerHTML='<p style="color:var(--muted);font-size:12px;padding:12px 14px;">Tidak ada jadwal untuk hari ini.</p>';
+    return;
+  }
+  // Tampilkan jumlah total
+  const counter = document.createElement('div');
+  counter.style.cssText='padding:6px 14px 2px;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;';
+  counter.textContent = `${items.length} anime tayang`;
+  list.appendChild(counter);
+
+  items.forEach(anime=>{
     const div=document.createElement('div');
     div.className='sched-item';
     const timeRaw = anime.broadcast?.time || '??:??';
-    div.innerHTML=`<div class="sched-time">${timeRaw}</div><div><div class="sched-name">${anime.title_english||anime.title||'Unknown'}</div><div class="sched-ep">EP ${anime.episodes||'?'} · ${anime.type||'TV'}</div></div>`;
+    const imgUrl  = anime.images?.jpg?.image_url||'';
+    const score   = anime.score ? `★${anime.score}` : '';
+    div.innerHTML=`
+      <div class="sched-time">${timeRaw}</div>
+      ${imgUrl?`<img src="${imgUrl}" style="width:34px;height:48px;border-radius:5px;object-fit:cover;flex-shrink:0;" onerror="this.style.display='none'">`:'' }
+      <div style="flex:1;min-width:0;">
+        <div class="sched-name">${anime.title_english||anime.title||'Unknown'}</div>
+        <div class="sched-ep">${anime.type||'TV'}${anime.episodes?' · '+anime.episodes+' EP':''}${score?' · '+score:''}</div>
+      </div>`;
     div.addEventListener('click',()=>openDetail(anime));
     list.appendChild(div);
   });
@@ -751,12 +1101,13 @@ async function loadSchedule(day) {
 async function openDetail(anime) {
   currentDetailAnime = anime;
   const modal = document.getElementById('detailModal');
+  const id = anime.mal_id || anime.id;
+  pushModalState('detail', { id: id || 0 });
   let a = anime;
   // coba fetch detail lebih lengkap
-  const id = anime.mal_id || anime.id;
   if(id){
     const fresh = await jikanFetch(`${JIKAN_BASE}/anime/${id}/full`);
-    if(fresh) a = fresh;
+    if(fresh) { a = fresh; currentDetailAnime = a; } // update currentDetailAnime ke data lengkap
   }
   const bg=document.getElementById('detailBgImg');
   bg.src=a.images?.jpg?.large_image_url||'';
@@ -788,6 +1139,7 @@ function closeDetail() {
   document.getElementById('detailModal').classList.add('hidden');
   document.body.style.overflow='';
   const frame=document.getElementById('trailerFrame');
+  // Hentikan video yang sedang diputar dengan menghapus iframe
   frame.innerHTML=`<div class="trailer-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:.4"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg><span>Memuat trailer...</span></div>`;
   currentDetailAnime=null;
 }
@@ -799,6 +1151,7 @@ function openSearch() {
   document.getElementById('searchModal').classList.remove('hidden');
   document.body.style.overflow='hidden';
   document.getElementById('modalSearchInput').focus();
+  pushModalState('search');
 }
 function closeSearch() {
   document.getElementById('searchModal').classList.add('hidden');
@@ -856,44 +1209,95 @@ async function loadAll() {
   initParticles();
   buildScheduleDays();
   loadLocalData();
-  setApiStatus(true, 'Menghubungkan ke Jikan...');
-  // ambil season sekarang
-  const seasonNow = await jikanFetch(`${JIKAN_BASE}/seasons/now?limit=24&sfw=true`);
-  if(seasonNow && seasonNow.length){
-    seasonData = seasonNow;
-    heroList = [...seasonData].sort((a,b)=>(b.score||0)-(a.score||0)).slice(0,5);
-    if(heroList.length){
-      buildStrip();
-      setHero(heroList[0],0);
-      heroTimer=setInterval(nextHero,6000);
-    }
-    const seasonGrid=document.getElementById('seasonGrid');
-    seasonGrid.innerHTML='';
-    seasonData.slice(0,18).forEach((anime,i)=>seasonGrid.appendChild(buildCard(anime,i*40)));
-    const epScroll=document.getElementById('epScroll');
-    epScroll.innerHTML='';
-    const recentEps=[...seasonData].sort((a,b)=>new Date(b.aired?.from||0)-new Date(a.aired?.from||0)).slice(0,12);
-    recentEps.forEach(anime=>epScroll.appendChild(buildEpCard(anime)));
-  } else {
-    document.getElementById('seasonGrid').innerHTML='<p style="color:var(--muted);font-size:14px;padding:20px;grid-column:1/-1;">Gagal memuat data. Coba reload.</p>';
+  loadUserSession();
+  history.replaceState({ modal: null }, '', window.location.pathname);
+  setApiStatus(false, 'Menghubungkan ke Jikan...');
+
+  // Tampilkan hero placeholder langsung agar halaman tidak kosong
+  showHeroPlaceholder();
+
+  // Cek apakah ada cached data — tampilkan SEGERA tanpa tunggu API
+  const cachedSeason = apiCacheGet('/seasons/now?limit=24&sfw=true');
+  const cachedTop    = apiCacheGet('/top/anime?limit=12&sfw=true');
+  if (cachedSeason && cachedSeason.length) {
+    applySeason(cachedSeason);
+    setApiStatus(true, 'Cache ✓ — memperbarui...');
   }
-  // Top anime
-  const topRes = await jikanFetch(`${JIKAN_BASE}/top/anime?limit=12&sfw=true`);
-  if(topRes && topRes.length){
-    topData = topRes;
-    const topGrid=document.getElementById('topGrid');
-    topGrid.innerHTML='';
-    topData.slice(0,12).forEach((anime,i)=>topGrid.appendChild(buildCard(anime,i*40)));
-    const rankList=document.getElementById('rankList');
-    rankList.innerHTML='';
-    topData.slice(0,7).forEach((anime,i)=>rankList.appendChild(buildRankItem(anime,i+1)));
-  } else {
-    document.getElementById('topGrid').innerHTML='<p style="color:var(--muted);font-size:14px;padding:20px;grid-column:1/-1;">Data tidak tersedia.</p>';
+  if (cachedTop && cachedTop.length) {
+    applyTop(cachedTop);
   }
-  await loadSchedule(currentScheduleDay);
-  setApiStatus(true, 'Jikan API Terhubung ✓');
-  showToast('Data berhasil dimuat dari Jikan! 🎌', '✅');
+
+  // Fetch semua secara PARALEL (bukan sequential) — jauh lebih cepat
+  const [seasonNow, topRes] = await Promise.all([
+    jikanFetch(`${JIKAN_BASE}/seasons/now?limit=24&sfw=true`),
+    jikanFetch(`${JIKAN_BASE}/top/anime?limit=12&sfw=true`)
+  ]);
+
+  let anySuccess = false;
+  if (seasonNow && seasonNow.length) { applySeason(seasonNow); anySuccess = true; }
+  else if (!cachedSeason) showSeasonError();
+
+  if (topRes && topRes.length) { applyTop(topRes); anySuccess = true; }
+  else if (!cachedTop) document.getElementById('topGrid').innerHTML = errorHtml('Top anime tidak tersedia.');
+
+  // Schedule load terpisah agar tidak block
+  loadSchedule(currentScheduleDay);
+
+  if (anySuccess || cachedSeason) {
+    setApiStatus(true, 'Jikan API Terhubung ✓');
+    if (anySuccess) showToast('Data berhasil dimuat! 🎌', '✅');
+  } else {
+    setApiStatus(false, 'Gagal — klik untuk retry');
+    document.getElementById('apiStatus').onclick = () => { location.reload(); };
+    showToast('Koneksi ke Jikan gagal. Klik status untuk retry.', '⚠️');
+  }
 }
+
+function showHeroPlaceholder() {
+  // Tunjukkan hero dengan gradien agar tidak kosong saat loading
+  document.getElementById('heroTitle').textContent = 'Memuat data...';
+  document.getElementById('heroDesc').textContent  = 'Mengambil data anime dari Jikan API...';
+  document.getElementById('heroTags').innerHTML    = '<span class="tag">Loading...</span>';
+  document.getElementById('heroScore').innerHTML   = '';
+  document.getElementById('heroBg').style.background = 'linear-gradient(135deg,#0c0e1a 0%,#111428 100%)';
+}
+
+function errorHtml(msg) {
+  return `<p style="color:var(--muted);font-size:14px;padding:20px;grid-column:1/-1;">${msg} <button onclick="loadAll()" style="color:var(--cyan);background:none;border:1px solid var(--cyan);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px;margin-left:8px;">↺ Retry</button></p>`;
+}
+function showSeasonError() {
+  document.getElementById('seasonGrid').innerHTML = errorHtml('Gagal memuat data season.');
+  document.getElementById('epScroll').innerHTML   = '';
+}
+
+function applySeason(data) {
+  seasonData = data;
+  heroList = [...seasonData].sort((a,b)=>(b.score||0)-(a.score||0)).slice(0,5);
+  if (heroList.length) {
+    buildStrip();
+    clearInterval(heroTimer);
+    setHero(heroList[0], 0);
+    heroTimer = setInterval(nextHero, 6000);
+  }
+  const seasonGrid = document.getElementById('seasonGrid');
+  seasonGrid.innerHTML = '';
+  seasonData.slice(0,18).forEach((anime,i) => seasonGrid.appendChild(buildCard(anime, i*40)));
+  const epScroll = document.getElementById('epScroll');
+  epScroll.innerHTML = '';
+  const recentEps = [...seasonData].sort((a,b)=>new Date(b.aired?.from||0)-new Date(a.aired?.from||0)).slice(0,12);
+  recentEps.forEach(anime => epScroll.appendChild(buildEpCard(anime)));
+}
+
+function applyTop(data) {
+  topData = data;
+  const topGrid = document.getElementById('topGrid');
+  topGrid.innerHTML = '';
+  topData.slice(0,12).forEach((anime,i) => topGrid.appendChild(buildCard(anime, i*40)));
+  const rankList = document.getElementById('rankList');
+  rankList.innerHTML = '';
+  topData.slice(0,7).forEach((anime,i) => rankList.appendChild(buildRankItem(anime, i+1)));
+}
+
 function setApiStatus(ok, text) {
   document.getElementById('apiDot').className = 'api-dot' + (ok ? '' : ' err');
   document.getElementById('apiStatusText').textContent = text;
