@@ -6,7 +6,7 @@
 <title>AnimeKu — Nonton Anime Sub Indo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://accounts.google.com/gsi/client" async defer onload="if(document.getElementById('loginModal') && !document.getElementById('loginModal').classList.contains('hidden')) initGoogleButton()"></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -323,6 +323,33 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:48px 40p
 .user-dropdown-item.danger:hover{background:rgba(239,68,68,.1)}
 .user-dropdown-sep{height:1px;background:var(--border);margin:4px 0}
 
+
+/* PROFILE MODAL */
+#profileModal{position:fixed;inset:0;z-index:9996;background:rgba(6,7,16,.92);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+.profile-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;max-width:620px;width:100%;overflow:hidden;animation:popIn .3s cubic-bezier(.34,1.56,.64,1) both;max-height:90vh;overflow-y:auto}
+.profile-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 0}
+.profile-title{font-family:var(--font-h);font-size:24px;letter-spacing:2px;color:#fff}
+.profile-title span{color:var(--cyan)}
+.profile-avatar-section{display:flex;flex-direction:column;align-items:center;padding:16px 24px 8px}
+.profile-avatar-wrap{position:relative;width:88px;height:88px;border-radius:50%;overflow:hidden;border:3px solid var(--cyan);background:linear-gradient(135deg,#7c3aed,var(--pink));cursor:pointer;flex-shrink:0}
+.profile-avatar-wrap img{width:100%;height:100%;object-fit:cover}
+.profile-avatar-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;font-size:22px;opacity:0;transition:opacity .2s}
+.profile-avatar-wrap:hover .profile-avatar-overlay{opacity:1}
+.profile-fields{padding:4px 24px 16px;display:flex;flex-direction:column;gap:14px}
+.profile-field{display:flex;flex-direction:column;gap:6px;flex:1}
+.profile-field label{font-size:12px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:.5px}
+.profile-field input,.profile-field select,.profile-field textarea{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:10px 12px;color:var(--text);font-family:var(--font-b);font-size:13px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%}
+.profile-field input:focus,.profile-field select:focus,.profile-field textarea:focus{border-color:rgba(0,212,255,.4);box-shadow:0 0 0 3px rgba(0,212,255,.08)}
+.profile-field select option{background:var(--bg2)}
+.profile-field textarea{resize:vertical;min-height:72px}
+.profile-field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.genre-check-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:2px}
+.genre-check{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--muted2);cursor:pointer;padding:7px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg3);transition:all .2s;user-select:none}
+.genre-check:hover{border-color:rgba(0,212,255,.3);color:var(--text)}
+.genre-check input{accent-color:var(--cyan);width:14px;height:14px;cursor:pointer}
+.genre-check:has(input:checked){border-color:rgba(0,212,255,.5);background:rgba(0,212,255,.08);color:var(--cyan)}
+.profile-actions{display:flex;gap:12px;justify-content:flex-end;padding:0 24px 24px}
+
 @media(max-width:1024px){.layout-grid{grid-template-columns:1fr}.sidebar{display:none}.footer-grid{grid-template-columns:1fr 1fr}.hero-strip{display:none}}
 @media(max-width:768px){#navbar{padding:0 16px}.nav-menu{display:none}.search-wrap{display:none}.main-container{padding:0 16px}.hero-content{padding:0 20px 60px}.hero-title{font-size:36px}footer{padding:32px 16px 20px}.footer-grid{grid-template-columns:1fr}.anime-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}}
 </style>
@@ -352,6 +379,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:48px 40p
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg>
         </div>
         <div class="user-dropdown hidden" id="userDropdown">
+          <div class="user-dropdown-item" onclick="openProfileModal();toggleUserDropdown()">👤 Edit Profil</div>
           <div class="user-dropdown-item" onclick="openFavModal();toggleUserDropdown()">❤️ Favorit Saya</div>
           <div class="user-dropdown-sep"></div>
           <div class="user-dropdown-item danger" onclick="logoutUser()">🚪 Keluar</div>
@@ -438,16 +466,94 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:48px 40p
   <div class="login-box">
     <button class="login-close" onclick="closeLoginModal()">✕</button>
     <div class="login-logo"><span class="la">ANIME</span><span class="lb">KU</span><span class="ld">.</span></div>
-    <p class="login-sub">Masuk untuk simpan favorit & riwayat di cloud</p>
-    <button class="btn-google" onclick="triggerGoogleLogin()">
+    <p class="login-sub">Masuk untuk simpan favorit & riwayat tontonanmu</p>
+    <div id="googleBtnContainer" style="display:flex;justify-content:center;margin:8px 0;"></div>
+    <button class="btn-google" id="btnGoogleFallback" onclick="triggerGoogleLogin()" style="display:none;">
       <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.36-8.16 2.36-6.26 0-11.57-3.59-13.46-8.83l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
-      Masuk dengan Google
+      Lanjutkan dengan Google
     </button>
-    <div class="login-divider">atau</div>
-    <button class="btn-google" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);box-shadow:none;" onclick="demoLogin()">
-      👤 Demo Login (tanpa akun)
-    </button>
+    <div id="loginClientIdWarn" class="hidden" style="background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:8px;padding:12px;font-size:12px;color:#ffd700;line-height:1.6;margin-top:8px;">
+      ⚠️ <strong>Setup diperlukan:</strong> Buka file <code>index.html</code>, cari <code>GOOGLE_CLIENT_ID</code> dan ganti dengan Client ID dari <a href="https://console.cloud.google.com" target="_blank" style="color:var(--cyan);">Google Cloud Console</a>.
+    </div>
     <p class="login-terms">Dengan masuk, kamu setuju dengan <a href="#">Syarat & Ketentuan</a> dan <a href="#">Kebijakan Privasi</a> kami.</p>
+  </div>
+</div>
+
+<!-- PROFILE MODAL -->
+<div id="profileModal" class="hidden">
+  <div class="profile-box">
+    <div class="profile-header">
+      <h2 class="profile-title">👤 Edit <span>Profil</span></h2>
+      <button class="login-close" onclick="closeProfileModal()">✕</button>
+    </div>
+    <div class="profile-avatar-section">
+      <div class="profile-avatar-wrap">
+        <img id="profileAvatarPreview" src="" alt="" onerror="this.src=''">
+        <div class="profile-avatar-overlay" onclick="document.getElementById('profileAvatarInput').click()">📷</div>
+      </div>
+      <input type="file" id="profileAvatarInput" accept="image/*" style="display:none" onchange="handleAvatarUpload(event)">
+      <p style="font-size:11px;color:var(--muted);margin-top:6px;">Klik foto untuk ganti</p>
+    </div>
+    <div class="profile-fields">
+      <div class="profile-field-row">
+        <div class="profile-field">
+          <label>Nama Tampilan</label>
+          <input type="text" id="pf_name" placeholder="Nama kamu..." maxlength="30">
+        </div>
+        <div class="profile-field">
+          <label>Username</label>
+          <div style="position:relative;">
+            <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;">@</span>
+            <input type="text" id="pf_username" placeholder="username" maxlength="20" style="padding-left:26px;" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_.]/g,'')">
+          </div>
+        </div>
+      </div>
+      <div class="profile-field-row">
+        <div class="profile-field">
+          <label>Gender</label>
+          <select id="pf_gender" onchange="updateWaifuLabel()">
+            <option value="">— Pilih —</option>
+            <option value="male">Laki-laki</option>
+            <option value="female">Perempuan</option>
+            <option value="other">Lainnya</option>
+          </select>
+        </div>
+        <div class="profile-field">
+          <label>Umur</label>
+          <input type="number" id="pf_age" placeholder="Umur" min="10" max="99">
+        </div>
+      </div>
+      <div class="profile-field">
+        <label id="waifuLabel">Waifu / Husbando Favorit 💕</label>
+        <input type="text" id="pf_waifu" placeholder="Siapa karakter favorit kamu?" maxlength="50">
+      </div>
+      <div class="profile-field">
+        <label>Genre Favorit</label>
+        <div class="genre-check-grid" id="genreCheckGrid">
+          <label class="genre-check"><input type="checkbox" value="Action"> Action</label>
+          <label class="genre-check"><input type="checkbox" value="Romance"> Romance</label>
+          <label class="genre-check"><input type="checkbox" value="Fantasy"> Fantasy</label>
+          <label class="genre-check"><input type="checkbox" value="Comedy"> Comedy</label>
+          <label class="genre-check"><input type="checkbox" value="Drama"> Drama</label>
+          <label class="genre-check"><input type="checkbox" value="Horror"> Horror</label>
+          <label class="genre-check"><input type="checkbox" value="Isekai"> Isekai</label>
+          <label class="genre-check"><input type="checkbox" value="Mecha"> Mecha</label>
+          <label class="genre-check"><input type="checkbox" value="Sports"> Sports</label>
+          <label class="genre-check"><input type="checkbox" value="Slice of Life"> Slice of Life</label>
+          <label class="genre-check"><input type="checkbox" value="Supernatural"> Supernatural</label>
+          <label class="genre-check"><input type="checkbox" value="Sci-Fi"> Sci-Fi</label>
+        </div>
+      </div>
+      <div class="profile-field">
+        <label>Bio</label>
+        <textarea id="pf_bio" placeholder="Ceritakan sedikit tentang dirimu..." maxlength="150" rows="3"></textarea>
+        <div style="text-align:right;font-size:11px;color:var(--muted);margin-top:4px;"><span id="bioCount">0</span>/150</div>
+      </div>
+    </div>
+    <div class="profile-actions">
+      <button class="btn-hero btn-hero-watch" onclick="saveProfile()" style="padding:10px 28px;font-size:13px;">💾 Simpan Profil</button>
+      <button class="btn-hero btn-hero-info" onclick="closeProfileModal()" style="padding:10px 20px;font-size:13px;">Batal</button>
+    </div>
   </div>
 </div>
 
@@ -455,8 +561,9 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:48px 40p
 // ============================================================
 // GOOGLE LOGIN & AUTH
 // ============================================================
-// Ganti dengan Google Client ID kamu dari console.cloud.google.com
-const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+// ⚠️ Ganti dengan Google Client ID dari https://console.cloud.google.com
+// Authorized Origins: tambahkan domain kamu (mis. https://anime-ku.netlify.app)
+const GOOGLE_CLIENT_ID = '282308511693-4qoe48o2r1fek4t5r7ar8kpdpcmjhala.apps.googleusercontent.com';
 
 let currentUser = null;
 
@@ -469,18 +576,37 @@ function loadUserSession() {
 function saveUserSession(user) {
   localStorage.setItem('animeku_user', JSON.stringify(user));
 }
+function loadUserProfile() {
+  try {
+    const raw = localStorage.getItem('animeku_profile');
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return {};
+}
+function saveUserProfile(profile) {
+  localStorage.setItem('animeku_profile', JSON.stringify(profile));
+}
+
 function applyUserToUI(user) {
   if (!user) return;
   document.getElementById('btnMasuk').classList.add('hidden');
   document.getElementById('userArea').classList.remove('hidden');
-  document.getElementById('userAvatarImg').src = user.picture || '';
-  document.getElementById('userAvatarImg').onerror = function(){ this.src=''; this.style.background='linear-gradient(135deg,#7c3aed,var(--pink))'; };
-  document.getElementById('userNameText').textContent = user.name || user.email || 'User';
+  const profile = loadUserProfile();
+  const avatar = profile.avatarDataUrl || user.picture || '';
+  const displayName = profile.name || user.name || user.email || 'User';
+  const avatarEl = document.getElementById('userAvatarImg');
+  avatarEl.src = avatar;
+  avatarEl.onerror = function(){ this.src=''; this.style.background='linear-gradient(135deg,#7c3aed,var(--pink))'; };
+  document.getElementById('userNameText').textContent = profile.username ? '@'+profile.username : displayName;
 }
+
 function openLoginModal() {
-  document.getElementById('loginModal').classList.remove('hidden');
+  const modal = document.getElementById('loginModal');
+  modal.classList.remove('hidden');
   document.body.style.overflow = 'hidden';
-  history.pushState({ modal: 'login' }, '', '#login');
+  if (!IS_LOCAL) try { history.pushState({ modal: 'login' }, '', '#login'); } catch(e) {}
+  // Render Google button
+  setTimeout(() => initGoogleButton(), 100);
 }
 function closeLoginModal() {
   document.getElementById('loginModal').classList.add('hidden');
@@ -502,71 +628,136 @@ function logoutUser() {
   document.getElementById('btnMasuk').classList.remove('hidden');
   document.getElementById('userArea').classList.add('hidden');
   document.getElementById('userDropdown').classList.add('hidden');
-  // Sign out dari Google juga
   if (window.google?.accounts?.id) google.accounts.id.disableAutoSelect();
   showToast('Berhasil keluar. Sampai jumpa! 👋', '🚪');
 }
 
-// Google Identity Services callback
+// Google Identity Services — decode JWT callback
 function handleGoogleLogin(response) {
   try {
-    // Decode JWT dari Google
-    const payload = JSON.parse(atob(response.credential.split('.')[1]));
-    currentUser = {
-      name: payload.name,
-      email: payload.email,
-      picture: payload.picture,
-      sub: payload.sub,
-      provider: 'google'
-    };
+    const parts = response.credential.split('.');
+    const payload = JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+    currentUser = { name: payload.name, email: payload.email, picture: payload.picture, sub: payload.sub, provider: 'google' };
     saveUserSession(currentUser);
+    // Jika belum punya profil, pre-fill dari Google data
+    const existing = loadUserProfile();
+    if (!existing.name) {
+      saveUserProfile({ ...existing, name: payload.name, avatarDataUrl: payload.picture || '' });
+    }
     applyUserToUI(currentUser);
     closeLoginModal();
-    showToast(`Halo, ${currentUser.name}! 👋`, '✅');
+    showToast(`Halo, ${payload.name.split(' ')[0]}! 👋`, '✅');
   } catch(e) {
     console.error('Google login error:', e);
     showToast('Login gagal. Coba lagi.', '❌');
   }
 }
 
-function triggerGoogleLogin() {
-  // Coba inisialisasi Google GSI jika sudah loaded
-  if (window.google?.accounts?.id && GOOGLE_CLIENT_ID !== 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com') {
-    google.accounts.id.initialize({
-      client_id: GOOGLE_CLIENT_ID,
-      callback: handleGoogleLogin,
-      auto_select: false,
-    });
-    google.accounts.id.prompt((notification) => {
-      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-        // One Tap tidak muncul, render button manual
-        google.accounts.id.renderButton(
-          document.getElementById('loginModal').querySelector('.btn-google'),
-          { theme: 'filled_black', size: 'large', width: 320, text: 'signin_with' }
-        );
-      }
-    });
+function initGoogleButton() {
+  const container = document.getElementById('googleBtnContainer');
+  const fallback  = document.getElementById('btnGoogleFallback');
+  const warn      = document.getElementById('loginClientIdWarn');
+  if (!container) return;
+
+  const clientIdSet = GOOGLE_CLIENT_ID !== 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+
+  if (window.google?.accounts?.id && clientIdSet) {
+    google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleLogin, auto_select: false });
+    google.accounts.id.renderButton(container, { theme: 'filled_black', size: 'large', width: 300, text: 'continue_with', shape: 'pill' });
+    fallback.style.display = 'none';
+    warn.classList.add('hidden');
   } else {
-    // Client ID belum dikonfigurasi — tampilkan pesan
-    showToast('Konfigurasikan GOOGLE_CLIENT_ID di kode untuk login nyata 🔧', '⚙️');
-    // Tetap izinkan demo login
-    setTimeout(() => demoLogin(), 1200);
+    // Tampilkan tombol custom + warning setup
+    container.innerHTML = '';
+    fallback.style.display = 'flex';
+    if (!clientIdSet) warn.classList.remove('hidden');
   }
 }
 
-// Demo login tanpa akun Google
-function demoLogin() {
-  currentUser = {
-    name: 'Otaku-kun',
-    email: 'demo@animeku.id',
-    picture: '',
-    provider: 'demo'
-  };
-  saveUserSession(currentUser);
-  applyUserToUI(currentUser);
-  closeLoginModal();
-  showToast('Masuk sebagai Demo User 🎌', '👤');
+function triggerGoogleLogin() {
+  const clientIdSet = GOOGLE_CLIENT_ID !== 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+  if (window.google?.accounts?.id && clientIdSet) {
+    google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleLogin, auto_select: false });
+    google.accounts.id.prompt();
+  } else {
+    document.getElementById('loginClientIdWarn').classList.remove('hidden');
+  }
 }
+
+// ============================================================
+// PROFILE MODAL
+// ============================================================
+function openProfileModal() {
+  if (!currentUser) { openLoginModal(); return; }
+  const modal = document.getElementById('profileModal');
+  modal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  // Load existing profile
+  const profile = loadUserProfile();
+  const avatarSrc = profile.avatarDataUrl || currentUser.picture || '';
+  const previewEl = document.getElementById('profileAvatarPreview');
+  previewEl.src = avatarSrc;
+  previewEl.onerror = () => { previewEl.src=''; previewEl.parentElement.style.background='linear-gradient(135deg,#7c3aed,var(--pink))'; };
+  document.getElementById('pf_name').value     = profile.name     || currentUser.name  || '';
+  document.getElementById('pf_username').value = profile.username || '';
+  document.getElementById('pf_gender').value   = profile.gender   || '';
+  document.getElementById('pf_age').value      = profile.age      || '';
+  document.getElementById('pf_waifu').value    = profile.waifu    || '';
+  document.getElementById('pf_bio').value      = profile.bio      || '';
+  updateBioCount();
+  updateWaifuLabel();
+  // Load genre checkboxes
+  const favGenres = profile.favGenres || [];
+  document.querySelectorAll('#genreCheckGrid input[type=checkbox]').forEach(cb => {
+    cb.checked = favGenres.includes(cb.value);
+  });
+}
+function closeProfileModal() {
+  document.getElementById('profileModal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+function updateWaifuLabel() {
+  const gender = document.getElementById('pf_gender').value;
+  const label  = document.getElementById('waifuLabel');
+  label.textContent = gender === 'female' ? 'Husbando Favorit 💙' : gender === 'male' ? 'Waifu Favorit 💕' : 'Waifu / Husbando Favorit 💕';
+}
+function updateBioCount() {
+  const bio = document.getElementById('pf_bio');
+  document.getElementById('bioCount').textContent = bio.value.length;
+  bio.addEventListener('input', () => document.getElementById('bioCount').textContent = bio.value.length);
+}
+function handleAvatarUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) { showToast('Ukuran foto maks 2MB', '⚠️'); return; }
+  const reader = new FileReader();
+  reader.onload = ev => {
+    document.getElementById('profileAvatarPreview').src = ev.target.result;
+    document.getElementById('profileAvatarPreview')._newData = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+function saveProfile() {
+  const previewEl = document.getElementById('profileAvatarPreview');
+  const favGenres = [...document.querySelectorAll('#genreCheckGrid input:checked')].map(cb => cb.value);
+  const profile = {
+    name:        document.getElementById('pf_name').value.trim(),
+    username:    document.getElementById('pf_username').value.trim(),
+    gender:      document.getElementById('pf_gender').value,
+    age:         document.getElementById('pf_age').value,
+    waifu:       document.getElementById('pf_waifu').value.trim(),
+    bio:         document.getElementById('pf_bio').value.trim(),
+    favGenres,
+    avatarDataUrl: previewEl._newData || previewEl.src || loadUserProfile().avatarDataUrl || '',
+  };
+  saveUserProfile(profile);
+  applyUserToUI(currentUser);
+  closeProfileModal();
+  showToast('Profil berhasil disimpan! ✨', '💾');
+}
+
+// Tutup profile modal saat klik backdrop
+document.getElementById('profileModal').addEventListener('click', function(e){ if(e.target===this) closeProfileModal(); });
 
 // ============================================================
 // HISTORY API — Back / Forward Browser
@@ -612,7 +803,7 @@ window.addEventListener('popstate', function(e) {
 });
 
 function _closeAllModals() {
-  ['detailModal','searchModal','favModal','loginModal'].forEach(id => {
+  ['detailModal','searchModal','favModal','loginModal','profileModal'].forEach(id => {
     const el = document.getElementById(id);
     if (el && !el.classList.contains('hidden')) {
       el.classList.add('hidden');
@@ -1239,7 +1430,7 @@ document.getElementById('navSearch').addEventListener('click',e=>{e.preventDefau
 document.getElementById('searchModal').addEventListener('click',function(e){if(e.target===this)closeSearch();});
 document.getElementById('detailModal').addEventListener('click',function(e){if(e.target===this)closeDetail();});
 document.getElementById('favModal').addEventListener('click',function(e){if(e.target===this)closeFavModal();});
-document.addEventListener('keydown',e=>{ if(e.key==='Escape'){closeSearch();closeDetail();closeFavModal();} });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){closeSearch();closeDetail();closeFavModal();closeProfileModal();} });
 document.getElementById('genreFilter').addEventListener('click',function(e){
   const btn=e.target.closest('.filter-pill');
   if(!btn)return;
