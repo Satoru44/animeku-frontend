@@ -571,10 +571,29 @@ function demoLogin() {
 // ============================================================
 // HISTORY API — Back / Forward Browser
 // ============================================================
+function slugify(str) {
+  return (str || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+}
+
+const IS_LOCAL = location.protocol === 'file:';
+
 function pushModalState(modalName, params = {}) {
-  const state = { modal: modalName, ...params };
-  const hash = `#${modalName}${params.id ? '-'+params.id : ''}`;
-  history.pushState(state, '', hash);
+  if (IS_LOCAL) return; // skip history manipulation on local files
+  try {
+    const state = { modal: modalName, ...params };
+    let url;
+    if (modalName === 'detail' && params.slug) {
+      url = '/' + params.slug;
+    } else {
+      url = '#' + modalName + (params.id ? '-' + params.id : '');
+    }
+    history.pushState(state, '', url);
+  } catch(e) {}
 }
 
 window.addEventListener('popstate', function(e) {
@@ -625,41 +644,66 @@ function apiCacheSet(key, data) {
   try { localStorage.setItem('apicache_' + key, JSON.stringify({ data, ts: Date.now() })); } catch(e) {}
 }
 
-// Helper fetch dengan timeout, retry, rate limit, dan cache
+// Helper fetch — coba direct dulu, kalau gagal otomatis pakai CORS proxy
+const CORS_PROXIES = [
+  u => "https://api.allorigins.win/raw?url=" + encodeURIComponent(u),
+  u => "https://corsproxy.io/?url=" + encodeURIComponent(u),
+  u => "https://thingproxy.freeboard.io/fetch/" + u,
+];
+
+async function _fetchWithFallback(url) {
+  // 1. Coba direct fetch
+  try {
+    const r = await fetch(url);
+    if (r.ok || r.status === 429) return r;
+  } catch(_) {}
+
+  // 2. Direct gagal → coba satu per satu CORS proxy
+  for (const makeProxy of CORS_PROXIES) {
+    try {
+      const r = await fetch(makeProxy(url));
+      if (r.ok || r.status === 429) return r;
+    } catch(_) {}
+  }
+
+  throw new Error("all-failed");
+}
+
 async function jikanFetch(url, retries = 2, rateRetries = 3) {
-  // Cek cache dulu
-  const cacheKey = url.replace(JIKAN_BASE, '');
+  const cacheKey = url.replace(JIKAN_BASE, "");
   const cached = apiCacheGet(cacheKey);
   if (cached) return cached;
 
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 detik timeout
+  const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 15000));
 
   try {
-    const res = await fetch(url, { signal: controller.signal });
-    clearTimeout(timeoutId);
+    const res = await Promise.race([_fetchWithFallback(url), timeout]);
 
     if (res.status === 429) {
-      if (rateRetries <= 0) { console.warn('Rate limit max reached:', url); return null; }
+      if (rateRetries <= 0) { console.warn("Rate limit max reached:", url); return null; }
       await new Promise(r => setTimeout(r, 2000));
       return jikanFetch(url, retries, rateRetries - 1);
     }
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    if (!res.ok) throw new Error("HTTP " + res.status);
     const json = await res.json();
     const data = json.data;
-    if (data) apiCacheSet(cacheKey, data); // simpan ke cache
+    if (data) apiCacheSet(cacheKey, data);
     return data;
   } catch (e) {
-    clearTimeout(timeoutId);
-    if (e.name === 'AbortError') {
-      console.warn('Jikan timeout:', url);
+    if (e.message === "timeout") { console.warn("Jikan timeout:", url); return null; }
+    if (e.message === "all-failed") {
+      if (retries > 0) {
+        await new Promise(r => setTimeout(r, 1000));
+        return jikanFetch(url, retries - 1, rateRetries);
+      }
+      console.warn("Jikan tidak bisa diakses (cek koneksi internet):", url);
       return null;
     }
     if (retries > 0) {
       await new Promise(r => setTimeout(r, 800));
       return jikanFetch(url, retries - 1, rateRetries);
     }
-    console.warn('Jikan error:', url, e);
+    console.warn("Jikan error:", url, e.message);
     return null;
   }
 }
@@ -1102,7 +1146,8 @@ async function openDetail(anime) {
   currentDetailAnime = anime;
   const modal = document.getElementById('detailModal');
   const id = anime.mal_id || anime.id;
-  pushModalState('detail', { id: id || 0 });
+  const slug = slugify(anime.title_english || anime.title || 'anime');
+  pushModalState('detail', { id: id || 0, slug });
   let a = anime;
   // coba fetch detail lebih lengkap
   if(id){
@@ -1142,6 +1187,7 @@ function closeDetail() {
   // Hentikan video yang sedang diputar dengan menghapus iframe
   frame.innerHTML=`<div class="trailer-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;opacity:.4"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor"/></svg><span>Memuat trailer...</span></div>`;
   currentDetailAnime=null;
+  if (!IS_LOCAL && window.location.pathname !== '/') try { history.pushState({ modal: null }, '', '/'); } catch(e) {}
 }
 
 // ============================
@@ -1210,7 +1256,7 @@ async function loadAll() {
   buildScheduleDays();
   loadLocalData();
   loadUserSession();
-  history.replaceState({ modal: null }, '', window.location.pathname);
+  if (!IS_LOCAL) try { history.replaceState({ modal: null }, '', '/'); } catch(e) {}
   setApiStatus(false, 'Menghubungkan ke Jikan...');
 
   // Tampilkan hero placeholder langsung agar halaman tidak kosong
